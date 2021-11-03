@@ -1,63 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>DataVisualization</title>
-  </head>
-  <body>
-    <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
-    <div> 
-      <div>
-        This Section will explain three visualization, number of authors Vs year, percentage of female and male authors Vs year and percentage of female by conference Vs year
-      </div>  
-      <svg id="nauthorsPerYear"></svg>
-      <svg id="percentageOfFemaleMaleAuthors"></svg>
-      <svg id="percentageOfFemaleByConference"></svg>
-    </div>
-    <div> 
-      <div>
-        This Section will explain number of authors having a given career age by gender and number of authors having a given number of publications by gender
-      </div>  
-      <svg id="nauthorsByCareerAge"></svg>
-      <svg id="nauthorsByPublications"></svg>
-    </div>
-    <div>
-      <div>
-        This Section will expain about the drop out rate as a function of career age
-      </div>
-      <svg id="dropoutRate"></svg>
-    </div>
-    <div>
-      <div>
-        This Section will explain about the percentage of female authors by position each year
-      </div>
-      <svg id="femaleAuthorsByPostion"></svg>
-    </div>
-    <div>
-      <div>
-        This Section will describe how the paper count varies with each possible gender compostion
-      </div>
-      <svg id="paperCountsByGender"></svg>
-    </div>
-    <div>
-      <div>
-        This Section will describe the trend in total number and percentage of OC and PC members by gender each year
-      </div>
-      <svg id="nOfOC"></svg>
-      <svg id="percentageOfOC"></svg>
-      <svg id="nOfPC"></svg>
-      <svg id="percentageOfPC"></svg>
-    </div>
-    <div>
-      <div>
-        This Section will describe the average career age of OC and PC members over the last five years
-      </div>
-      <svg id="careerAgeOCAndPC"></svg>
-    </div>
-    <div>
-      <div>
-        This Section will describe the percentage of awardees per gender compared to the overall proportion of female/male authors
-      </div>
-      <svg id="percentageAwardessByGender"></svg>
-    </div>
-  </body>
+
+<head>
+  <title>DataVisualization</title>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+    function vizByYear() {
+      console.log("Display by year")
+      age = document.getElementById('byAge')
+      if (age!=null){
+          age.remove()
+      }
+      byYear = document.createElement("div")
+      byYear.setAttribute("id", "byYear")
+      gpBc1d = document.createElement("div")
+      gpBc1d.setAttribute("id", "gpBc1d")
+
+      byYear.appendChild(gpBc1d)
+      document.getElementById("body").appendChild(byYear)
+
+
+      var gpBc1dscript = document.createElement("script");
+      gpBc1dscript.type = "text/javascript";
+      gpBc1dscript.src = "src/groupedBarChart_1d.js";
+      document.getElementById("body").appendChild(gpBc1dscript)
+    }
+
+    function vizByAge() {
+      console.log("Display by age")
+      year = document.getElementById('byYear')
+      if (year!=null){
+          year.remove()
+      }
+      byAge = document.createElement("div")
+      byAge.setAttribute("id", "byAge")
+      steam = document.createElement("div")
+      steam.setAttribute("id", "steam")
+
+      byAge.appendChild(steam)
+      document.getElementById("body").appendChild(byAge)
+
+      var steamScript = document.createElement("script");
+      steamScript.type = "text/javascript";
+      steamScript.src = "src/steam_3d.js";
+      document.getElementById("body").appendChild(steamScript)
+    }
+
+    function vizByCollaboration() {
+      console.log("Display by collaboration")
+      year = document.getElementById('byYear')
+      if (year!=null){
+          year.remove()
+      }
+      age = document.getElementById('byAge')
+      if (age!=null){
+        age.remove()
+      }
+    }
+
+    function landing() {
+      var gpBc1dscript = document.createElement("script");
+      gpBc1dscript.type = "text/javascript";
+      gpBc1dscript.src = "src/groupedBarChart_1d.js";
+      document.getElementById("body").appendChild(gpBc1dscript)
+
+      document.getElementById('year').checked=true
+    }
+  </script>
+</head>
+
+<body id='body' onload="landing()">
+  <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
+  <div style="text-align:center">
+    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Year</input>
+    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Age</input>
+    <input type="radio" id="collaboration" name="fav_language" value="collaboration"
+      onclick="vizByCollaboration()">Collaboration</input>
+  
+  </div>
+  <div id='byYear'>
+    <div id='gpBc1d' ></div>
+  </div>
+
+
+</body>
+
 </html>
