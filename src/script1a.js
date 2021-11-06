@@ -1,4 +1,4 @@
-d3.csv("01-AB n_gender_year.csv").then(function(dataset){
+d3.csv("dataaset/01-AB n_gender_year.csv").then(function(dataset){
 	 var dimensions = {
         width: 2000,
         height: 2000,
@@ -31,6 +31,10 @@ d3.csv("01-AB n_gender_year.csv").then(function(dataset){
 	const male = dataset.filter(d => d.AuthorGender == 'Male');
 	const female = dataset.filter(d => d.AuthorGender == 'Female');
 	const unknown = dataset.filter(d => d.AuthorGender == 'Unknown');
+	
+	 var legend = svg.append('g')
+					 .attr('class', 'legend')
+                     .attr('transform', 'translate(' + (10) + ', 10)');
 	
 	
 //	var color=			{if (d=>d.AuthorGender)return yellow

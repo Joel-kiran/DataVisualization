@@ -1,4 +1,4 @@
-d3.csv("01-AB n_gender_year.csv").then(function(dataset){
+d3.csv("dataaset/01-AB n_gender_year.csv").then(function(dataset){
 	 var dimensions = {
         width: 2000,
         height: 2000,

@@ -1,4 +1,4 @@
-d3.csv("02-B career_paper.csv").then(function(dataset){
+d3.csv("dataaset/02-B career_paper.csv").then(function(dataset){
 	 var dimensions = {
         width: 2000,
         height: 2000,

@@ -1,4 +1,4 @@
-d3.csv("02-A career_author.csv").then(function(dataset){
+d3.csv("dataaset/02-A career_author.csv").then(function(dataset){
 	 var dimensions = {
         width: 2000,
         height: 2000,
