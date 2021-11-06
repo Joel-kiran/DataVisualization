@@ -15,6 +15,11 @@
       byYear.setAttribute("id", "byYear")
       gpBc1d = document.createElement("div")
       gpBc1d.setAttribute("id", "gpBc1d")
+	  LineCt1a=document.createElement("div")
+      LineCt1a.setAttribute("id", "LineCt1a")
+	  LineCt1b=document.createElement("div")
+      LineCt1b.setAttribute("id", "LineCt1b")
+	  
 
       byYear.appendChild(gpBc1d)
       document.getElementById("body").appendChild(byYear)
@@ -24,6 +29,16 @@
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
+	  
+	  var LineCt1ascript=document.createElement("script");
+      LineCt1ascript.type = "text/javascript";
+      LineCt1ascript.src = "src/script1a.js";
+      document.getElementById("body").appendChild(LineCt1ascript)
+	  
+	  var LineCt1bscript=document.createElement("script");
+      LineCt1bscript.type = "text/javascript";
+      LineCt1bscript.src = "src/script1b.js";
+      document.getElementById("body").appendChild(LineCt1bscript)
     }
 
     function vizByAge() {
@@ -80,6 +95,8 @@
   </div>
   <div id='byYear'>
     <div id='gpBc1d' ></div>
+	<div id='LineCt1a'><div align='right'></div>
+	<div id='LineCt1b'><div align='bottom'></div>
   </div>
 
 
