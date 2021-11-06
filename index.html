@@ -20,15 +20,12 @@
      
       LineCt1a = document.createElement("div")
       LineCt1a.setAttribute("id", "")
-      svg1a = document. createElement("svg")
+      svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg1a.setAttribute("id", "LineCt1a")
       LineCt1a.appendChild(svg1a)
       byYear.appendChild(LineCt1a)
       
       document.getElementById("body").appendChild(byYear)
-
-      //document.getElementById("body").appendChild(LineCt1a)
-
 
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
@@ -40,11 +37,6 @@
       LineCt1ascript.type = "text/javascript";
       LineCt1ascript.src = "src/script1a.js";
       document.getElementById("body").appendChild(LineCt1ascript)
-
-      //var LineCt1bscript = document.createElement("script");
-      //LineCt1bscript.type = "text/javascript";
-      //LineCt1bscript.src = "src/script1b.js";
-      //document.getElementById("body").appendChild(LineCt1bscript)
     }
 
     function vizByAge() {

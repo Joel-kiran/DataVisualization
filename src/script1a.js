@@ -9,6 +9,7 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function(dataset){
 		   left: 50
 	   }
    }
+ 
    var svg = d3.select("#LineCt1a")
 			   .attr("width", dimensions.width)
 			   .attr("height", dimensions.height);
