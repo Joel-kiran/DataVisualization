@@ -10,8 +10,8 @@ d3.csv("dataaset/02-A career_author.csv").then(function(dataset){
         }
     }
 	var svg = d3.select("#linechart")
-                .style("width", dimensions.width)
-                .style("height", dimensions.height);
+                .attr("width", dimensions.width)
+                .attr("height", dimensions.height);
 	
 	var xAccessor=d=>d.CareerAge
 	var yAccessor=d=>d.count
