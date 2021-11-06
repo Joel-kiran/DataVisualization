@@ -13,15 +13,24 @@
       }
       byYear = document.createElement("div")
       byYear.setAttribute("id", "byYear")
+	  
       gpBc1d = document.createElement("div")
       gpBc1d.setAttribute("id", "gpBc1d")
+	  
 	  LineCt1a=document.createElement("div")
       LineCt1a.setAttribute("id", "LineCt1a")
+	  
 	  LineCt1b=document.createElement("div")
       LineCt1b.setAttribute("id", "LineCt1b")
 	  
 
       byYear.appendChild(gpBc1d)
+      document.getElementById("body").appendChild(byYear)
+	  
+	  byYear.appendChild(LineCt1a)
+      document.getElementById("body").appendChild(byYear)
+	  
+	  byYear.appendChild(LineCt1b)
       document.getElementById("body").appendChild(byYear)
 
 
