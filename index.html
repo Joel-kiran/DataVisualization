@@ -11,6 +11,10 @@
       if (age!=null){
           age.remove()
       }
+      colla = document.getElementById('byCollaboration')
+      if (colla!=null){
+          colla.remove()
+      }
       byYear = document.createElement("div")
       byYear.setAttribute("id", "byYear")
       gpBc1d = document.createElement("div")
@@ -31,6 +35,10 @@
       year = document.getElementById('byYear')
       if (year!=null){
           year.remove()
+      }
+      colla = document.getElementById('byCollaboration')
+      if (colla!=null){
+          colla.remove()
       }
       byAge = document.createElement("div")
       byAge.setAttribute("id", "byAge")
@@ -56,6 +64,18 @@
       if (age!=null){
         age.remove()
       }
+      byColla = document.createElement("div")
+      byColla.setAttribute("id", "byCollaboration")
+      collabortion = document.createElement("div")
+      collabortion.setAttribute("id", "collaboration_actual")
+
+      byColla.appendChild(collabortion)
+      document.getElementById("body").appendChild(byColla)
+
+      var collaScript = document.createElement("script");
+      collaScript.type = "text/javascript";
+      collaScript.src = "src/script-heatmap.js";
+      document.getElementById("body").appendChild(collaScript)
     }
 
     function landing() {
@@ -63,7 +83,6 @@
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
-
       document.getElementById('year').checked=true
     }
   </script>
