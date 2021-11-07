@@ -64,6 +64,39 @@ d3.csv("dataset/02-A_career_author.csv",function(dataset){
                    .style("transform", `translateX(${dimensions.margin.left}px)`)
 	//			   .text("Count")
 				   
-	
+	conf = ['Male', 'Female']
+    color = ['yellow', 'red']
+    var legend = svg.append('g')
+        .attr('class', 'legend')
+        .attr('transform', 'translate(' + (10) + ', 10)');
+
+    legend.selectAll('rect')
+        .data(conf)
+        .enter()
+        .append('rect')
+        .attr('x', 0)
+        .attr('y', function (d, i) {
+            return i * 25;
+        })
+        .attr('width', 12)
+        .attr('height', 12)
+        .attr('fill', function (d, i) {
+            return color[i];
+        });
+
+    legend.selectAll('text')
+        .data(conf)
+        .enter()
+        .append('text')
+        .text(function (d) {
+            return d;
+        })
+        .attr('x', 25)
+        .attr('y', function (d, i) {
+            return i * 28;
+        })
+        .attr('text-anchor', 'start')
+        .attr('alignment-baseline', 'hanging');
+
     console.log(dataset)
 })

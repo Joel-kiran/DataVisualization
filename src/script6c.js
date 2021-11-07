@@ -73,7 +73,40 @@ d3.csv("dataset/07-CD_program_count.csv",function(dataset){
     var yAxis = svg.append("g")
                    .call(yAxisgen)
                    .style("transform", `translateX(${dimensions.margin.left}px)`)
-				   
 	
+				   conf = ['Male', 'Female', 'Unknown']
+				   color = ['yellow', 'red', 'blue']
+				   var legend = svg.append('g')
+					   .attr('class', 'legend')
+					   .attr('transform', 'translate(' + (10) + ', 10)');
+			   
+				   legend.selectAll('rect')
+					   .data(conf)
+					   .enter()
+					   .append('rect')
+					   .attr('x', 0)
+					   .attr('y', function (d, i) {
+						   return i * 25;
+					   })
+					   .attr('width', 20)
+					   .attr('height', 20)
+					   .attr('fill', function (d, i) {
+						   return color[i];
+					   });
+			   
+				   legend.selectAll('text')
+					   .data(conf)
+					   .enter()
+					   .append('text')
+					   .text(function (d) {
+						   return d;
+					   })
+					   .attr('x', 25)
+					   .attr('y', function (d, i) {
+						   return i * 28;
+					   })
+					   .attr('text-anchor', 'start')
+					   .attr('alignment-baseline', 'hanging');
+							  
     console.log(dataset)
 })
