@@ -5,6 +5,9 @@
   <title>DataVisualization</title>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
+    var txt1c = "This graph explains the trend over the years in the percentage of Female out of all genders in the four different conference"
+    var txt1d = "This graph explains the trend in the drop out rate with respect to career age for male and female genders"
+
     function vizByYear() {
       console.log("Display by year")
       age = document.getElementById('byAge')
@@ -14,24 +17,36 @@
       byYear = document.createElement("div")
       byYear.setAttribute("id", "byYear")
 
+      heading1c = document.createElement("h3")
+      heading1c.setAttribute("style", "position:absolute; left:10%")
+      heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
+      byYear.appendChild(heading1c)
+
       gpBc1d = document.createElement("div")
+      gpBc1d.setAttribute("style", 'display: inline-block')
       gpBc1d.setAttribute("id", "gpBc1d")
       byYear.appendChild(gpBc1d)
-      
+
+      divtext1c = document.createElement("div")
+      divtext1c.setAttribute("style", "display: inline-block; position:absolute;top:40%")
+      divtext1c.innerHTML = txt1c
+      byYear.appendChild(divtext1c)
+
+
       LineCt1a = document.createElement("div")
       LineCt1a.setAttribute("id", "LineCh1a")
       svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg1a.setAttribute("id", "LineCt1a")
       LineCt1a.appendChild(svg1a)
       byYear.appendChild(LineCt1a)
-     
+
       LineCt6a = document.createElement("div")
       LineCt6a.setAttribute("id", "LineCh6a")
       svg6a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg6a.setAttribute("id", "LineCt6a")
       LineCt6a.appendChild(svg6a)
       byYear.appendChild(LineCt6a)
-      
+
       LineCt6c = document.createElement("div")
       LineCt6c.setAttribute("id", "LineCh6c")
       svg6c = document.createElementNS("http://www.w3.org/2000/svg", "svg")
@@ -46,22 +61,22 @@
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
 
-      
+
       var LineCt1ascript = document.createElement("script");
       LineCt1ascript.type = "text/javascript";
       LineCt1ascript.src = "src/script1a.js";
       document.getElementById("body").appendChild(LineCt1ascript)
-      
+
       var LineCt6ascript = document.createElement("script");
       LineCt6ascript.type = "text/javascript";
       LineCt6ascript.src = "src/script6a.js";
       document.getElementById("body").appendChild(LineCt6ascript)
-      
+
       var LineCt6cscript = document.createElement("script");
       LineCt6cscript.type = "text/javascript";
       LineCt6cscript.src = "src/script6c.js";
       document.getElementById("body").appendChild(LineCt6cscript)
- 
+
     }
 
     function vizByAge() {
@@ -70,12 +85,24 @@
       if (year != null) {
         year.remove()
       }
+
       byAge = document.createElement("div")
       byAge.setAttribute("id", "byAge")
+
+      heading1d = document.createElement("h3")
+      heading1d.setAttribute("style", "position:absolute;left:10%;top:12%")
+      heading1d.innerHTML = "DropOut Rate Vs Career Age"
+      byAge.appendChild(heading1d)
+
       steam = document.createElement("div")
       steam.setAttribute("id", "steam")
-
+      steam.setAttribute("style", "display: inline-block")
       byAge.appendChild(steam)
+
+      divtext1d = document.createElement("div")
+      divtext1d.setAttribute("style", "display: inline-block; position:absolute;top:40%")
+      divtext1d.innerHTML = txt1d
+      byAge.appendChild(divtext1d)
 
       LineCt2a = document.createElement("div")
       LineCt2a.setAttribute("id", "LineCh2a")
@@ -123,7 +150,7 @@
       LineCt1ascript.type = "text/javascript";
       LineCt1ascript.src = "src/script1a.js";
       document.getElementById("body").appendChild(LineCt1ascript)
-      
+
       var LineCt6ascript = document.createElement("script");
       LineCt6ascript.type = "text/javascript";
       LineCt6ascript.src = "src/script6a.js";
@@ -141,31 +168,34 @@
 <body id='body' onload="landing()">
   <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
   <div style="text-align:center">
-    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Year</input>
-    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Age</input>
+    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
+    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
     <input type="radio" id="collaboration" name="fav_language" value="collaboration"
-      onclick="vizByCollaboration()">Collaboration</input>
+      onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
 
   </div>
   <div id='byYear'>
-    <div id='gpBc1d'></div>
+    <div>
+      <h3 style='position:absolute; left:10%'>Percentage of Female By Conference Vs Year</h3>
+      <div id='gpBc1d' style='display: inline-block'>
+
+      </div>
+      <div style='display: inline-block; position:absolute;top:40%'> This graph explains the trend over the years in the
+        percentage of Female out of all genders in the four different conference </div>
+    </div>
+
     <div id='LineCh1a'>
-      <svg  id='LineCt1a'></svg>
+      <svg id='LineCt1a'></svg>
     </div>
     <div id='LineCh6a'>
-      <svg  id='LineCt6a'></svg>
+      <svg id='LineCt6a'></svg>
     </div>
     <div id='LineCh6c'>
-      <svg  id='LineCt6c'></svg>
+      <svg id='LineCt6c'></svg>
     </div>
   </div>
 
-  <div id='byAge'>
-    <div id='steam'> </div>
-    <div id='LineCh2a'>
-      <svg  id='LineCt2a'></svg>
-    </div>
-  </div>
+
 
 
 
