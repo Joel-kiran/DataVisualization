@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = { top: 30, right: 30, bottom: 30, left: 30 },
+var margin = { top: 80, right: 25, bottom: 30, left: 40 },
   width = 450 - margin.left - margin.right,
   height = 450 - margin.top - margin.bottom;
 
@@ -65,6 +65,20 @@ d3.csv("dataset/6_coll_actual_count.csv", function (data) {
     .style("border-radius", "5px")
     .style("padding", "5px")
 
+     // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    tooltip.style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    tooltip
+      .html("The exact value of<br>this cell is: " + d.real_count)
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+  var mouseleave = function(d) {
+    tooltip.style("opacity", 0)
+  }
+
   // add the squares
   svg.selectAll()
     .data(data, function (d) { return 1; })
@@ -75,6 +89,28 @@ d3.csv("dataset/6_coll_actual_count.csv", function (data) {
     .attr("width", x.bandwidth())
     .attr("height", y.bandwidth())
     .style("fill", function (d) { return myColor(+d.real_count) })
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+
+
+     // Add title to graph
+svg.append("text")
+.attr("x", 70)
+.attr("y", -50)
+.attr("text-anchor", "left")
+.style("font-size", "30px")
+.text("A Heatmap Graph");
+
+// Add subtitle to graph
+svg.append("text")
+.attr("x", 90)
+.attr("y", -20)
+.attr("text-anchor", "left")
+.style("font-size", "22px")
+.style("fill", "black")
+.style("max-width", 400)
+.text("Actual paper counts");
 
 })
 
