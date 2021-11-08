@@ -9,13 +9,13 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 			left: 50
 		}
 	}
-	console.log("script6a start")
+	//console.log("script6a start")
 	var svg = d3.select("#LineCt1a")
 		.attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
 		.attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
-		.attr("transform",
-			"translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")")
-	console.log("script6a goin")
+	//	.attr("transform",
+	//		"translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")")
+	//console.log("script6a goin")
 
 	var xAccessor = d => +d.Year
 	var yAccessor = d => +d.n_authors

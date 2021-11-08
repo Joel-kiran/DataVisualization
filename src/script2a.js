@@ -1,6 +1,6 @@
 d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 	var dimensions = {
-		width: 500,
+		width: 600,
 		height: 350,
 		margin: {
 			top: 20,
@@ -12,7 +12,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 	var svg = d3.select("#LineCt2a")
 		.attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
 		.attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom);
-
+	
 	var xAccessor = d => +d.CareerAge
 	var yAccessor = d => +d.count
 

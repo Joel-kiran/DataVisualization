@@ -11,7 +11,9 @@ d3.csv("dataset/07-CD_program_count.csv", function (dataset) {
 	}
 	var svg = d3.select("#LineCt6a")
 		.attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
-		.attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom);
+		.attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
+//		.attr("transform",
+//			"translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")")
 
 	var xAccessor = d => +d.Year
 	var yAccessor = d => +d.count
