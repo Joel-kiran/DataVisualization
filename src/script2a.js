@@ -64,6 +64,4 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
 	//			   .text("Count")
 
-
-	console.log(dataset)
 })

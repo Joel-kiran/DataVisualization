@@ -74,6 +74,4 @@ d3.csv("dataset/07-CD_program_count.csv", function (dataset) {
 		.call(yAxisgen)
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
 
-
-	console.log(dataset)
 })
