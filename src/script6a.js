@@ -1,28 +1,28 @@
 d3.csv("dataset/07-AB_conference_count.csv",function(dataset){
 	 var dimensions = {
         width: 500,
-        height: 500,
+        height: 220,
         margin: {
             top: 10,
             bottom: 20,
-            right: 10,
+            right: 20,
             left: 50
         }
     }
 	var svg = d3.select("#LineCt6c")
-                .attr("width", dimensions.width)
-                .attr("height", dimensions.height);
+                .attr("width", dimensions.width+dimensions.margin.left+dimensions.margin.right)
+                .attr("height", dimensions.height+dimensions.margin.top+dimensions.margin.bottom);
 	
 	var xAccessor=d=>+d.Year
 	var yAccessor=d=>+d.count
 	
 	var xScale=d3.scaleLinear()
                   .domain(d3.extent(dataset,xAccessor))
-                  .range([dimensions.margin.left,dimensions.width - dimensions.margin.right])
+                  .range([dimensions.margin.left,dimensions.width + dimensions.margin.left])
 				  
 	var yScale=d3.scaleLinear()
                   .domain(d3.extent(dataset,yAccessor))
-                  .range([dimensions.width - dimensions.margin.right,dimensions.margin.left])
+                  .range([dimensions.height, 0])
 	
 	
 	const male = dataset.filter(d => { return d.AuthorGender == 'Male' && d.Group=='Committee'});
@@ -64,7 +64,7 @@ d3.csv("dataset/07-AB_conference_count.csv",function(dataset){
 	
     var xAxis = svg.append("g")
                    .call(xAxisgen)
-                   .style("transform",`translateY(${dimensions.height - dimensions.margin.bottom}px)`)
+                   .style("transform",`translateY(${dimensions.height}px)`)
 				   
 
     var yAxis = svg.append("g")

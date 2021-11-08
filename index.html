@@ -5,7 +5,7 @@
   <title>DataVisualization</title>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
-    var txt1c = "This graph explains the trend over the years in the percentage of Female out of all genders in the four different conference"
+    var txt1c = "This graph explains the trend over the years in the percentage of Female Count w.r.t all genders for four different conference"
     var txt1d = "This graph explains the trend in the drop out rate with respect to career age for male and female genders"
 
     function vizByYear() {
@@ -15,48 +15,74 @@
         age.remove()
       }
       colla = document.getElementById('byCollaboration')
-      if (colla!=null){
-          colla.remove()
+      if (colla != null) {
+        colla.remove()
       }
       byYear = document.createElement("div")
       byYear.setAttribute("id", "byYear")
 
-      heading1c = document.createElement("h3")
-      heading1c.setAttribute("style", "position:absolute; left:10%")
+      heading1c = document.createElement("h4")
+      heading1c.setAttribute("style", "text-align:center")
       heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
-      byYear.appendChild(heading1c)
 
+      heading1a = document.createElement("h4")
+      heading1a.setAttribute("style", "text-align:center")
+      heading1a.innerHTML = "No. Of Authors In IEEE Vis Vs Year"
+
+
+      heading6a = document.createElement("h4")
+      heading6a.setAttribute("style", "text-align:center")
+      heading6a.innerHTML = "No. Of PC members Vs Year"
+
+      heading6c = document.createElement("h4")
+      heading6c.setAttribute("style", "text-align:center")
+      heading6c.innerHTML = "No. Of OC members Vs Year"
+
+      line1Div = document.createElement("div")
       gpBc1d = document.createElement("div")
       gpBc1d.setAttribute("style", 'display: inline-block')
       gpBc1d.setAttribute("id", "gpBc1d")
-      byYear.appendChild(gpBc1d)
+      gpBc1d.appendChild(heading1c)
+      line1Div.appendChild(gpBc1d)
 
-      divtext1c = document.createElement("div")
-      divtext1c.setAttribute("style", "display: inline-block; position:absolute;top:40%")
-      divtext1c.innerHTML = txt1c
-      byYear.appendChild(divtext1c)
+      //divtext1c = document.createElement("div")
+      //divtext1c.setAttribute("style", "display: inline-block; position:absolute;top:40%")
+      //divtext1c.innerHTML = txt1c
+      //byYear.appendChild(divtext1c)
 
 
       LineCt1a = document.createElement("div")
+      LineCt1a.setAttribute("style", 'display: inline-block')
       LineCt1a.setAttribute("id", "LineCh1a")
+      LineCt1a.appendChild(heading1a)
       svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg1a.setAttribute("id", "LineCt1a")
       LineCt1a.appendChild(svg1a)
-      byYear.appendChild(LineCt1a)
+      line1Div.appendChild(LineCt1a)
+
+      byYear.appendChild(line1Div)
+
+      line2Div = document.createElement("div")
 
       LineCt6a = document.createElement("div")
+      LineCt6a.setAttribute("style", 'display: inline-block')
       LineCt6a.setAttribute("id", "LineCh6a")
+      LineCt6a.appendChild(heading6a)
       svg6a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg6a.setAttribute("id", "LineCt6a")
       LineCt6a.appendChild(svg6a)
-      byYear.appendChild(LineCt6a)
+      line2Div.appendChild(LineCt6a)
 
       LineCt6c = document.createElement("div")
+      LineCt6c.setAttribute("style", 'display: inline-block')
       LineCt6c.setAttribute("id", "LineCh6c")
+      LineCt6c.appendChild(heading6c)
       svg6c = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg6c.setAttribute("id", "LineCt6c")
       LineCt6c.appendChild(svg6c)
-      byYear.appendChild(LineCt6c)
+      line2Div.appendChild(LineCt6c)
+
+      byYear.appendChild(line2Div)
 
       document.getElementById("body").appendChild(byYear)
 
@@ -90,33 +116,39 @@
         year.remove()
       }
       colla = document.getElementById('byCollaboration')
-      if (colla!=null){
-          colla.remove()
+      if (colla != null) {
+        colla.remove()
       }
       byAge = document.createElement("div")
       byAge.setAttribute("id", "byAge")
 
-      heading1d = document.createElement("h3")
-      heading1d.setAttribute("style", "position:absolute;left:10%;top:12%")
-      heading1d.innerHTML = "DropOut Rate Vs Career Age"
-      byAge.appendChild(heading1d)
+      headingSteam = document.createElement("h4")
+      headingSteam.setAttribute("style", "text-align:center")
+      headingSteam.innerHTML = "DropOut Rate Vs Career Age"
+
+      heading2a = document.createElement("h4")
+      heading2a.setAttribute("style", "text-align:center")
+      heading2a.innerHTML = "No. Of Authors Vs Career Age"
+
+
+      line1Div = document.createElement("div")
 
       steam = document.createElement("div")
       steam.setAttribute("id", "steam")
       steam.setAttribute("style", "display: inline-block")
-      byAge.appendChild(steam)
-
-      divtext1d = document.createElement("div")
-      divtext1d.setAttribute("style", "display: inline-block; position:absolute;top:40%")
-      divtext1d.innerHTML = txt1d
-      byAge.appendChild(divtext1d)
+      steam.appendChild(headingSteam)
+      line1Div.appendChild(steam)
 
       LineCt2a = document.createElement("div")
+      LineCt2a.setAttribute("style", "display: inline-block")
       LineCt2a.setAttribute("id", "LineCh2a")
+      LineCt2a.appendChild(heading2a)
       svg2a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg2a.setAttribute("id", "LineCt2a")
       LineCt2a.appendChild(svg2a)
-      byAge.appendChild(LineCt2a)
+      line1Div.appendChild(LineCt2a)
+
+      byAge.appendChild(line1Div)
 
       document.getElementById("body").appendChild(byAge)
 
@@ -194,23 +226,25 @@
 
   </div>
   <div id='byYear'>
-    <div>
-      <h3 style='position:absolute; left:10%'>Percentage of Female By Conference Vs Year</h3>
+    <div id='row1'>
       <div id='gpBc1d' style='display: inline-block'>
-
+        <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
       </div>
-      <div style='display: inline-block; position:absolute;top:40%'> This graph explains the trend over the years in the
-        percentage of Female out of all genders in the four different conference </div>
+      <div id='LineCh1a' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
+        <svg id='LineCt1a'></svg>
+      </div>
     </div>
 
-    <div id='LineCh1a'>
-      <svg id='LineCt1a'></svg>
-    </div>
-    <div id='LineCh6a'>
-      <svg id='LineCt6a'></svg>
-    </div>
-    <div id='LineCh6c'>
-      <svg id='LineCt6c'></svg>
+    <div id='row2'>
+      <div id='LineCh6a' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of PC members Vs Year</h4>
+        <svg id='LineCt6a'></svg>
+      </div>
+      <div id='LineCh6c' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of OC members Vs Year</h4>
+        <svg id='LineCt6c'></svg>
+      </div>
     </div>
   </div>
 
