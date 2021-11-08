@@ -41,11 +41,11 @@ d3.csv('dataset/1d.csv', function (data) {
         }
         confYearDict.push(temp)
     }
-    console.log(confYearDict)
+    //console.log(confYearDict)
 
     var container = d3.select('#gpBc1d'),
         width = 600,
-        height = 400,
+        height = 220,
         margin = { top: 30, right: 20, bottom: 30, left: 50 },
         barPadding = .2,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };

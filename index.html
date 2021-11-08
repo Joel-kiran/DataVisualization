@@ -5,63 +5,174 @@
   <title>DataVisualization</title>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
+    var txt1c = "This graph explains the trend over the years in the percentage of Female Count w.r.t all genders for four different conference"
+    var txt1d = "This graph explains the trend in the drop out rate with respect to career age for male and female genders"
+
     function vizByYear() {
       console.log("Display by year")
       age = document.getElementById('byAge')
-      if (age!=null){
-          age.remove()
+      if (age != null) {
+        age.remove()
       }
       colla = document.getElementById('byCollaboration')
-      if (colla!=null){
-          colla.remove()
+      if (colla != null) {
+        colla.remove()
       }
       byYear = document.createElement("div")
       byYear.setAttribute("id", "byYear")
+
+      heading1c = document.createElement("h4")
+      heading1c.setAttribute("style", "text-align:center")
+      heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
+
+      heading1a = document.createElement("h4")
+      heading1a.setAttribute("style", "text-align:center")
+      heading1a.innerHTML = "No. Of Authors In IEEE Vis Vs Year"
+
+
+      heading6a = document.createElement("h4")
+      heading6a.setAttribute("style", "text-align:center")
+      heading6a.innerHTML = "No. Of PC members Vs Year"
+
+      heading6c = document.createElement("h4")
+      heading6c.setAttribute("style", "text-align:center")
+      heading6c.innerHTML = "No. Of OC members Vs Year"
+
+      line1Div = document.createElement("div")
       gpBc1d = document.createElement("div")
+      gpBc1d.setAttribute("style", 'display: inline-block')
       gpBc1d.setAttribute("id", "gpBc1d")
+      gpBc1d.appendChild(heading1c)
+      line1Div.appendChild(gpBc1d)
 
-      byYear.appendChild(gpBc1d)
+      //divtext1c = document.createElement("div")
+      //divtext1c.setAttribute("style", "display: inline-block; position:absolute;top:40%")
+      //divtext1c.innerHTML = txt1c
+      //byYear.appendChild(divtext1c)
+
+
+      LineCt1a = document.createElement("div")
+      LineCt1a.setAttribute("style", 'display: inline-block')
+      LineCt1a.setAttribute("id", "LineCh1a")
+      LineCt1a.appendChild(heading1a)
+      svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      svg1a.setAttribute("id", "LineCt1a")
+      LineCt1a.appendChild(svg1a)
+      line1Div.appendChild(LineCt1a)
+
+      byYear.appendChild(line1Div)
+
+      line2Div = document.createElement("div")
+
+      LineCt6a = document.createElement("div")
+      LineCt6a.setAttribute("style", 'display: inline-block')
+      LineCt6a.setAttribute("id", "LineCh6a")
+      LineCt6a.appendChild(heading6a)
+      svg6a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      svg6a.setAttribute("id", "LineCt6a")
+      LineCt6a.appendChild(svg6a)
+      line2Div.appendChild(LineCt6a)
+
+      LineCt6c = document.createElement("div")
+      LineCt6c.setAttribute("style", 'display: inline-block')
+      LineCt6c.setAttribute("id", "LineCh6c")
+      LineCt6c.appendChild(heading6c)
+      svg6c = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      svg6c.setAttribute("id", "LineCt6c")
+      LineCt6c.appendChild(svg6c)
+      line2Div.appendChild(LineCt6c)
+
+      byYear.appendChild(line2Div)
+
       document.getElementById("body").appendChild(byYear)
-
 
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
+
+
+      var LineCt1ascript = document.createElement("script");
+      LineCt1ascript.type = "text/javascript";
+      LineCt1ascript.src = "src/script1a.js";
+      document.getElementById("body").appendChild(LineCt1ascript)
+
+      var LineCt6ascript = document.createElement("script");
+      LineCt6ascript.type = "text/javascript";
+      LineCt6ascript.src = "src/script6a.js";
+      document.getElementById("body").appendChild(LineCt6ascript)
+
+      var LineCt6cscript = document.createElement("script");
+      LineCt6cscript.type = "text/javascript";
+      LineCt6cscript.src = "src/script6c.js";
+      document.getElementById("body").appendChild(LineCt6cscript)
+
     }
 
     function vizByAge() {
       console.log("Display by age")
       year = document.getElementById('byYear')
-      if (year!=null){
-          year.remove()
+      if (year != null) {
+        year.remove()
       }
       colla = document.getElementById('byCollaboration')
-      if (colla!=null){
-          colla.remove()
+      if (colla != null) {
+        colla.remove()
       }
       byAge = document.createElement("div")
       byAge.setAttribute("id", "byAge")
+
+      headingSteam = document.createElement("h4")
+      headingSteam.setAttribute("style", "text-align:center")
+      headingSteam.innerHTML = "DropOut Rate Vs Career Age"
+
+      heading2a = document.createElement("h4")
+      heading2a.setAttribute("style", "text-align:center")
+      heading2a.innerHTML = "No. Of Authors Vs Career Age"
+
+
+      line1Div = document.createElement("div")
+
       steam = document.createElement("div")
       steam.setAttribute("id", "steam")
+      steam.setAttribute("style", "display: inline-block")
+      steam.appendChild(headingSteam)
+      line1Div.appendChild(steam)
 
-      byAge.appendChild(steam)
+      LineCt2a = document.createElement("div")
+      LineCt2a.setAttribute("style", "display: inline-block")
+      LineCt2a.setAttribute("id", "LineCh2a")
+      LineCt2a.appendChild(heading2a)
+      svg2a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      svg2a.setAttribute("id", "LineCt2a")
+      LineCt2a.appendChild(svg2a)
+      line1Div.appendChild(LineCt2a)
+
+      byAge.appendChild(line1Div)
+
       document.getElementById("body").appendChild(byAge)
 
       var steamScript = document.createElement("script");
       steamScript.type = "text/javascript";
       steamScript.src = "src/steam_3d.js";
       document.getElementById("body").appendChild(steamScript)
+
+      var LineCt2ascript = document.createElement("script");
+      LineCt2ascript.type = "text/javascript";
+      LineCt2ascript.src = "src/script2a.js";
+      document.getElementById("body").appendChild(LineCt2ascript)
+
+
     }
 
     function vizByCollaboration() {
       console.log("Display by collaboration")
       year = document.getElementById('byYear')
-      if (year!=null){
-          year.remove()
+      if (year != null) {
+        year.remove()
       }
       age = document.getElementById('byAge')
-      if (age!=null){
+      if (age != null) {
         age.remove()
       }
       byColla = document.createElement("div")
@@ -83,7 +194,24 @@
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
-      document.getElementById('year').checked=true
+
+      document.getElementById('year').checked = true
+
+      var LineCt1ascript = document.createElement("script");
+      LineCt1ascript.type = "text/javascript";
+      LineCt1ascript.src = "src/script1a.js";
+      document.getElementById("body").appendChild(LineCt1ascript)
+
+      var LineCt6ascript = document.createElement("script");
+      LineCt6ascript.type = "text/javascript";
+      LineCt6ascript.src = "src/script6a.js";
+      document.getElementById("body").appendChild(LineCt6ascript)
+
+      var LineCt6cscript = document.createElement("script");
+      LineCt6cscript.type = "text/javascript";
+      LineCt6cscript.src = "src/script6c.js";
+      document.getElementById("body").appendChild(LineCt6cscript)
+
     }
   </script>
 </head>
@@ -91,15 +219,37 @@
 <body id='body' onload="landing()">
   <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
   <div style="text-align:center">
-    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Year</input>
-    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Age</input>
+    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
+    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
     <input type="radio" id="collaboration" name="fav_language" value="collaboration"
-      onclick="vizByCollaboration()">Collaboration</input>
-  
+      onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
+
   </div>
   <div id='byYear'>
-    <div id='gpBc1d' ></div>
+    <div id='row1'>
+      <div id='gpBc1d' style='display: inline-block'>
+        <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
+      </div>
+      <div id='LineCh1a' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
+        <svg id='LineCt1a'></svg>
+      </div>
+    </div>
+
+    <div id='row2'>
+      <div id='LineCh6a' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of PC members Vs Year</h4>
+        <svg id='LineCt6a'></svg>
+      </div>
+      <div id='LineCh6c' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of OC members Vs Year</h4>
+        <svg id='LineCt6c'></svg>
+      </div>
+    </div>
   </div>
+
+
+
 
 
 </body>
