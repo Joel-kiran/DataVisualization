@@ -4,11 +4,12 @@
 <head>
   <title>DataVisualization</title>
   <style>
-    table, th, td {
+    table,
+    th,
+    td {
       border: 1px solid black;
-      border-collapse:collapse;
+      border-collapse: collapse;
     }
-
   </style>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
@@ -218,49 +219,49 @@
 </head>
 
 <body id='body' onload="landing()">
-<h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
-<div style="text-align:center">
-  <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
-  <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
-  <input type="radio" id="collaboration" name="fav_language" value="collaboration"
-         onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
-
-</div>
-<div id='byYear'>
-  <div id='row1'>
-    <div id='gpBc1d' style='display: inline-block;' >
-      <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
-    </div>
-    <div id='pubInfo' width='400px' height='700px' style='display: inline-block; '>
-      <h4 id='confChoosen'>The choosen conference is None and the year is None</h4>
-      <Table id='pubAuthInfo' style="display:block;" >
-        <thead id='pubInfoHead' >
-
-        </thead>
-        <tbody id='pubInfoBody' style='overflow-y:scroll; overflow-x:scroll; display:block;height:400px; width:700px'>
-
-        </tbody>
-
-      </Table>
-    </div>
+  <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
+  <div style="text-align:center">
+    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
+    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
+    <input type="radio" id="collaboration" name="fav_language" value="collaboration"
+      onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
 
   </div>
-  <div id='LineCh1a'>
-    <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
-    <svg id='LineCt1a'></svg>
-  </div>
+  <div id='byYear'>
+    <div id='row1'>
+      <div id='gpBc1d' style='display: inline-block;'>
+        <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
+      </div>
+      <div id='pubInfo' width='400px' height='700px' style='display: inline-block; '>
+        <h4 id='confChoosen'>The choosen conference is None and the year is None</h4>
+        <Table id='pubAuthInfo' style="display:block;">
+          <thead id='pubInfoHead'>
 
-  <div id='row2'>
-    <div id='LineCh6a' style='display: inline-block'>
-      <h4 style="text-align:center">No. Of PC members Vs Year</h4>
-      <svg id='LineCt6a'></svg>
+          </thead>
+          <tbody id='pubInfoBody' style='overflow-y:scroll; overflow-x:scroll; display:block;height:400px; width:700px'>
+
+          </tbody>
+
+        </Table>
+      </div>
+
     </div>
-    <div id='LineCh6c' style='display: inline-block'>
-      <h4 style="text-align:center">No. Of OC members Vs Year</h4>
-      <svg id='LineCt6c'></svg>
+    <div id='LineCh1a'>
+      <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
+      <svg id='LineCt1a'></svg>
+    </div>
+
+    <div id='row2'>
+      <div id='LineCh6a' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of PC members Vs Year</h4>
+        <svg id='LineCt6a'></svg>
+      </div>
+      <div id='LineCh6c' style='display: inline-block'>
+        <h4 style="text-align:center">No. Of OC members Vs Year</h4>
+        <svg id='LineCt6c'></svg>
+      </div>
     </div>
   </div>
-</div>
 
 
 
