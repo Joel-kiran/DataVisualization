@@ -45,7 +45,7 @@ d3.csv('dataset/1d.csv', function (data) {
 
     var container = d3.select('#gpBc1d'),
         width = 600,
-        height = 220,
+        height = 400,
         margin = { top: 30, right: 20, bottom: 30, left: 50 },
         barPadding = .2,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };
@@ -68,6 +68,20 @@ d3.csv('dataset/1d.csv', function (data) {
     xScale1.domain(['Vis', 'InfoVis', 'VAST', 'SciVis']).range([0, xScale0.bandwidth()]);
     yScale.domain([0, 40]);
 
+    mouseoverSciVis = function(d) {
+        populatePubInfo("SciVis", d.Year)
+    }
+
+    mouseoverVAST = function(d) {
+        populatePubInfo("VAST", d.Year)
+    }
+    mouseoverInfoVis = function(d) {
+        populatePubInfo("InfoVis", d.Year)
+    }
+    mouseoverVis = function(d) {
+        populatePubInfo("Vis", d.Year)
+    }
+
     var model_name = svg.selectAll(".Year")
         .data(confYearDict)
         .enter().append("g")
@@ -80,13 +94,14 @@ d3.csv('dataset/1d.csv', function (data) {
         .enter()
         .append("rect")
         .attr("class", "bar Vis")
-        .style("fill", "yellow")
+        .style("fill", "orange")
         .attr("x", d => xScale1('Vis'))
         .attr("y", d => yScale(d.Vis))
         .attr("width", xScale1.bandwidth())
         .attr("height", d => {
             return height - margin.top - margin.bottom - yScale(d.Vis)
-        });
+        })
+        .on("mouseover", mouseoverVis)
 
     /* Add field2 bars */
     model_name.selectAll(".bar.InfoVis")
@@ -100,7 +115,8 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("width", xScale1.bandwidth())
         .attr("height", d => {
             return height - margin.top - margin.bottom - yScale(d.InfoVis)
-        });
+        })
+        .on("mouseover", mouseoverInfoVis)
 
     model_name.selectAll(".bar.VAST")
         .data(d => [d])
@@ -113,7 +129,8 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("width", xScale1.bandwidth())
         .attr("height", d => {
             return height - margin.top - margin.bottom - yScale(d.VAST)
-        });
+        })
+        .on("mouseover", mouseoverVAST)
 
     model_name.selectAll(".bar.SciVis")
         .data(d => [d])
@@ -126,7 +143,9 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("width", xScale1.bandwidth())
         .attr("height", d => {
             return height - margin.top - margin.bottom - yScale(d.SciVis)
-        });
+        })
+        .on("mouseover", mouseoverSciVis)
+
 
     // Add the X Axis
     svg.append("g")
@@ -145,7 +164,7 @@ d3.csv('dataset/1d.csv', function (data) {
         .call(yAxis);
 
     conf = ['Vis', 'InfoVis', 'VAST', 'SciVis']
-    color = ['yellow', 'red', 'green', 'blue']
+    color = ['orange', 'red', 'green', 'blue']
     var legend = svg.append('g')
         .attr('class', 'legend')
         .attr('transform', 'translate(' + (10) + ', 10)');
@@ -177,5 +196,75 @@ d3.csv('dataset/1d.csv', function (data) {
         })
         .attr('text-anchor', 'start')
         .attr('alignment-baseline', 'hanging');
+
+    populatePubInfo = function(confName, year){
+
+        d3.csv('dataset/AuthorPublication-uptoVIS2020.csv', function(publicationData){
+            //console.log("publicationData", publicationData)
+            document.getElementById("pubInfoHead").innerHTML=''
+            document.getElementById("pubInfoBody").innerHTML=''
+            headerRow=document.createElement("tr")
+            headers1 = document.createElement("th")
+            headers1.innerHTML = "Authors"
+            headers2 = document.createElement("th")
+            headers2.innerHTML = "AuthorOrderRank"
+            headers3 = document.createElement("th")
+            headers3.innerHTML = "Paper Title"
+            headers4 = document.createElement("th")
+            headers4.innerHTML = "Publication Citation"
+            headers5 = document.createElement("th")
+            headers5.innerHTML = "Link"
+            headerRow.appendChild(headers1)
+            headerRow.appendChild(headers2)
+            headerRow.appendChild(headers3)
+            headerRow.appendChild(headers4)
+            headerRow.appendChild(headers5)
+            document.getElementById("pubInfoBody").appendChild(headerRow)
+            //console.log(confName, year)
+            pubDataByConfAndYear = publicationData.filter(d=>{return d.Conference==confName && +d.Year==year})
+
+            d3.csv('dataset/IEEEVISpapers1990-2020-Maindataset.csv', function(mainData){
+
+
+                mainDataByConfYear = mainData.filter(d=>{return +d.Year==year && d.Conference==confName})
+
+                console.log(" main data",mainDataByConfYear)
+
+                for (var i in pubDataByConfAndYear){
+                    for (var j in mainDataByConfYear){
+                        if (pubDataByConfAndYear[i].Author.toUpperCase().includes(mainDataByConfYear[j].AuthorNames.toUpperCase()) ||
+                            mainDataByConfYear[j].AuthorNames.toUpperCase().includes(pubDataByConfAndYear[i].Author.toUpperCase())){
+                            row= document.createElement("tr")
+                            col1=document.createElement("td")
+                            col1.innerHTML=pubDataByConfAndYear[i].Author
+                            col2= document.createElement("td")
+                            col2.innerHTML=pubDataByConfAndYear[i].AuthorOrderRank
+                            col3=document.createElement("td")
+                            col3.innerHTML= mainDataByConfYear[j].Title
+                            col4=document.createElement("td")
+                            col4.innerHTML= mainDataByConfYear[j].PubsCited
+                            col5=document.createElement("td")
+                            col5.innerHTML= mainDataByConfYear[j].Link
+                            row.appendChild(col1)
+                            row.appendChild(col2)
+                            row.appendChild(col3)
+                            row.appendChild(col4)
+                            row.appendChild(col5)
+                            document.getElementById("pubInfoBody").appendChild(row)
+                            console.log("inised")
+                        }
+
+                    }
+                }
+            })
+
+
+            //console.log("pubdata",pubDataByConfAndYear )
+
+
+        })
+    }
+
+
 
 })
