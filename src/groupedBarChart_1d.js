@@ -63,23 +63,35 @@ d3.csv('dataset/1d.csv', function (data) {
 
     var xAxis = d3.axisBottom(xScale0)//.tickSizeOuter(axisTicks.outerSize);
     var yAxis = d3.axisLeft(yScale)//.ticks(axisTicks.qty).tickSizeOuter(axisTicks.outerSize);
-    console.log(xScale0.bandwidth())
+    //console.log(xScale0.bandwidth())
     xScale0.domain(confYearDict.map(d => d.Year));
     xScale1.domain(['Vis', 'InfoVis', 'VAST', 'SciVis']).range([0, xScale0.bandwidth()]);
     yScale.domain([0, 40]);
 
     mouseoverSciVis = function(d) {
         populatePubInfo("SciVis", d.Year)
+        document.getElementById("confChoosen").innerHTML="The choosen conference is SciVis and the year is "+d.Year +
+         " and the percentage of female is "+d.SciVis.toFixed(2)
+        d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
 
     mouseoverVAST = function(d) {
         populatePubInfo("VAST", d.Year)
+        document.getElementById("confChoosen").innerHTML="The choosen conference is VAST and the year is "+d.Year+
+        " and the percentage of female is "+d.VAST.toFixed(2)
+        d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
     mouseoverInfoVis = function(d) {
         populatePubInfo("InfoVis", d.Year)
+        document.getElementById("confChoosen").innerHTML="The choosen conference is InfoVis and the year is "+d.Year+
+        " and the percentage of female is "+d.InfoVis.toFixed(2)
+        d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
     mouseoverVis = function(d) {
         populatePubInfo("Vis", d.Year)
+        document.getElementById("confChoosen").innerHTML="The choosen conference is Vis and the year is "+d.Year+
+        " and the percentage of female is "+d.Vis.toFixed(2)
+        d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
 
     var model_name = svg.selectAll(".Year")
@@ -102,6 +114,7 @@ d3.csv('dataset/1d.csv', function (data) {
             return height - margin.top - margin.bottom - yScale(d.Vis)
         })
         .on("mouseover", mouseoverVis)
+        .on("mouseout", function(d){d3.select(this).attr("stroke", "").style('stroke-width', 0)})
 
     /* Add field2 bars */
     model_name.selectAll(".bar.InfoVis")
@@ -117,6 +130,7 @@ d3.csv('dataset/1d.csv', function (data) {
             return height - margin.top - margin.bottom - yScale(d.InfoVis)
         })
         .on("mouseover", mouseoverInfoVis)
+        .on("mouseout", function(d){d3.select(this).attr("stroke", "").style('stroke-width', 0)})
 
     model_name.selectAll(".bar.VAST")
         .data(d => [d])
@@ -131,6 +145,7 @@ d3.csv('dataset/1d.csv', function (data) {
             return height - margin.top - margin.bottom - yScale(d.VAST)
         })
         .on("mouseover", mouseoverVAST)
+        .on("mouseout", function(d){d3.select(this).attr("stroke", "").style('stroke-width', 0)})
 
     model_name.selectAll(".bar.SciVis")
         .data(d => [d])
@@ -145,6 +160,7 @@ d3.csv('dataset/1d.csv', function (data) {
             return height - margin.top - margin.bottom - yScale(d.SciVis)
         })
         .on("mouseover", mouseoverSciVis)
+        .on("mouseout", function(d){d3.select(this).attr("stroke", "").style('stroke-width', 0)})
 
 
     // Add the X Axis
@@ -197,70 +213,86 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr('text-anchor', 'start')
         .attr('alignment-baseline', 'hanging');
 
+    pubCiteSortOrder="asc"
+    var groupedPubAndMainData=[]
+    function sortByPubCitation(){
+        pubCiteSortOrder = pubCiteSortOrder=='asc'?'dsc':'asc'
+        if (pubCiteSortOrder=="asc"){
+            groupedPubAndMainData.sort(function(a,b){return a.pubCited-b.pubCited})
+        }
+        else{
+            groupedPubAndMainData.sort(function(a,b){return b.pubCited-a.pubCited})
+        }
+        createTableElemets()
+        
+    }
+    function createTableElemets(){
+        document.getElementById("pubInfoHead").innerHTML=''
+        document.getElementById("pubInfoBody").innerHTML=''
+        headerRow=document.createElement("tr")
+        headers1 = document.createElement("th")
+        headers1.innerHTML = "Authors"
+        headers2 = document.createElement("th")
+        headers2.innerHTML = "AuthorOrderRank"
+        headers3 = document.createElement("th")
+        headers3.innerHTML = "Paper Title"
+        headers4 = document.createElement("th")
+        headers4.innerHTML =  pubCiteSortOrder=='asc' ? "Publication Citation (asc)" : 'Publication Citation (dsc)'
+        headers4.addEventListener("click" , sortByPubCitation)
+        headers5 = document.createElement("th")
+        headers5.innerHTML = "Link"
+        headerRow.appendChild(headers1)
+        headerRow.appendChild(headers2)
+        headerRow.appendChild(headers3)
+        headerRow.appendChild(headers4)
+        headerRow.appendChild(headers5)
+        document.getElementById("pubInfoBody").appendChild(headerRow)
+
+        for (var i in groupedPubAndMainData){
+            row= document.createElement("tr")
+                    col1=document.createElement("td")
+                    col1.innerHTML=groupedPubAndMainData[i].author
+                    col2= document.createElement("td")
+                    col2.innerHTML=groupedPubAndMainData[i].authorOrderRank
+                    col3=document.createElement("td")
+                    col3.innerHTML= groupedPubAndMainData[i].title
+                    col4=document.createElement("td")
+                    col4.innerHTML= groupedPubAndMainData[i].pubCited
+                    col5=document.createElement("td")
+                    col5.innerHTML= groupedPubAndMainData[i].link
+                    row.appendChild(col1)
+                    row.appendChild(col2)
+                    row.appendChild(col3)
+                    row.appendChild(col4)
+                    row.appendChild(col5)
+                    document.getElementById("pubInfoBody").appendChild(row)
+        }
+    }
+
     populatePubInfo = function(confName, year){
-
         d3.csv('dataset/AuthorPublication-uptoVIS2020.csv', function(publicationData){
-            //console.log("publicationData", publicationData)
-            document.getElementById("pubInfoHead").innerHTML=''
-            document.getElementById("pubInfoBody").innerHTML=''
-            headerRow=document.createElement("tr")
-            headers1 = document.createElement("th")
-            headers1.innerHTML = "Authors"
-            headers2 = document.createElement("th")
-            headers2.innerHTML = "AuthorOrderRank"
-            headers3 = document.createElement("th")
-            headers3.innerHTML = "Paper Title"
-            headers4 = document.createElement("th")
-            headers4.innerHTML = "Publication Citation"
-            headers5 = document.createElement("th")
-            headers5.innerHTML = "Link"
-            headerRow.appendChild(headers1)
-            headerRow.appendChild(headers2)
-            headerRow.appendChild(headers3)
-            headerRow.appendChild(headers4)
-            headerRow.appendChild(headers5)
-            document.getElementById("pubInfoBody").appendChild(headerRow)
-            //console.log(confName, year)
             pubDataByConfAndYear = publicationData.filter(d=>{return d.Conference==confName && +d.Year==year})
-
             d3.csv('dataset/IEEEVISpapers1990-2020-Maindataset.csv', function(mainData){
-
-
                 mainDataByConfYear = mainData.filter(d=>{return +d.Year==year && d.Conference==confName})
-
-                console.log(" main data",mainDataByConfYear)
-
+                groupedPubAndMainData=[]
                 for (var i in pubDataByConfAndYear){
                     for (var j in mainDataByConfYear){
                         if (pubDataByConfAndYear[i].Author.toUpperCase().includes(mainDataByConfYear[j].AuthorNames.toUpperCase()) ||
                             mainDataByConfYear[j].AuthorNames.toUpperCase().includes(pubDataByConfAndYear[i].Author.toUpperCase())){
-                            row= document.createElement("tr")
-                            col1=document.createElement("td")
-                            col1.innerHTML=pubDataByConfAndYear[i].Author
-                            col2= document.createElement("td")
-                            col2.innerHTML=pubDataByConfAndYear[i].AuthorOrderRank
-                            col3=document.createElement("td")
-                            col3.innerHTML= mainDataByConfYear[j].Title
-                            col4=document.createElement("td")
-                            col4.innerHTML= mainDataByConfYear[j].PubsCited
-                            col5=document.createElement("td")
-                            col5.innerHTML= mainDataByConfYear[j].Link
-                            row.appendChild(col1)
-                            row.appendChild(col2)
-                            row.appendChild(col3)
-                            row.appendChild(col4)
-                            row.appendChild(col5)
-                            document.getElementById("pubInfoBody").appendChild(row)
-                            console.log("inised")
+                           
+                            obj={
+                                "author":pubDataByConfAndYear[i].Author,
+                                "authorOrderRank":pubDataByConfAndYear[i].AuthorOrderRank,
+                                "title":mainDataByConfYear[j].Title,
+                                "pubCited":+mainDataByConfYear[j].PubsCited,
+                                "link": mainDataByConfYear[j].Link
+                            }
+                            groupedPubAndMainData.push(obj)
                         }
-
                     }
                 }
+                sortByPubCitation()
             })
-
-
-            //console.log("pubdata",pubDataByConfAndYear )
-
 
         })
     }
