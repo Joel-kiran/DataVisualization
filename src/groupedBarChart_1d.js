@@ -45,8 +45,8 @@ d3.csv('dataset/1d.csv', function (data) {
 
     var container = d3.select('#gpBc1d'),
         width = 600,
-        height = 400,
-        margin = { top: 30, right: 20, bottom: 30, left: 50 },
+        height = 500,
+        margin = { top: 100, right: 20, bottom: 30, left: 50 },
         barPadding = .2,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };
 
@@ -215,18 +215,26 @@ d3.csv('dataset/1d.csv', function (data) {
 
     pubCiteSortOrder = "asc"
     var groupedPubAndMainData = []
-    function sortByPubCitation() {
-        pubCiteSortOrder = pubCiteSortOrder == 'asc' ? 'dsc' : 'asc'
-        if (pubCiteSortOrder == "asc") {
-            groupedPubAndMainData.sort(function (a, b) { return a.pubCited - b.pubCited })
-        }
-        else {
-            groupedPubAndMainData.sort(function (a, b) { return b.pubCited - a.pubCited })
-        }
+    function sortByPubCitationAsc() {
+        console.log("asc")
+        document.getElementById("pubAsc").checked=true
+        groupedPubAndMainData.sort(function (a, b) { return a.pubCited - b.pubCited })
         createTableElemets()
 
     }
+    function sortByPubCitationDesc() {
+        document.getElementById("pubDesc").checked=true
+        groupedPubAndMainData.sort(function (a, b) { return b.pubCited - a.pubCited })
+        createTableElemets()
+
+    }
+
     function createTableElemets() {
+        document.getElementById("sortByPub").style.display='block'
+        document.getElementById("pubAuthInfo").style.display='block'
+        document.getElementById("confChoosen").style.display='block'
+        document.getElementById("pubAsc").onclick=sortByPubCitationAsc
+        document.getElementById("pubDesc").onclick=sortByPubCitationDesc
         document.getElementById("pubInfoHead").innerHTML = ''
         document.getElementById("pubInfoBody").innerHTML = ''
         headerRow = document.createElement("tr")
@@ -238,7 +246,7 @@ d3.csv('dataset/1d.csv', function (data) {
         headers3.innerHTML = "Paper Title"
         headers4 = document.createElement("th")
         headers4.innerHTML = pubCiteSortOrder == 'asc' ? "Publication Citation (asc)" : 'Publication Citation (dsc)'
-        headers4.addEventListener("click", sortByPubCitation)
+        //headers4.addEventListener("click", sortByPubCitation)
         headers5 = document.createElement("th")
         headers5.innerHTML = "Link"
         headerRow.appendChild(headers1)
@@ -259,7 +267,12 @@ d3.csv('dataset/1d.csv', function (data) {
             col4 = document.createElement("td")
             col4.innerHTML = groupedPubAndMainData[i].pubCited
             col5 = document.createElement("td")
-            col5.innerHTML = groupedPubAndMainData[i].link
+            col5a = document.createElement("a")
+            col5a.setAttribute("target", "_blank")
+            col5a.setAttribute("href", groupedPubAndMainData[i].link)
+            col5a.innerHTML=groupedPubAndMainData[i].link
+            //col5.innerHTML = groupedPubAndMainData[i].link
+            col5.appendChild(col5a)
             row.appendChild(col1)
             row.appendChild(col2)
             row.appendChild(col3)
@@ -291,7 +304,7 @@ d3.csv('dataset/1d.csv', function (data) {
                         }
                     }
                 }
-                sortByPubCitation()
+                sortByPubCitationAsc()
             })
 
         })

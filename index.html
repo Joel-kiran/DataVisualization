@@ -218,23 +218,31 @@
   </script>
 </head>
 
-<body id='body' onload="landing()">
-  <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
-  <div style="text-align:center">
-    <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
-    <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
-    <input type="radio" id="collaboration" name="fav_language" value="collaboration"
-      onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
+<body id='body' onload="landing()" style='background-color: #D8D8D8;'>
+  <div style='position:fixed; width:100%;top:0%; background-color: aqua; padding:10px'>
+    <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
+    <div style="text-align:center">
+      <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
+      <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
+      <input type="radio" id="collaboration" name="fav_language" value="collaboration"
+        onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
 
+    </div>
   </div>
-  <div id='byYear'>
+
+  <div id='byYear' style='top:20%'>
     <div id='row1'>
       <div id='gpBc1d' style='display: inline-block;'>
         <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
       </div>
       <div id='pubInfo' width='400px' height='700px' style='display: inline-block; '>
-        <h4 id='confChoosen'>The choosen conference is None and the year is None</h4>
-        <Table id='pubAuthInfo' style="display:block;">
+        <h4 id='confChoosen' style='display:none'>The choosen conference is None and the year is None</h4>
+        <div id='sortByPub' style='display:none'>
+          <span> Sort By Pub</span>
+          <input type='radio' id='pubAsc' name='sortByPub' value='asc'> Asc</input>
+          <input type='radio' id='pubDesc' name='sortByPub' value='desc'> Desc</input>
+        </div>
+        <Table id='pubAuthInfo' style="display:none;">
           <thead id='pubInfoHead'>
 
           </thead>
