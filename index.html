@@ -29,9 +29,110 @@
       byYear = document.createElement("div")
       byYear.setAttribute("id", "byYear")
 
+      row1 = document.createElement("div")
+      row1.setAttribute("id", 'row1')
+      bc1d = document.createElement("div")
+      bc1d.setAttribute("id", "gpBc1d")
+      bc1d.setAttribute("style", "display: inline-block;")
+      fromyearSpan = document.createElement("span")
+      fromyearSpan.setAttribute("style", "position:absolute; top:20%; left: 4%")
+      fromyearSpan.innerHTML = "From Year : "
+      fromyearInput = document.createElement("input")
+      fromyearInput.setAttribute("type", "text")
+      fromyearInput.setAttribute("id", "fromYear1d")
+      fromyearInput.setAttribute("style", 'width:80px;')
+      fromyearInput.setAttribute("value", "1990")
+      fromyearSpan.appendChild(fromyearInput)
+      bc1d.appendChild(fromyearSpan)
+
+      toyearSpan = document.createElement("span")
+      toyearSpan.setAttribute("style", "position:absolute; top:20%; left: 17%")
+      toyearSpan.innerHTML = "To Year : "
+      toyearInput = document.createElement("input")
+      toyearInput.setAttribute("type", "text")
+      toyearInput.setAttribute("id", "toYear1d")
+      toyearInput.setAttribute("style", 'width:80px;')
+      toyearInput.setAttribute("value", "2020")
+      toyearSpan.appendChild(toyearInput)
+      bc1d.appendChild(toyearSpan)
+
+      goYearBCInput = document.createElement("input")
+      goYearBCInput.setAttribute("type", "button")
+      goYearBCInput.setAttribute("id", "go1d")
+      goYearBCInput.setAttribute("style", 'position:absolute; top:20%; left: 30%')
+      goYearBCInput.setAttribute("value", "Go")
+      goYearBCInput.setAttribute("onclick", 'range1d()')
+      bc1d.appendChild(goYearBCInput)
+
       heading1c = document.createElement("h4")
       heading1c.setAttribute("style", "text-align:center")
       heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
+      bc1d.appendChild(heading1c)
+
+      row1.appendChild(bc1d)
+
+      pubInfoDiv = document.createElement("id", "pubInfo")
+      pubInfoDiv.setAttribute("width", "400px")
+      pubInfoDiv.setAttribute("height", "600px")
+      pubInfoDiv.setAttribute("style", 'display: inline-block; ')
+
+      h4 = document.createElement("h4")
+      h4.setAttribute("id", "confChoosen")
+      h4.setAttribute("style", 'display:none; position:absolute; top:14%')
+      h4.innerHTML = 'The choosen conference is None and the year is None'
+
+      pubInfoDiv.appendChild(h4)
+
+      sortPubDiv = document.createElement("div")
+      sortPubDiv.setAttribute("id", "sortByPub")
+      sortPubDiv.setAttribute("style", "display:none")
+      spanPub = document.createElement("span")
+      emPub = document.createElement("em")
+      emPub.innerHTML = 'Sort By Publication Citation : '
+      sortPubDiv.appendChild(emPub)
+
+      sortBubAscSpan = document.createElement("span")
+      sortBubAscSpan.innerHTML = " Asc "
+      sortPubAsc = document.createElement("input")
+      sortPubAsc.setAttribute("type", "radio")
+      sortPubAsc.setAttribute("id", "pubAsc")
+      sortPubAsc.setAttribute("name", "sortByPub")
+      sortPubAsc.setAttribute("value", "asc")
+      sortBubAscSpan.appendChild(sortPubAsc)
+      sortPubDiv.appendChild(sortBubAscSpan)
+
+      sortBubDescSpan = document.createElement("span")
+      sortBubDescSpan.innerHTML = " Desc "
+      sortPubDesc = document.createElement("input")
+      sortPubDesc.setAttribute("type", "radio")
+      sortPubDesc.setAttribute("id", "pubDesc")
+      sortPubDesc.setAttribute("name", "sortByPub")
+      sortPubDesc.setAttribute("value", "desc")
+      sortBubDescSpan.appendChild(sortPubDesc)
+      sortPubDiv.appendChild(sortBubDescSpan)
+
+      pubInfoDiv.appendChild(sortPubDiv)
+
+      pubTable = document.createElement("table")
+      pubTable.setAttribute("id", "pubAuthInfo")
+      pubTable.setAttribute("style", "display:none;")
+
+      thead = document.createElement("thead")
+      thead.setAttribute("id", "pubInfoHead")
+
+      tbody = document.createElement("tbody")
+      tbody.setAttribute("id", "pubInfoBody")
+      tbody.setAttribute("style", 'overflow-y:scroll; overflow-x:scroll; display:block;height:400px; width:700px')
+
+      pubTable.appendChild(thead)
+      pubTable.appendChild(tbody)
+
+      pubInfoDiv.appendChild(pubTable)
+
+      row1.appendChild(pubInfoDiv)
+
+      byYear.appendChild(row1)
+
 
       heading1a = document.createElement("h4")
       heading1a.setAttribute("style", "text-align:center")
@@ -46,23 +147,13 @@
       heading6c.setAttribute("style", "text-align:center")
       heading6c.innerHTML = "No. Of OC members Vs Year"
 
-      line1Div = document.createElement("div")
-      gpBc1d = document.createElement("div")
-      gpBc1d.setAttribute("style", 'display: inline-block')
-      gpBc1d.setAttribute("id", "gpBc1d")
-      gpBc1d.appendChild(heading1c)
-      line1Div.appendChild(gpBc1d)
-
       LineCt1a = document.createElement("div")
-      LineCt1a.setAttribute("style", 'display: inline-block')
       LineCt1a.setAttribute("id", "LineCh1a")
       LineCt1a.appendChild(heading1a)
       svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg1a.setAttribute("id", "LineCt1a")
       LineCt1a.appendChild(svg1a)
-      line1Div.appendChild(LineCt1a)
-
-      byYear.appendChild(line1Div)
+      byYear.appendChild(LineCt1a)
 
       line2Div = document.createElement("div")
 
@@ -215,32 +306,45 @@
       document.getElementById("body").appendChild(LineCt6cscript)
 
     }
+
+    function range1d() {
+      var gpBc1dscript = document.createElement("script");
+      gpBc1dscript.type = "text/javascript";
+      gpBc1dscript.src = "src/groupedBarChart_1d.js";
+      document.getElementById("body").appendChild(gpBc1dscript)
+      document.getElementById('year').checked = true
+    }
   </script>
 </head>
 
 <body id='body' onload="landing()" style='background-color: #D8D8D8;'>
   <div style='position:fixed; width:100%;top:0%; background-color: aqua; padding:10px'>
-    <h1 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h1>
+    <h2 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h2>
     <div style="text-align:center">
       <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
       <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
       <input type="radio" id="collaboration" name="fav_language" value="collaboration"
         onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
-
     </div>
   </div>
 
-  <div id='byYear' style='top:20%'>
+  <div id='byYear' style='top:10%'>
     <div id='row1'>
-      <div id='gpBc1d' style='display: inline-block;'>
+      <div id='gpBc1d' style='display: inline-block; '>
+        <span style='position:absolute; top:20%; left: 4%'> From Year : <input type="text" id='fromYear1d'
+            style='width:80px' value="1990" /></span>
+        <span style='position:absolute; top:20%; left: 17%'> To Year : <input type="text" id='toYear1d'
+            style='width:80px;' value="2020" /></span>
+        <input type="button" id='go1d' style='position:absolute; top:20%; left: 30%' value="Go" onclick='range1d()'>
         <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
       </div>
-      <div id='pubInfo' width='400px' height='700px' style='display: inline-block; '>
-        <h4 id='confChoosen' style='display:none'>The choosen conference is None and the year is None</h4>
+      <div id='pubInfo' width='400px' height='600px' style='display: inline-block; '>
+        <h4 id='confChoosen' style='display:none; position:absolute; top:14%'>The choosen conference is None and the
+          year is None</h4>
         <div id='sortByPub' style='display:none'>
-          <span> Sort By Pub</span>
-          <input type='radio' id='pubAsc' name='sortByPub' value='asc'> Asc</input>
-          <input type='radio' id='pubDesc' name='sortByPub' value='desc'> Desc</input>
+          <span><em>Sort By Publication Citation: </em></span>
+          <span>Asc <input type='radio' id='pubAsc' name='sortByPub' value='asc'></input></span>
+          <span>Desc<input type='radio' id='pubDesc' name='sortByPub' value='desc'></input></span>
         </div>
         <Table id='pubAuthInfo' style="display:none;">
           <thead id='pubInfoHead'>
@@ -258,17 +362,15 @@
       <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
       <svg id='LineCt1a'></svg>
     </div>
-
-    <div id='row2'>
-      <div id='LineCh6a' style='display: inline-block'>
-        <h4 style="text-align:center">No. Of PC members Vs Year</h4>
-        <svg id='LineCt6a'></svg>
-      </div>
-      <div id='LineCh6c' style='display: inline-block'>
-        <h4 style="text-align:center">No. Of OC members Vs Year</h4>
-        <svg id='LineCt6c'></svg>
-      </div>
+    <div id='LineCh6a'>
+      <h4 style="text-align:center">No. Of PC members Vs Year</h4>
+      <svg id='LineCt6a'></svg>
     </div>
+    <div id='LineCh6c'>
+      <h4 style="text-align:center">No. Of OC members Vs Year</h4>
+      <svg id='LineCt6c'></svg>
+    </div>
+
   </div>
 
 

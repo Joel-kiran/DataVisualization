@@ -1,6 +1,12 @@
 
 
 d3.csv('dataset/1d.csv', function (data) {
+    console.log("Before", data)
+    fromYear = document.getElementById('fromYear1d').value
+    toYear = document.getElementById('toYear1d').value
+    data = data.filter(d => { return +d.Year >= +fromYear && +d.Year <= +toYear })
+    console.log("After", data)
+
     var year = {}
     data.forEach(function (d) {
         if (d.AuthorGender == 'Female') {
@@ -41,17 +47,22 @@ d3.csv('dataset/1d.csv', function (data) {
         }
         confYearDict.push(temp)
     }
-    //console.log(confYearDict)
 
+    if  (document.getElementById("svg1d") != null){
+        document.getElementById("gpBc1d").removeChild(document.getElementById("svg1d") )
+    }
+    
     var container = d3.select('#gpBc1d'),
         width = 600,
         height = 500,
-        margin = { top: 100, right: 20, bottom: 30, left: 50 },
-        barPadding = .2,
+        margin = { top: 150, right: 20, bottom: 30, left: 50 },
+        barPadding = 0,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };
 
+    
     var svg = container
         .append("svg")
+        .attr("id", "svg1d")
         .attr("width", width)
         .attr("height", height)
         .append("g")
@@ -106,7 +117,7 @@ d3.csv('dataset/1d.csv', function (data) {
         .enter()
         .append("rect")
         .attr("class", "bar Vis")
-        .style("fill", "orange")
+        .style("fill", "yellow")
         .attr("x", d => xScale1('Vis'))
         .attr("y", d => yScale(d.Vis))
         .attr("width", xScale1.bandwidth())
@@ -180,7 +191,7 @@ d3.csv('dataset/1d.csv', function (data) {
         .call(yAxis);
 
     conf = ['Vis', 'InfoVis', 'VAST', 'SciVis']
-    color = ['orange', 'red', 'green', 'blue']
+    color = ['yellow', 'red', 'green', 'blue']
     var legend = svg.append('g')
         .attr('class', 'legend')
         .attr('transform', 'translate(' + (10) + ', 10)');
