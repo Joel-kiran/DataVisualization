@@ -35,7 +35,7 @@
       bc1d.setAttribute("id", "gpBc1d")
       bc1d.setAttribute("style", "display: inline-block;")
       fromyearSpan = document.createElement("span")
-      fromyearSpan.setAttribute("style", "position:absolute; top:20%; left: 4%")
+      fromyearSpan.setAttribute("style", "position:absolute; top:17%; left: 4%")
       fromyearSpan.innerHTML = "From Year : "
       fromyearInput = document.createElement("input")
       fromyearInput.setAttribute("type", "text")
@@ -46,7 +46,7 @@
       bc1d.appendChild(fromyearSpan)
 
       toyearSpan = document.createElement("span")
-      toyearSpan.setAttribute("style", "position:absolute; top:20%; left: 17%")
+      toyearSpan.setAttribute("style", "position:absolute; top:17%; left: 17%")
       toyearSpan.innerHTML = "To Year : "
       toyearInput = document.createElement("input")
       toyearInput.setAttribute("type", "text")
@@ -59,15 +59,69 @@
       goYearBCInput = document.createElement("input")
       goYearBCInput.setAttribute("type", "button")
       goYearBCInput.setAttribute("id", "go1d")
-      goYearBCInput.setAttribute("style", 'position:absolute; top:20%; left: 30%')
+      goYearBCInput.setAttribute("style", 'position:absolute; top:17%; left: 30%')
       goYearBCInput.setAttribute("value", "Go")
       goYearBCInput.setAttribute("onclick", 'range1d()')
       bc1d.appendChild(goYearBCInput)
 
-      heading1c = document.createElement("h4")
-      heading1c.setAttribute("style", "text-align:center")
-      heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
-      bc1d.appendChild(heading1c)
+      //heading1c = document.createElement("h4")
+      //heading1c.setAttribute("style", "text-align:center")
+      //heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
+      //bc1d.appendChild(heading1c)
+
+
+
+      spanChkbx1 = document.createElement("span")
+      spanChkbx1.setAttribute("style", 'position:absolute; top:22%; left: 2%')
+      spanChkbx1.innerHTML = 'Filter By Conference : '
+      bc1d.appendChild(spanChkbx1)
+
+      spanChkbx2 = document.createElement("span")
+      spanChkbx2.setAttribute("style", 'position:absolute; top:22%; left: 12%')
+      spanChkbx2.innerHTML = 'InfoVis'
+      inputInfo = document.createElement("input")
+      inputInfo.setAttribute("id", "infovischkbox")
+      inputInfo.setAttribute("type", "checkbox")
+      inputInfo.checked=true
+      spanChkbx2.appendChild(inputInfo)
+      bc1d.appendChild(spanChkbx2)
+
+      spanChkbx3 = document.createElement("span")
+      spanChkbx3.setAttribute("style", 'position:absolute; top:22%; left: 18%')
+      spanChkbx3.innerHTML = 'VAST'
+      inputvast = document.createElement("input")
+      inputvast.setAttribute("id", "vastchkbox")
+      inputvast.setAttribute("type", "checkbox")
+      inputvast.checked=true
+      spanChkbx3.appendChild(inputvast)
+      bc1d.appendChild(spanChkbx3)
+
+      spanChkbx4 = document.createElement("span")
+      spanChkbx4.setAttribute("style", 'position:absolute; top:22%; left: 23%')
+      spanChkbx4.innerHTML = 'Vis'
+      inputvis = document.createElement("input")
+      inputvis.setAttribute("id", "vischkbox")
+      inputvis.setAttribute("type", "checkbox")
+      inputvis.checked=true
+      spanChkbx4.appendChild(inputvis)
+      bc1d.appendChild(spanChkbx4)
+
+      spanChkbx5 = document.createElement("span")
+      spanChkbx5.setAttribute("style", 'position:absolute; top:22%; left: 27%')
+      spanChkbx5.innerHTML = 'SciVis'
+      inputsci = document.createElement("input")
+      inputsci.setAttribute("id", "scivischkbk")
+      inputsci.setAttribute("type", "checkbox")
+      inputsci.checked=true
+      spanChkbx5.appendChild(inputsci)
+      bc1d.appendChild(spanChkbx5)
+
+      filterButton = document.createElement("button")
+      filterButton.setAttribute("style", 'position:absolute; top:22%; left: 32%')
+      filterButton.setAttribute("onclick", "filter1d()")
+      filterButton.innerHTML = 'Filter'
+      bc1d.appendChild(filterButton)
+
 
       row1.appendChild(bc1d)
 
@@ -314,6 +368,14 @@
       document.getElementById("body").appendChild(gpBc1dscript)
       document.getElementById('year').checked = true
     }
+
+    function filter1d() {
+      var gpBc1dscript = document.createElement("script");
+      gpBc1dscript.type = "text/javascript";
+      gpBc1dscript.src = "src/groupedBarChart_1d.js";
+      document.getElementById("body").appendChild(gpBc1dscript)
+      document.getElementById('year').checked = true
+    }
   </script>
 </head>
 
@@ -331,12 +393,22 @@
   <div id='byYear' style='top:10%'>
     <div id='row1'>
       <div id='gpBc1d' style='display: inline-block; '>
-        <span style='position:absolute; top:20%; left: 4%'> From Year : <input type="text" id='fromYear1d'
+        <span style='position:absolute; top:17%; left: 4%'> From Year : <input type="text" id='fromYear1d'
             style='width:80px' value="1990" /></span>
-        <span style='position:absolute; top:20%; left: 17%'> To Year : <input type="text" id='toYear1d'
+        <span style='position:absolute; top:17%; left: 17%'> To Year : <input type="text" id='toYear1d'
             style='width:80px;' value="2020" /></span>
-        <input type="button" id='go1d' style='position:absolute; top:20%; left: 30%' value="Go" onclick='range1d()'>
-        <h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>
+        <input type="button" id='go1d' style='position:absolute; top:17%; left: 30%' value="Go" onclick='range1d()'>
+        <span style='position:absolute; top:22%; left: 2%'>Filter By Conference : </span>
+        <span style='position:absolute; top:22%; left: 12%'><input id='infovischkbox' type='checkbox' name="InfoVis"
+            value="InfoVis" checked/> InfoVis </span>
+        <span style='position:absolute; top:22%; left: 18%'><input id='vastchkbox' type='checkbox' name="VAST"
+            value="VAST" checked/> VAST </span>
+        <span style='position:absolute; top:22%; left: 23%'><input id='vischkbox' type='checkbox' name="Vis"
+            value="Vis" checked /> Vis</span>
+        <span style='position:absolute; top:22%; left: 27%'> <input id='scivischkbk' type='checkbox' name="SciVis"
+            value="SciVis"  checked/>SciVis </span>
+        <button style='position:absolute; top:22%; left: 32%' onclick='filter1d()'>Filter</button>
+        <!--<h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>-->
       </div>
       <div id='pubInfo' width='400px' height='600px' style='display: inline-block; '>
         <h4 id='confChoosen' style='display:none; position:absolute; top:14%'>The choosen conference is None and the

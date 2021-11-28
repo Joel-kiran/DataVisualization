@@ -5,7 +5,13 @@ d3.csv('dataset/1d.csv', function (data) {
     fromYear = document.getElementById('fromYear1d').value
     toYear = document.getElementById('toYear1d').value
     data = data.filter(d => { return +d.Year >= +fromYear && +d.Year <= +toYear })
-    console.log("After", data)
+    
+    infovischkbox = document.getElementById("infovischkbox").checked
+    vastchkbox= document.getElementById("vastchkbox").checked
+    vischkbox = document.getElementById("vischkbox").checked
+    scivischkbox = document.getElementById("scivischkbk").checked
+
+    console.log("infovischkbox", document.getElementById("infovischkbox").checked)
 
     var year = {}
     data.forEach(function (d) {
@@ -54,8 +60,8 @@ d3.csv('dataset/1d.csv', function (data) {
     
     var container = d3.select('#gpBc1d'),
         width = 600,
-        height = 500,
-        margin = { top: 150, right: 20, bottom: 30, left: 50 },
+        height = 600,
+        margin = { top: 200, right: 20, bottom: 30, left: 50 },
         barPadding = 0,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };
 
@@ -104,6 +110,8 @@ d3.csv('dataset/1d.csv', function (data) {
             " and the percentage of female is " + d.Vis.toFixed(2)
         d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
+    conf = []
+    color = []
 
     var model_name = svg.selectAll(".Year")
         .data(confYearDict)
@@ -112,7 +120,8 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("transform", d => `translate(${xScale0(d.Year)},0)`);
 
     /* Add field1 bars */
-    model_name.selectAll(".bar.Vis")
+    if(vischkbox){
+        model_name.selectAll(".bar.Vis")
         .data(d => [d])
         .enter()
         .append("rect")
@@ -127,8 +136,13 @@ d3.csv('dataset/1d.csv', function (data) {
         .on("mouseover", mouseoverVis)
         .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
+        conf.push("Vis")
+        color.push("yellow")
+    }
+
     /* Add field2 bars */
-    model_name.selectAll(".bar.InfoVis")
+    if (infovischkbox){
+        model_name.selectAll(".bar.InfoVis")
         .data(d => [d])
         .enter()
         .append("rect")
@@ -143,7 +157,11 @@ d3.csv('dataset/1d.csv', function (data) {
         .on("mouseover", mouseoverInfoVis)
         .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
-    model_name.selectAll(".bar.VAST")
+        conf.push("InfoVis")
+        color.push("red")
+    }
+    if (vastchkbox){
+        model_name.selectAll(".bar.VAST")
         .data(d => [d])
         .enter()
         .append("rect")
@@ -158,7 +176,13 @@ d3.csv('dataset/1d.csv', function (data) {
         .on("mouseover", mouseoverVAST)
         .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
-    model_name.selectAll(".bar.SciVis")
+        conf.push("VAST")
+        color.push("green")
+
+    }
+ 
+    if (scivischkbox){
+        model_name.selectAll(".bar.SciVis")
         .data(d => [d])
         .enter()
         .append("rect")
@@ -173,6 +197,10 @@ d3.csv('dataset/1d.csv', function (data) {
         .on("mouseover", mouseoverSciVis)
         .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
+        conf.push("SciVis")
+        color.push("blue")
+    }
+ 
 
     // Add the X Axis
     svg.append("g")
@@ -190,8 +218,7 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("class", "y axis")
         .call(yAxis);
 
-    conf = ['Vis', 'InfoVis', 'VAST', 'SciVis']
-    color = ['yellow', 'red', 'green', 'blue']
+  
     var legend = svg.append('g')
         .attr('class', 'legend')
         .attr('transform', 'translate(' + (10) + ', 10)');
