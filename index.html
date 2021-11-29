@@ -188,7 +188,7 @@
       piediv = document.createElement("div")
       piediv.setAttribute("style", 'display:None; width: 400px; height: 400px')
       piediv.setAttribute("id", "pieDiv")
-      
+
 
       piep = document.createElement("p")
       piep.setAttribute("style", 'text-align:center')
@@ -199,7 +199,7 @@
 
       piesvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       piesvg.setAttribute("id", "pie")
-      piesvg.setAttribute("width","400")
+      piesvg.setAttribute("width", "400")
       //piesvg.setAttribute("width", "400px")
       piesvg.setAttribute("height", "400")
       piediv.appendChild(piesvg)
@@ -289,9 +289,10 @@
       }
       byAge = document.createElement("div")
       byAge.setAttribute("id", "byAge")
+      byAge.setAttribute("style", "position:absolute;top:13%")
 
       headingSteam = document.createElement("h4")
-      headingSteam.setAttribute("style", "text-align:center")
+      //headingSteam.setAttribute("style", "text-align:center")
       headingSteam.innerHTML = "DropOut Rate Vs Career Age"
 
       heading2a = document.createElement("h4")
@@ -303,9 +304,24 @@
 
       steam = document.createElement("div")
       steam.setAttribute("id", "steam")
-      //steam.setAttribute("style", "display: inline-block")
+      steam.setAttribute("style", "display: inline-block")
       steam.appendChild(headingSteam)
       line1Div.appendChild(steam)
+
+      steamText = document.createElement("div")
+      steamText.setAttribute("style", "display: inline-block; position:absolute; width: 500px; height: 500px; top: 20%")
+      steamText.innerHTML = "This graph provides an overview of the trend of dropout rate (aka quiting job)  with respect to career age for Male and Female authors"
+      line1Div.appendChild(steamText)
+
+      byAge.appendChild(line1Div)
+
+      agelineDiv = document.createElement("div")
+      agelineDiv.setAttribute("style", "width:90%; padding: 2%")
+      agelineDiv.innerHTML = "<br/><br/><br/>The below graphs provides an overiew of the trend w.r.t to number of authors and career age, " +
+        "it helps us understand how many authors of a particular career age are present in the organisation. <b>click on the male/female line " +
+        "in the graph, to explore more details "
+      byAge.appendChild(agelineDiv)
+
 
       line2Div = document.createElement("div")
       LineCt2a = document.createElement("div")
@@ -320,14 +336,23 @@
       divTable = document.createElement("div")
       divTable.setAttribute("id", "AgeTable")
       divTable.setAttribute("style", "display: inline-block; width:500px; height: 500px")
+
+
       line2Div.appendChild(divTable)
 
+      svgPieDiv = document.createElement("div")
+      svgPieDiv.setAttribute("style", "display: inline-block; width:300px; height: 500px")
+      svgPieDiv.setAttribute("id", "piespan")
+      pieText = document.createElement("span")
+      pieText.setAttribute("id", "pietext")
+      svgPieDiv.appendChild(pieText)
       svgPie = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svgPie.setAttribute("id", "confpie")
-      svgPie.setAttribute("style", "display: inline-block; width:300px; height: 500px")
-      line2Div.appendChild(svgPie)
+      svgPie.setAttribute("style", "display: inline-block; width:300px; height: 400px")
+      svgPieDiv.appendChild(svgPie)
 
-      byAge.appendChild(line1Div)
+      line2Div.appendChild(svgPieDiv)
+
       byAge.appendChild(line2Div)
 
       document.getElementById("body").appendChild(byAge)
@@ -425,26 +450,29 @@
 
   <div id='byYear' style='top:10%'>
     <div id='row1'>
+      <div style='position:absolute; top:17%; left:25%'><b>The Below graph provides the trend in the percentage of
+          female w.r.t
+          year for four different conferences</b></div>
       <div id='gpBc1d' style='display: inline-block; '>
-        <span style='position:absolute; top:17%; left: 4%'> From Year : <input type="text" id='fromYear1d'
+        <span style='position:absolute; top:23%; left: 4%'> From Year : <input type="text" id='fromYear1d'
             style='width:80px' value="1990" /></span>
-        <span style='position:absolute; top:17%; left: 17%'> To Year : <input type="text" id='toYear1d'
+        <span style='position:absolute; top:23%; left: 17%'> To Year : <input type="text" id='toYear1d'
             style='width:80px;' value="2020" /></span>
-        <input type="button" id='go1d' style='position:absolute; top:17%; left: 30%' value="Go" onclick='range1d()'>
-        <span style='position:absolute; top:22%; left: 2%'>Filter By Conference : </span>
-        <span style='position:absolute; top:22%; left: 12%'><input id='infovischkbox' type='checkbox' name="InfoVis"
+        <input type="button" id='go1d' style='position:absolute; top:23%; left: 30%' value="Go" onclick='range1d()'>
+        <span style='position:absolute; top:28%; left: 2%'>Filter By Conference : </span>
+        <span style='position:absolute; top:28%; left: 12%'><input id='infovischkbox' type='checkbox' name="InfoVis"
             value="InfoVis" checked /> InfoVis </span>
-        <span style='position:absolute; top:22%; left: 18%'><input id='vastchkbox' type='checkbox' name="VAST"
+        <span style='position:absolute; top:28%; left: 18%'><input id='vastchkbox' type='checkbox' name="VAST"
             value="VAST" checked /> VAST </span>
-        <span style='position:absolute; top:22%; left: 23%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
+        <span style='position:absolute; top:28%; left: 23%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
             checked /> Vis</span>
-        <span style='position:absolute; top:22%; left: 27%'> <input id='scivischkbk' type='checkbox' name="SciVis"
+        <span style='position:absolute; top:28%; left: 27%'> <input id='scivischkbk' type='checkbox' name="SciVis"
             value="SciVis" checked />SciVis </span>
-        <button style='position:absolute; top:22%; left: 32%' onclick='filter1d()'>Filter</button>
+        <button style='position:absolute; top:28%; left: 32%' onclick='filter1d()'>Filter</button>
         <!--<h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>-->
       </div>
       <div id='pubInfo' width='400px' height='600px' style='display: inline-block; '>
-        <h4 id='confChoosen' style='display:none; position:absolute; top:14%'>The choosen conference is None and the
+        <h4 id='confChoosen' style='display:none; position:absolute; top:22%'>The choosen conference is None and the
           year is None</h4>
         <div id='sortByPub' style='display:none'>
           <span><em>Sort By Publication Citation: </em></span>
@@ -462,7 +490,7 @@
         </Table>
       </div>
       <div id="pieDiv" style='display:None' width='400px' height='400px'>
-        <br/>
+        <br />
         <p style='text-align:center'><b>Distribution of Author Order Rank</b></p>
         <svg id='pie' width='400px' height='400px'></svg>
       </div>

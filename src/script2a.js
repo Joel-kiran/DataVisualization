@@ -1,7 +1,7 @@
 d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 	var dimensions = {
-		width: 600,
-		height: 400,
+		width: 400,
+		height: 350,
 		margin: {
 			top: 20,
 			bottom: 20,
@@ -117,16 +117,21 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 	function displayAgeData(gender) {
 		d3.csv('dataset/author_gender_info.csv', function (dataset) {
 
+
+
 			if (document.getElementById("AgeTable") != null) {
 				document.getElementById("AgeTable").innerHTML = ''
 			}
 
+			agetext = document.createElement("span")
+			agetext.innerHTML = "<em>The Choosen gender is <b>" + gender + "</b></em><br/><br/>"
+			document.getElementById("AgeTable").appendChild(agetext)
 			console.log("data", dataset)
 			dataForCAge = dataset.filter(d => { return d.Gender ? d.Gender.toUpperCase() == gender.toUpperCase() : false })
 			console.log("age", gender, dataForCAge)
 
 			table = document.createElement("table")
-			table.setAttribute("style", "overflow-y:scroll; display:block;width: 400px; height: 400px")
+			table.setAttribute("style", "overflow-y:scroll; display:block;width: 350px; height: 380px; padding: 2px")
 
 			hrow = document.createElement("tr")
 			header1 = document.createElement("th")
@@ -163,6 +168,10 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 			}
 
 			document.getElementById("AgeTable").appendChild(table)
+
+			pietext=document.getElementById("pietext")
+			pietext.innerHTML="<b>Conference Distrbution for the choosen Gender</b>"
+
 
 
 			// Step 3

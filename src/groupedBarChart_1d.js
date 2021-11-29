@@ -60,8 +60,8 @@ d3.csv('dataset/1d.csv', function (data) {
 
     var container = d3.select('#gpBc1d'),
         width = 600,
-        height = 600,
-        margin = { top: 200, right: 20, bottom: 30, left: 50 },
+        height = 650,
+        margin = { top: 250, right: 20, bottom: 30, left: 50 },
         barPadding = 0,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };
 
