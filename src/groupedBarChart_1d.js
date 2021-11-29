@@ -5,9 +5,9 @@ d3.csv('dataset/1d.csv', function (data) {
     fromYear = document.getElementById('fromYear1d').value
     toYear = document.getElementById('toYear1d').value
     data = data.filter(d => { return +d.Year >= +fromYear && +d.Year <= +toYear })
-    
+
     infovischkbox = document.getElementById("infovischkbox").checked
-    vastchkbox= document.getElementById("vastchkbox").checked
+    vastchkbox = document.getElementById("vastchkbox").checked
     vischkbox = document.getElementById("vischkbox").checked
     scivischkbox = document.getElementById("scivischkbk").checked
 
@@ -54,10 +54,10 @@ d3.csv('dataset/1d.csv', function (data) {
         confYearDict.push(temp)
     }
 
-    if  (document.getElementById("svg1d") != null){
-        document.getElementById("gpBc1d").removeChild(document.getElementById("svg1d") )
+    if (document.getElementById("svg1d") != null) {
+        document.getElementById("gpBc1d").removeChild(document.getElementById("svg1d"))
     }
-    
+
     var container = d3.select('#gpBc1d'),
         width = 600,
         height = 600,
@@ -65,7 +65,7 @@ d3.csv('dataset/1d.csv', function (data) {
         barPadding = 0,
         axisTicks = { qty: 5, outerSize: 0, dateFormat: '%m-%d' };
 
-    
+
     var svg = container
         .append("svg")
         .attr("id", "svg1d")
@@ -120,87 +120,87 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("transform", d => `translate(${xScale0(d.Year)},0)`);
 
     /* Add field1 bars */
-    if(vischkbox){
+    if (vischkbox) {
         model_name.selectAll(".bar.Vis")
-        .data(d => [d])
-        .enter()
-        .append("rect")
-        .attr("class", "bar Vis")
-        .style("fill", "yellow")
-        .attr("x", d => xScale1('Vis'))
-        .attr("y", d => yScale(d.Vis))
-        .attr("width", xScale1.bandwidth())
-        .attr("height", d => {
-            return height - margin.top - margin.bottom - yScale(d.Vis)
-        })
-        .on("mouseover", mouseoverVis)
-        .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
+            .data(d => [d])
+            .enter()
+            .append("rect")
+            .attr("class", "bar Vis")
+            .style("fill", "yellow")
+            .attr("x", d => xScale1('Vis'))
+            .attr("y", d => yScale(d.Vis))
+            .attr("width", xScale1.bandwidth())
+            .attr("height", d => {
+                return height - margin.top - margin.bottom - yScale(d.Vis)
+            })
+            .on("mouseover", mouseoverVis)
+            .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
         conf.push("Vis")
         color.push("yellow")
     }
 
     /* Add field2 bars */
-    if (infovischkbox){
+    if (infovischkbox) {
         model_name.selectAll(".bar.InfoVis")
-        .data(d => [d])
-        .enter()
-        .append("rect")
-        .attr("class", "bar InfoVis")
-        .style("fill", "red")
-        .attr("x", d => xScale1('InfoVis'))
-        .attr("y", d => yScale(d.InfoVis))
-        .attr("width", xScale1.bandwidth())
-        .attr("height", d => {
-            return height - margin.top - margin.bottom - yScale(d.InfoVis)
-        })
-        .on("mouseover", mouseoverInfoVis)
-        .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
+            .data(d => [d])
+            .enter()
+            .append("rect")
+            .attr("class", "bar InfoVis")
+            .style("fill", "red")
+            .attr("x", d => xScale1('InfoVis'))
+            .attr("y", d => yScale(d.InfoVis))
+            .attr("width", xScale1.bandwidth())
+            .attr("height", d => {
+                return height - margin.top - margin.bottom - yScale(d.InfoVis)
+            })
+            .on("mouseover", mouseoverInfoVis)
+            .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
         conf.push("InfoVis")
         color.push("red")
     }
-    if (vastchkbox){
+    if (vastchkbox) {
         model_name.selectAll(".bar.VAST")
-        .data(d => [d])
-        .enter()
-        .append("rect")
-        .attr("class", "bar VAST")
-        .style("fill", "green")
-        .attr("x", d => xScale1('VAST'))
-        .attr("y", d => yScale(d.VAST))
-        .attr("width", xScale1.bandwidth())
-        .attr("height", d => {
-            return height - margin.top - margin.bottom - yScale(d.VAST)
-        })
-        .on("mouseover", mouseoverVAST)
-        .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
+            .data(d => [d])
+            .enter()
+            .append("rect")
+            .attr("class", "bar VAST")
+            .style("fill", "green")
+            .attr("x", d => xScale1('VAST'))
+            .attr("y", d => yScale(d.VAST))
+            .attr("width", xScale1.bandwidth())
+            .attr("height", d => {
+                return height - margin.top - margin.bottom - yScale(d.VAST)
+            })
+            .on("mouseover", mouseoverVAST)
+            .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
         conf.push("VAST")
         color.push("green")
 
     }
- 
-    if (scivischkbox){
+
+    if (scivischkbox) {
         model_name.selectAll(".bar.SciVis")
-        .data(d => [d])
-        .enter()
-        .append("rect")
-        .attr("class", "bar SciVis")
-        .style("fill", "blue")
-        .attr("x", d => xScale1('SciVis'))
-        .attr("y", d => yScale(d.SciVis))
-        .attr("width", xScale1.bandwidth())
-        .attr("height", d => {
-            return height - margin.top - margin.bottom - yScale(d.SciVis)
-        })
-        .on("mouseover", mouseoverSciVis)
-        .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
+            .data(d => [d])
+            .enter()
+            .append("rect")
+            .attr("class", "bar SciVis")
+            .style("fill", "blue")
+            .attr("x", d => xScale1('SciVis'))
+            .attr("y", d => yScale(d.SciVis))
+            .attr("width", xScale1.bandwidth())
+            .attr("height", d => {
+                return height - margin.top - margin.bottom - yScale(d.SciVis)
+            })
+            .on("mouseover", mouseoverSciVis)
+            .on("mouseout", function (d) { d3.select(this).attr("stroke", "").style('stroke-width', 0) })
 
         conf.push("SciVis")
         color.push("blue")
     }
- 
+
 
     // Add the X Axis
     svg.append("g")
@@ -218,7 +218,7 @@ d3.csv('dataset/1d.csv', function (data) {
         .attr("class", "y axis")
         .call(yAxis);
 
-  
+
     var legend = svg.append('g')
         .attr('class', 'legend')
         .attr('transform', 'translate(' + (10) + ', 10)');
@@ -255,31 +255,45 @@ d3.csv('dataset/1d.csv', function (data) {
     var groupedPubAndMainData = []
     function sortByPubCitationAsc() {
         console.log("asc")
-        document.getElementById("pubAsc").checked=true
+        document.getElementById("pubAsc").checked = true
         groupedPubAndMainData.sort(function (a, b) { return a.pubCited - b.pubCited })
         createTableElemets()
 
     }
     function sortByPubCitationDesc() {
-        document.getElementById("pubDesc").checked=true
+        document.getElementById("pubDesc").checked = true
         groupedPubAndMainData.sort(function (a, b) { return b.pubCited - a.pubCited })
         createTableElemets()
 
     }
 
+
+
     function createTableElemets() {
-        document.getElementById("sortByPub").style.display='block'
-        document.getElementById("pubAuthInfo").style.display='block'
-        document.getElementById("confChoosen").style.display='block'
-        document.getElementById("pubAsc").onclick=sortByPubCitationAsc
-        document.getElementById("pubDesc").onclick=sortByPubCitationDesc
+
+
+        firstAuth = groupedPubAndMainData.filter(d => { return d.authorOrderRank == 'First' })
+        middleAuth = groupedPubAndMainData.filter(d => { return d.authorOrderRank == 'Middle' })
+        lastAuth = groupedPubAndMainData.filter(d => { return d.authorOrderRank == 'Last' })
+        console.log("firstAuth", firstAuth)
+        displayPieDistribution(firstAuth.length, middleAuth.length, lastAuth.length)
+
+        document.getElementById("sortByPub").style.display = 'block'
+        document.getElementById("pubAuthInfo").style.display = 'block'
+        document.getElementById("confChoosen").style.display = 'block'
+        document.getElementById("pubAsc").onclick = sortByPubCitationAsc
+        document.getElementById("pubDesc").onclick = sortByPubCitationDesc
         document.getElementById("pubInfoHead").innerHTML = ''
         document.getElementById("pubInfoBody").innerHTML = ''
         headerRow = document.createElement("tr")
         headers1 = document.createElement("th")
         headers1.innerHTML = "Authors"
         headers2 = document.createElement("th")
-        headers2.innerHTML = "AuthorOrderRank"
+        headers2.innerHTML = "AuthorOrderRank <em style='color:red'> Click Me </em>"
+        headers2.onclick = function (d) {
+            alert("Author Order Rank Distribution:\nFirst : " + firstAuth.length + "\nMiddle : " + middleAuth.length + "\nLast: " + lastAuth.length)
+
+        }
         headers3 = document.createElement("th")
         headers3.innerHTML = "Paper Title"
         headers4 = document.createElement("th")
@@ -287,8 +301,12 @@ d3.csv('dataset/1d.csv', function (data) {
         //headers4.addEventListener("click", sortByPubCitation)
         headers5 = document.createElement("th")
         headers5.innerHTML = "Link"
+        header6 = document.createElement("th")
+        header6.innerHTML = 'Career Age'
+
         headerRow.appendChild(headers1)
         headerRow.appendChild(headers2)
+        headerRow.appendChild(header6)
         headerRow.appendChild(headers3)
         headerRow.appendChild(headers4)
         headerRow.appendChild(headers5)
@@ -308,11 +326,17 @@ d3.csv('dataset/1d.csv', function (data) {
             col5a = document.createElement("a")
             col5a.setAttribute("target", "_blank")
             col5a.setAttribute("href", groupedPubAndMainData[i].link)
-            col5a.innerHTML=groupedPubAndMainData[i].link
-            //col5.innerHTML = groupedPubAndMainData[i].link
+            col5a.innerHTML = groupedPubAndMainData[i].link
             col5.appendChild(col5a)
+
+            col6 = document.createElement("td")
+            col6.innerHTML = groupedPubAndMainData[i].careerAge
+
+            //col5.innerHTML = groupedPubAndMainData[i].link
+
             row.appendChild(col1)
             row.appendChild(col2)
+            row.appendChild(col6)
             row.appendChild(col3)
             row.appendChild(col4)
             row.appendChild(col5)
@@ -336,7 +360,8 @@ d3.csv('dataset/1d.csv', function (data) {
                                 "authorOrderRank": pubDataByConfAndYear[i].AuthorOrderRank,
                                 "title": mainDataByConfYear[j].Title,
                                 "pubCited": +mainDataByConfYear[j].PubsCited,
-                                "link": mainDataByConfYear[j].Link
+                                "link": mainDataByConfYear[j].Link,
+                                "careerAge": pubDataByConfAndYear[i].CareerAge
                             }
                             groupedPubAndMainData.push(obj)
                         }
@@ -348,6 +373,81 @@ d3.csv('dataset/1d.csv', function (data) {
         })
     }
 
+    function displayPieDistribution(first, middle, last) {
+
+        document.getElementById("pieDiv").setAttribute("style",'display:inline-block; width: 400px; height: 400px')
+
+        totalAuthPos = first+middle+last
+        firstPer = first/totalAuthPos * 100
+        middlePer = middle/totalAuthPos * 100
+        lastPer = last/totalAuthPos * 100
+
+        console.log(totalAuthPos, firstPer, middlePer, lastPer)
+
+        // Step 3
+        var svg = d3.select("#pie"),
+            piewidth = 400,
+            pieheight = 500,
+            pieradius = 150;
+
+        
+        var data=[]
+        color = []
+        // Step 1    
+        if (first!=0){
+            data.push({ name: "First", share: firstPer})
+            color.push('#ffd384')
+        }    
+        if (middle!=0){
+            data.push({ name: "Middle", share: middlePer })
+            color.push('#94ebcd')
+        }
+        if (last!=0){
+            data.push({ name: "Last", share: lastPer })
+            color.push('#fbaccc')
+        }
+      
+        //console.log("width", piewidth/2,pieheight )
+        var g = svg.append("g")
+            .attr("transform", "translate(" +  piewidth / 2 + "," + pieheight / 2 + ")");
+
+        // Step 4
+        var ordScale = d3.scaleOrdinal()
+            .domain(data)
+            .range(color);
+
+        // Step 5
+        var pie = d3.pie().value(function (d) {
+            return d.share;
+        });
+
+        var arc = g.selectAll("arc")
+            .data(pie(data))
+            .enter();
+
+        // Step 6
+        var path = d3.arc()
+            .outerRadius(pieradius)
+            .innerRadius(0);
+
+        arc.append("path")
+            .attr("d", path)
+            .attr("fill", function (d) { return ordScale(d.data.name); });
+
+        // Step 7
+        var label = d3.arc()
+            .outerRadius(pieradius)
+            .innerRadius(0);
+
+        arc.append("text")
+            .attr("transform", function (d) {
+                return "translate(" + label.centroid(d) + ")";
+            })
+            .text(function (d) { return d.data.name; })
+            .style("font-family", "arial")
+            .style("font-size", 15);
+
+    }
 
 
 })

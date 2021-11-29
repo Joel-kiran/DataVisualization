@@ -82,7 +82,7 @@
       inputInfo = document.createElement("input")
       inputInfo.setAttribute("id", "infovischkbox")
       inputInfo.setAttribute("type", "checkbox")
-      inputInfo.checked=true
+      inputInfo.checked = true
       spanChkbx2.appendChild(inputInfo)
       bc1d.appendChild(spanChkbx2)
 
@@ -92,7 +92,7 @@
       inputvast = document.createElement("input")
       inputvast.setAttribute("id", "vastchkbox")
       inputvast.setAttribute("type", "checkbox")
-      inputvast.checked=true
+      inputvast.checked = true
       spanChkbx3.appendChild(inputvast)
       bc1d.appendChild(spanChkbx3)
 
@@ -102,7 +102,7 @@
       inputvis = document.createElement("input")
       inputvis.setAttribute("id", "vischkbox")
       inputvis.setAttribute("type", "checkbox")
-      inputvis.checked=true
+      inputvis.checked = true
       spanChkbx4.appendChild(inputvis)
       bc1d.appendChild(spanChkbx4)
 
@@ -112,7 +112,7 @@
       inputsci = document.createElement("input")
       inputsci.setAttribute("id", "scivischkbk")
       inputsci.setAttribute("type", "checkbox")
-      inputsci.checked=true
+      inputsci.checked = true
       spanChkbx5.appendChild(inputsci)
       bc1d.appendChild(spanChkbx5)
 
@@ -125,7 +125,7 @@
 
       row1.appendChild(bc1d)
 
-      pubInfoDiv = document.createElement("id", "pubInfo")
+      pubInfoDiv = document.createElement("div")
       pubInfoDiv.setAttribute("width", "400px")
       pubInfoDiv.setAttribute("height", "600px")
       pubInfoDiv.setAttribute("style", 'display: inline-block; ')
@@ -184,6 +184,27 @@
       pubInfoDiv.appendChild(pubTable)
 
       row1.appendChild(pubInfoDiv)
+
+      piediv = document.createElement("div")
+      piediv.setAttribute("style", 'display:None; width: 400px; height: 400px')
+      piediv.setAttribute("id", "pieDiv")
+      
+
+      piep = document.createElement("p")
+      piep.setAttribute("style", 'text-align:center')
+      pieb = document.createElement("b")
+      pieb.innerHTML = "Distribution of Author Order Rank"
+      piep.appendChild(pieb)
+      piediv.appendChild(piep)
+
+      piesvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      piesvg.setAttribute("id", "pie")
+      piesvg.setAttribute("width","400")
+      //piesvg.setAttribute("width", "400px")
+      piesvg.setAttribute("height", "400")
+      piediv.appendChild(piesvg)
+
+      row1.appendChild(piediv)
 
       byYear.appendChild(row1)
 
@@ -282,10 +303,11 @@
 
       steam = document.createElement("div")
       steam.setAttribute("id", "steam")
-      steam.setAttribute("style", "display: inline-block")
+      //steam.setAttribute("style", "display: inline-block")
       steam.appendChild(headingSteam)
       line1Div.appendChild(steam)
 
+      line2Div = document.createElement("div")
       LineCt2a = document.createElement("div")
       LineCt2a.setAttribute("style", "display: inline-block")
       LineCt2a.setAttribute("id", "LineCh2a")
@@ -293,9 +315,20 @@
       svg2a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg2a.setAttribute("id", "LineCt2a")
       LineCt2a.appendChild(svg2a)
-      line1Div.appendChild(LineCt2a)
+      line2Div.appendChild(LineCt2a)
+
+      divTable = document.createElement("div")
+      divTable.setAttribute("id", "AgeTable")
+      divTable.setAttribute("style", "display: inline-block; width:500px; height: 500px")
+      line2Div.appendChild(divTable)
+
+      svgPie = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      svgPie.setAttribute("id", "confpie")
+      svgPie.setAttribute("style", "display: inline-block; width:300px; height: 500px")
+      line2Div.appendChild(svgPie)
 
       byAge.appendChild(line1Div)
+      byAge.appendChild(line2Div)
 
       document.getElementById("body").appendChild(byAge)
 
@@ -379,8 +412,8 @@
   </script>
 </head>
 
-<body id='body' onload="landing()" style='background-color: #D8D8D8;'>
-  <div style='position:fixed; width:100%;top:0%; background-color: aqua; padding:10px'>
+<body id='body' onload="landing()" style='overflow-x:scroll;background-color: #D8D8D8;'>
+  <div style='position:fixed; width:100%;top:0%; background-color:#FFC0CB; padding:10px'>
     <h2 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h2>
     <div style="text-align:center">
       <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
@@ -400,13 +433,13 @@
         <input type="button" id='go1d' style='position:absolute; top:17%; left: 30%' value="Go" onclick='range1d()'>
         <span style='position:absolute; top:22%; left: 2%'>Filter By Conference : </span>
         <span style='position:absolute; top:22%; left: 12%'><input id='infovischkbox' type='checkbox' name="InfoVis"
-            value="InfoVis" checked/> InfoVis </span>
+            value="InfoVis" checked /> InfoVis </span>
         <span style='position:absolute; top:22%; left: 18%'><input id='vastchkbox' type='checkbox' name="VAST"
-            value="VAST" checked/> VAST </span>
-        <span style='position:absolute; top:22%; left: 23%'><input id='vischkbox' type='checkbox' name="Vis"
-            value="Vis" checked /> Vis</span>
+            value="VAST" checked /> VAST </span>
+        <span style='position:absolute; top:22%; left: 23%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
+            checked /> Vis</span>
         <span style='position:absolute; top:22%; left: 27%'> <input id='scivischkbk' type='checkbox' name="SciVis"
-            value="SciVis"  checked/>SciVis </span>
+            value="SciVis" checked />SciVis </span>
         <button style='position:absolute; top:22%; left: 32%' onclick='filter1d()'>Filter</button>
         <!--<h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>-->
       </div>
@@ -428,8 +461,15 @@
 
         </Table>
       </div>
+      <div id="pieDiv" style='display:None' width='400px' height='400px'>
+        <br/>
+        <p style='text-align:center'><b>Distribution of Author Order Rank</b></p>
+        <svg id='pie' width='400px' height='400px'></svg>
+      </div>
 
     </div>
+
+
     <div id='LineCh1a'>
       <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
       <svg id='LineCt1a'></svg>
