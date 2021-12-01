@@ -38,13 +38,21 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 		.datum(male)
 		.attr("class", "line")
 		.attr("d", line)
+		.attr("id", "maleline")
 		.style("fill", "none")
 		.style("stroke", "yellow")
 		.style("stroke-width", "2")
 		.attr("cursor", "pointer")
 		.on('click', function (d) {
-			//console.log("clicked",d)
 			displayAgeData(d[0].AuthorGender)
+		})
+		.on("mouseover", function (d) {
+			d3.select("#maleline").style("stroke-width", "5")
+			d3.select("#femaleline").style("stroke-width", "1")
+		})
+		.on("mouseout", function (d) {
+			d3.select("#maleline").style("stroke-width", "2")
+			d3.select("#femaleline").style("stroke-width", "2")
 		})
 
 	console.log("Ima in 2a")
@@ -52,14 +60,24 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 		.datum(female)
 		.attr("class", "line")
 		.attr("d", line)
+		.attr("id", "femaleline")
 		.style("fill", "none")
 		.style("stroke", "red")
 		.style("stroke-width", "2")
 		.attr("cursor", "pointer")
 		.on('click', function (d) {
-			//console.log("clicked",d)
 			displayAgeData(d[0].AuthorGender)
 		})
+		.on("mouseover", function (d) {
+			d3.select("#femaleline").style("stroke-width", "5")
+			d3.select("#maleline").style("stroke-width", "1")
+		})
+		.on("mouseout", function (d) {
+			d3.select("#maleline").style("stroke-width", "2")
+			d3.select("#femaleline").style("stroke-width", "2")
+		})
+
+
 
 
 	var xAxisgen = d3.axisBottom().scale(xScale)
@@ -69,13 +87,11 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 	var xAxis = svg.append("g")
 		.call(xAxisgen)
 		.style("transform", `translateY(${dimensions.height}px)`)
-	//			   .text("Year")
 
 
 	var yAxis = svg.append("g")
 		.call(yAxisgen)
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
-	//			   .text("Count")
 
 	conf = ['Male', 'Female']
 	color = ['yellow', 'red']
@@ -169,8 +185,8 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 
 			document.getElementById("AgeTable").appendChild(table)
 
-			pietext=document.getElementById("pietext")
-			pietext.innerHTML="<b>Conference Distrbution for the choosen Gender</b>"
+			pietext = document.getElementById("pietext")
+			pietext.innerHTML = "<b>Conference Distrbution for the choosen Gender</b>"
 
 
 

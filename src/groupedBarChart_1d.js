@@ -87,27 +87,27 @@ d3.csv('dataset/1d.csv', function (data) {
 
     mouseoverSciVis = function (d) {
         populatePubInfo("SciVis", d.Year)
-        document.getElementById("confChoosen").innerHTML = "The choosen conference is SciVis and the year is " + d.Year +
-            " and the percentage of female is " + d.SciVis.toFixed(2)
+        document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>SciVis</b> and the year is <b>" + d.Year +
+            "</b> and the percentage of female is <b>" + d.SciVis.toFixed(2) + "</b>"
         d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
 
     mouseoverVAST = function (d) {
         populatePubInfo("VAST", d.Year)
-        document.getElementById("confChoosen").innerHTML = "The choosen conference is VAST and the year is " + d.Year +
-            " and the percentage of female is " + d.VAST.toFixed(2)
+        document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>VAST</b> and the year is <b>" + d.Year +
+            "</b> and the percentage of female is <b>" + d.VAST.toFixed(2) + "</b>"
         d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
     mouseoverInfoVis = function (d) {
         populatePubInfo("InfoVis", d.Year)
-        document.getElementById("confChoosen").innerHTML = "The choosen conference is InfoVis and the year is " + d.Year +
-            " and the percentage of female is " + d.InfoVis.toFixed(2)
+        document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>InfoVis</b> and the year is <b>" + d.Year +
+            "</b> and the percentage of female is <b>" + d.InfoVis.toFixed(2) + "</b>"
         d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
     mouseoverVis = function (d) {
         populatePubInfo("Vis", d.Year)
-        document.getElementById("confChoosen").innerHTML = "The choosen conference is Vis and the year is " + d.Year +
-            " and the percentage of female is " + d.Vis.toFixed(2)
+        document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>Vis</b> and the year is <b>" + d.Year +
+            "</b> and the percentage of female is <b>" + d.Vis.toFixed(2) + "</b>"
         d3.select(this).attr("stroke", "black").style('stroke-width', 1)
     }
     conf = []
@@ -147,6 +147,7 @@ d3.csv('dataset/1d.csv', function (data) {
             .enter()
             .append("rect")
             .attr("class", "bar InfoVis")
+            .attr("id", "infovisbar")
             .style("fill", "red")
             .attr("x", d => xScale1('InfoVis'))
             .attr("y", d => yScale(d.InfoVis))
@@ -166,6 +167,7 @@ d3.csv('dataset/1d.csv', function (data) {
             .enter()
             .append("rect")
             .attr("class", "bar VAST")
+            .attr("id", "vastbar")
             .style("fill", "green")
             .attr("x", d => xScale1('VAST'))
             .attr("y", d => yScale(d.VAST))
@@ -187,6 +189,7 @@ d3.csv('dataset/1d.csv', function (data) {
             .enter()
             .append("rect")
             .attr("class", "bar SciVis")
+            .attr("id", "scivisbar")
             .style("fill", "blue")
             .attr("x", d => xScale1('SciVis'))
             .attr("y", d => yScale(d.SciVis))
@@ -297,16 +300,16 @@ d3.csv('dataset/1d.csv', function (data) {
         headers3 = document.createElement("th")
         headers3.innerHTML = "Paper Title"
         headers4 = document.createElement("th")
-        headers4.innerHTML = pubCiteSortOrder == 'asc' ? "Publication Citation (asc)" : 'Publication Citation (dsc)'
+        headers4.innerHTML = 'Publication Citation'
         //headers4.addEventListener("click", sortByPubCitation)
         headers5 = document.createElement("th")
         headers5.innerHTML = "Link"
-        header6 = document.createElement("th")
-        header6.innerHTML = 'Career Age'
+        //header6 = document.createElement("th")
+        //header6.innerHTML = 'Career Age'
 
         headerRow.appendChild(headers1)
         headerRow.appendChild(headers2)
-        headerRow.appendChild(header6)
+        //headerRow.appendChild(header6)
         headerRow.appendChild(headers3)
         headerRow.appendChild(headers4)
         headerRow.appendChild(headers5)
@@ -329,14 +332,14 @@ d3.csv('dataset/1d.csv', function (data) {
             col5a.innerHTML = groupedPubAndMainData[i].link
             col5.appendChild(col5a)
 
-            col6 = document.createElement("td")
-            col6.innerHTML = groupedPubAndMainData[i].careerAge
+            //col6 = document.createElement("td")
+            //col6.innerHTML = groupedPubAndMainData[i].careerAge
 
             //col5.innerHTML = groupedPubAndMainData[i].link
 
             row.appendChild(col1)
             row.appendChild(col2)
-            row.appendChild(col6)
+            //row.appendChild(col6)
             row.appendChild(col3)
             row.appendChild(col4)
             row.appendChild(col5)
@@ -375,12 +378,12 @@ d3.csv('dataset/1d.csv', function (data) {
 
     function displayPieDistribution(first, middle, last) {
 
-        document.getElementById("pieDiv").setAttribute("style",'display:inline-block; width: 400px; height: 400px')
+        document.getElementById("pieDiv").setAttribute("style", 'display:inline-block; width: 400px; height: 400px')
 
-        totalAuthPos = first+middle+last
-        firstPer = first/totalAuthPos * 100
-        middlePer = middle/totalAuthPos * 100
-        lastPer = last/totalAuthPos * 100
+        totalAuthPos = first + middle + last
+        firstPer = first / totalAuthPos * 100
+        middlePer = middle / totalAuthPos * 100
+        lastPer = last / totalAuthPos * 100
 
         console.log(totalAuthPos, firstPer, middlePer, lastPer)
 
@@ -390,26 +393,26 @@ d3.csv('dataset/1d.csv', function (data) {
             pieheight = 500,
             pieradius = 150;
 
-        
-        var data=[]
+
+        var data = []
         color = []
         // Step 1    
-        if (first!=0){
-            data.push({ name: "First", share: firstPer})
+        if (first != 0) {
+            data.push({ name: "First", share: firstPer })
             color.push('#ffd384')
-        }    
-        if (middle!=0){
+        }
+        if (middle != 0) {
             data.push({ name: "Middle", share: middlePer })
             color.push('#94ebcd')
         }
-        if (last!=0){
+        if (last != 0) {
             data.push({ name: "Last", share: lastPer })
             color.push('#fbaccc')
         }
-      
+
         //console.log("width", piewidth/2,pieheight )
         var g = svg.append("g")
-            .attr("transform", "translate(" +  piewidth / 2 + "," + pieheight / 2 + ")");
+            .attr("transform", "translate(" + piewidth / 2 + "," + pieheight / 2 + ")");
 
         // Step 4
         var ordScale = d3.scaleOrdinal()

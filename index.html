@@ -32,9 +32,9 @@
       row1 = document.createElement("div")
       row1.setAttribute("id", 'row1')
 
-      text1d=document.createElement("div")
+      text1d = document.createElement("div")
       text1d.setAttribute("style", "position:absolute; top:17%; left:25%")
-      text1d.innerHTML="<b>The Below graph provides the trend in the percentage of female w.r.t year for four different conferences</b>"
+      text1d.innerHTML = "<b>The Below graph provides the trend in the percentage of female w.r.t year for four different conferences</b>"
       row1.appendChild(text1d)
 
       bc1d = document.createElement("div")
@@ -136,12 +136,12 @@
       pubInfoDiv.setAttribute("height", "600px")
       pubInfoDiv.setAttribute("style", 'display: inline-block; ')
 
-      h4 = document.createElement("h4")
-      h4.setAttribute("id", "confChoosen")
-      h4.setAttribute("style", 'display:none; position:absolute; top:20%')
-      h4.innerHTML = 'The choosen conference is None and the year is None'
+      h4span = document.createElement("span")
+      h4span.setAttribute("id", "confChoosen")
+      h4span.setAttribute("style", 'display:none; position:absolute; top:28%')
+      h4span.innerHTML = 'The choosen conference is None and the year is None'
 
-      pubInfoDiv.appendChild(h4)
+      pubInfoDiv.appendChild(h4span)
 
       sortPubDiv = document.createElement("div")
       sortPubDiv.setAttribute("id", "sortByPub")
@@ -316,13 +316,13 @@
 
       steamText = document.createElement("div")
       steamText.setAttribute("style", "display: inline-block; position:absolute; width: 500px; height: 500px; top: 20%")
-      steamText.innerHTML = "This graph provides an overview of the trend of dropout rate (aka quiting job)  with respect to career age for Male and Female authors"
+      steamText.innerHTML = "This graph provides an overview of the trend in dropout rate (aka quiting job)  with respect to career age for Male and Female authors"
       line1Div.appendChild(steamText)
 
       byAge.appendChild(line1Div)
 
       agelineDiv = document.createElement("div")
-      agelineDiv.setAttribute("style", "width:90%; padding: 2%")
+      agelineDiv.setAttribute("style", "width:95%; padding: 1%; background-color:#FFC0CB; text-align:center")
       agelineDiv.innerHTML = "<br/><br/><br/>The below graphs provides an overiew of the trend w.r.t to number of authors and career age, " +
         "it helps us understand how many authors of a particular career age are present in the organisation. <b>click on the male/female line " +
         "in the graph, to explore more details "
@@ -389,15 +389,15 @@
       byColla = document.createElement("div")
       byColla.setAttribute("id", "byCollaboration")
       collabortion = document.createElement("div")
-      collabortion.setAttribute("style","display:inline-block")
+      collabortion.setAttribute("style", "display:inline-block")
       collabortion.setAttribute("id", "collaboration_actual")
       byColla.appendChild(collabortion)
 
-      collaText =document.createElement("div")
+      collaText = document.createElement("div")
       collaText.setAttribute("style", "position:fixed; top: 40%;display:inline-block; width:600px ")
-      collaText.innerHTML="This Heapmap gives an overview of how the paper publication count varies w.r.t collobration between same and "+
-      "opposite gender authors"
-     
+      collaText.innerHTML = "This Heapmap gives an overview of how the paper publication count varies w.r.t collobration between same and " +
+        "opposite gender authors"
+
       byColla.appendChild(collaText)
 
 
@@ -487,8 +487,8 @@
         <!--<h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>-->
       </div>
       <div id='pubInfo' width='400px' height='600px' style='display: inline-block; '>
-        <h4 id='confChoosen' style='display:none; position:absolute; top:22%'>The choosen conference is None and the
-          year is None</h4>
+        <span id='confChoosen' style='display:none; position:absolute; top:25%'>The choosen conference is None and the
+          year is None</span>
         <div id='sortByPub' style='display:none'>
           <span><em>Sort By Publication Citation: </em></span>
           <span>Asc <input type='radio' id='pubAsc' name='sortByPub' value='asc'></input></span>
