@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
-var margin = { top: 80, right: 25, bottom: 30, left: 40 },
+var margin = { top: 180, right: 25, bottom: 30, left: 40 },
   width = 450 - margin.left - margin.right,
-  height = 450 - margin.top - margin.bottom;
+  height = 620 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#collaboration_actual")
@@ -71,7 +71,7 @@ d3.csv("dataset/6_coll_actual_count.csv", function (data) {
   }
   var mousemove = function(d) {
     tooltip
-      .html("The exact value of<br>this cell is: " + d.real_count)
+      .html("The Publication Count for the choosen cell is : " + d.real_count)
       .style("left", (d3.mouse(this)[0]+70) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
