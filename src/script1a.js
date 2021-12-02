@@ -33,14 +33,25 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.x(d => xScale(xAccessor(d)))
 		.y(d => yScale(selected_yAccessor(d)))
 		.curve(d3.curveMonotoneX)
-
+		
 	var MaleCurve = svg.append("path")
 		.datum(male)
 		.attr("class", "line")
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "yellow")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover",function(){
+			d3.select(this)
+				.attr("stroke-width",1)
+				.attr("stroke","black")
+		})
+		.on("mouseout",function(){
+			d3.select(this)
+			  .attr("stroke-width",0)
+		});
+
+		
 
 	var FemaleCurve = svg.append("path")
 		.datum(female)
@@ -48,7 +59,16 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "red")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover",function(){
+			d3.select(this)
+				.attr("stroke-width",1)
+				.attr("stroke","black")
+		})
+		.on("mouseout",function(){
+			d3.select(this)
+			  .attr("stroke-width",0)
+		});
 
 	var UnknownCurve = svg.append("path")
 		.datum(unknown)
@@ -56,7 +76,16 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "blue")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover",function(){
+			d3.select(this)
+				.attr("stroke-width",1)
+				.attr("stroke","black")
+		})
+		.on("mouseout",function(){
+			d3.select(this)
+			  .attr("stroke-width",0)
+		});
 	var xAxisgen = d3.axisBottom().scale(xScale)
 	var yAxisgen = d3.axisLeft().scale(yScale)
 

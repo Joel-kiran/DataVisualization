@@ -43,7 +43,17 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "yellow")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover",function(){
+			d3.select(this)
+				.attr("stroke-width",1)
+				.attr("stroke","black")
+		})
+		.on("mouseout",function(){
+			d3.select(this)
+			  .attr("stroke-width",0)
+		});
+
 
 	var FemaleCurve = svg.append("path")
 		.datum(female)
@@ -51,7 +61,16 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "red")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover",function(){
+			d3.select(this)
+				.attr("stroke-width",1)
+				.attr("stroke","black")
+		})
+		.on("mouseout",function(){
+			d3.select(this)
+			  .attr("stroke-width",0)
+		});
 
 	var UnknownCurve = svg.append("path")
 		.datum(unknown)
@@ -59,7 +78,16 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "blue")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover",function(){
+			d3.select(this)
+				.attr("stroke-width",1)
+				.attr("stroke","black")
+		})
+		.on("mouseout",function(){
+			d3.select(this)
+			  .attr("stroke-width",0)
+		});
 
 	var xAxisgen = d3.axisBottom().scale(xScale)
 	var yAxisgen = d3.axisLeft().scale(yScale)
