@@ -9,33 +9,29 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 			left: 50
 		}
 	}
-	//console.log("script6a start")
+
 	var svg = d3.select("#LineCt1a")
 		.attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
 		.attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
-	//	.attr("transform",
-	//		"translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")")
-	//console.log("script6a goin")
 
 	var xAccessor = d => +d.Year
-	var yAccessor = d => +d.n_authors
+	var selected_yAccessor = d => +d.n_authors
 
 	var xScale = d3.scaleLinear()
 		.domain(d3.extent(dataset, xAccessor))
 		.range([dimensions.margin.left, dimensions.width + dimensions.margin.left])
 
 	var yScale = d3.scaleLinear()
-		.domain(d3.extent(dataset, yAccessor))
+		.domain(d3.extent(dataset, selected_yAccessor))
 		.range([dimensions.height, 0])
 
 	const male = dataset.filter(d => { return d.AuthorGender == 'Male' && d.Group == 'All authors' });
 	const female = dataset.filter(d => { return d.AuthorGender == 'Female' && d.Group == 'All authors' });
 	const unknown = dataset.filter(d => { return d.AuthorGender == 'Unknown' && d.Group == 'All authors' });
 
-
 	var line = d3.line()
 		.x(d => xScale(xAccessor(d)))
-		.y(d => yScale(yAccessor(d)))
+		.y(d => yScale(selected_yAccessor(d)))
 		.curve(d3.curveMonotoneX)
 
 	var MaleCurve = svg.append("path")
@@ -43,7 +39,7 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.attr("class", "line")
 		.attr("d", line)
 		.style("fill", "none")
-		.style("stroke", "green")
+		.style("stroke", "yellow")
 		.style("stroke-width", "2");
 
 	var FemaleCurve = svg.append("path")
@@ -68,16 +64,20 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	var xAxis = svg.append("g")
 		.call(xAxisgen)
 		.style("transform", `translateY(${dimensions.height}px)`)
-	//				  .text("Year")
+		.selectAll("text")
+                   .style("text-anchor", "end")
+                   .attr("dx", "-.8em")
+                   .attr("dy", ".10em")
+                   .attr("transform", "rotate(-65)");
 
 
 	var yAxis = svg.append("g")
 		.call(yAxisgen)
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
-	//				  .text("Number of authors")
+	
 
     conf = ['Male', 'Female', 'Unknown']
-	color = ['green', 'red', 'blue']
+	color = ['yellow', 'red', 'blue']
 
     var legend = svg.append('g')
         .attr('class', 'legend')
@@ -111,53 +111,17 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
         .attr('text-anchor', 'start')
         .attr('alignment-baseline', 'hanging');
 
-	//console.log(dataset)
-
-	var yAccessorNew = d => +d.percent
-
-	/*d3.select("#Number").on('click', function(){
-       
-        yAxisgen.scale(yScale)
-
-        yAxis.transition()
-                     .call(yAxisgen)
-
-		
-		line.y(d => yScale(yAccessor(d)))
-
-		MaleCurve.transition().attr("d", line)
-		FemaleCurve.transition().attr("d", line)
-		UnknownCurve.transition().attr("d", line)
-
-        })
-
-	d3.select("#Percent").on('click', function(){
-           
-		var yScale = d3.scaleLinear()
-		.domain(d3.extent(dataset, yAccessorNew))
-		.range([dimensions.height, 0])
-
-        yAxisgen.scale(yScale)
-
-        yAxis.transition()
-                     .call(yAxisgen)
-
-		line.y(d => yScale(yAccessorNew(d)))
-
-		MaleCurve.transition().attr("d", line)
-		FemaleCurve.transition().attr("d", line)
-		UnknownCurve.transition().attr("d", line)
-
-	})*/
+	 selected_yAccessor = d => +d.percent*100
 
 	document.getElementById("Number").addEventListener("click", function(){
+		selected_yAccessor = d => +d.n_authors
 		yAxisgen.scale(yScale)
 
         yAxis.transition()
                      .call(yAxisgen)
 
 		
-		line.y(d => yScale(yAccessor(d)))
+		line.y(d => yScale(selected_yAccessor(d)))
 
 		MaleCurve.transition().attr("d", line)
 		FemaleCurve.transition().attr("d", line)
@@ -166,8 +130,10 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	})
 
 	document.getElementById("Percent").addEventListener("click", function(){
+		selected_yAccessor = d => +d.percent*100
+		
 		var yScale = d3.scaleLinear()
-		.domain(d3.extent(dataset, yAccessorNew))
+		.domain(d3.extent(dataset, selected_yAccessor))
 		.range([dimensions.height, 0])
 
         yAxisgen.scale(yScale)
@@ -175,11 +141,36 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
         yAxis.transition()
                      .call(yAxisgen)
 
-		line.y(d => yScale(yAccessorNew(d)))
+		line.y(d => yScale(selected_yAccessor(d)))
 
 		MaleCurve.transition().attr("d", line)
 		FemaleCurve.transition().attr("d", line)
 		UnknownCurve.transition().attr("d", line)
 	})
-	
+
+	document.getElementById("1990").addEventListener("click", function(){
+		dataset = dataset.filter(d => { return +d.Year >= +1990 && +d.Year <= +2000 })
+		var xScale = d3.scaleLinear()
+		.domain(d3.extent(dataset, xAccessor))
+		.range([dimensions.margin.left, dimensions.width + dimensions.margin.left])
+
+		var yScale = d3.scaleLinear()
+		.domain(d3.extent(dataset, selected_yAccessor))
+		.range([dimensions.height, 0])
+
+        yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		xAxis.transition()
+                     .call(xAxisgen)
+
+		line.x(d => xScale(xAccessor(d)))
+		.y(d => yScale(selected_yAccessor(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
+	})
 })

@@ -12,11 +12,9 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 	var svg = d3.select("#LineCt6a")
 		.attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
 		.attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
-//		.attr("transform",
-//			"translate(" + dimensions.margin.left + "," + dimensions.margin.top + ")")
 
 	var xAccessor = d => +d.Year
-	var yAccessor = d => +d.count
+	var yAccessor = d => d.count
 
 	var xScale = d3.scaleLinear()
 		.domain(d3.extent(dataset, xAccessor))
@@ -44,7 +42,7 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 		.attr("class", "line")
 		.attr("d", line)
 		.style("fill", "none")
-		.style("stroke", "green")
+		.style("stroke", "yellow")
 		.style("stroke-width", "2");
 
 	var FemaleCurve = svg.append("path")
@@ -81,7 +79,7 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
 	
 	conf = ['Male', 'Female', 'Unknown']
-	color = ['green', 'red', 'blue']
+	color = ['yellow', 'red', 'blue']
 
 	var legend = svg.append('g')
 					.attr('class', 'legend')
@@ -117,42 +115,7 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 				   
     console.log(dataset)
 
-	var yAccessorNew = d => +d.percent
-	/*
-	d3.select("#Number").on('click', function(){
-       
-        yAxisgen.scale(yScale)
-
-        yAxis.transition()
-                     .call(yAxisgen)
-
-		
-		line.y(d => yScale(yAccessor(d)))
-
-		MaleCurve.transition().attr("d", line)
-		FemaleCurve.transition().attr("d", line)
-		UnknownCurve.transition().attr("d", line)
-
-        })
-	
-	d3.select("#Percent").on('click', function(){
-           
-		var yScale = d3.scaleLinear()
-		.domain(d3.extent(dataset, yAccessorNew))
-		.range([dimensions.height, 0])
-
-        yAxisgen.scale(yScale)
-
-        yAxis.transition()
-                     .call(yAxisgen)
-
-		line.y(d => yScale(yAccessorNew(d)))
-
-		MaleCurve.transition().attr("d", line)
-		FemaleCurve.transition().attr("d", line)
-		UnknownCurve.transition().attr("d", line)
-
-	})*/
+	var yAccessorNew = d => d.percent*100
 
 	document.getElementById("Number").addEventListener("click", function(){
 		yAxisgen.scale(yScale)

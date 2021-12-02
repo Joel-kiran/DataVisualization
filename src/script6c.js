@@ -42,7 +42,7 @@ d3.csv("dataset/07-CD_program_count.csv", function (dataset) {
 		.attr("class", "line")
 		.attr("d", line)
 		.style("fill", "none")
-		.style("stroke", "green")
+		.style("stroke", "yellow")
 		.style("stroke-width", "2");
 
 	var FemaleCurve = svg.append("path")
@@ -79,7 +79,7 @@ d3.csv("dataset/07-CD_program_count.csv", function (dataset) {
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
 	
    conf = ['Male', 'Female', 'Unknown']
-   color = ['green', 'red', 'blue']
+   color = ['yellow', 'red', 'blue']
    var legend = svg.append('g')
 					   .attr('class', 'legend')
 					   .attr('transform', 'translate(' + (10) + ', 10)');
@@ -114,42 +114,7 @@ d3.csv("dataset/07-CD_program_count.csv", function (dataset) {
 							  
     console.log(dataset)
 
-	var yAccessorNew = d => d.percent
-
-	/*d3.select("#Number").on('click', function(){
-       
-        yAxisgen.scale(yScale)
-
-        yAxis.transition()
-                     .call(yAxisgen)
-
-		
-		line.y(d => yScale(yAccessor(d)))
-
-		MaleCurve.transition().attr("d", line)
-		FemaleCurve.transition().attr("d", line)
-		UnknownCurve.transition().attr("d", line)
-
-        })
-
-	d3.select("#Percent").on('click', function(){
-           
-		var yScale = d3.scaleLinear()
-		.domain(d3.extent(dataset, yAccessorNew))
-		.range([dimensions.height, 0])
-
-        yAxisgen.scale(yScale)
-
-        yAxis.transition()
-                     .call(yAxisgen)
-
-		line.y(d => yScale(yAccessorNew(d)))
-
-		MaleCurve.transition().attr("d", line)
-		FemaleCurve.transition().attr("d", line)
-		UnknownCurve.transition().attr("d", line)
-
-	})*/
+	var yAccessorNew = d => d.percent*100
 
 	document.getElementById("Number").addEventListener("click", function(){
 		yAxisgen.scale(yScale)
