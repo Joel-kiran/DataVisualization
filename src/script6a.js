@@ -28,9 +28,9 @@ d3.csv("dataset/07-AB_conference_count.csv", function (dataset) {
 
 
 
-	const male = dataset.filter(d => { return d.AuthorGender == 'Male' });
-	const female = dataset.filter(d => { return d.AuthorGender == 'Female' });
-	const unknown = dataset.filter(d => { return d.AuthorGender == 'Unknown' });
+	const male = dataset.filter(d => { return d.AuthorGender == 'Male' && d.Group == 'Committee'});
+	const female = dataset.filter(d => { return d.AuthorGender == 'Female' && d.Group == 'Committee'});
+	const unknown = dataset.filter(d => { return d.AuthorGender == 'Unknown' && d.Group == 'Committee'});
 
 
 	var line = d3.line()
