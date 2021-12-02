@@ -223,20 +223,21 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 
 			if (sciConf.length > 0) {
 				data.push({ name: "SciVis", share: (sciConf.length / total) * 100 })
-				color.push('#ffd384')
+				color.push('blue')
 			}
 			if (visConf.length > 0) {
 				data.push({ name: "Vis", share: (visConf.length / total) * 100 })
-				color.push('#94ebcd')
+				color.push('yellow')
 			}
 			if (vastConf.length > 0) {
 				data.push({ name: "VAST", share: (vastConf.length / total) * 100 })
-				color.push('#fbaccc')
+				color.push('green')
 			}
 			if (infoVisConf.length > 0) {
 				data.push({ name: "InfoVis", share: (infoVisConf.length / total) * 100 })
-				color.push('#fbaccc')
+				color.push('red')
 			}
+			console.log("color", color)
 
 			//console.log("width", piewidth/2,pieheight )
 			var g = svg.append("g")
