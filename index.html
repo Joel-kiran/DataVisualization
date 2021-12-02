@@ -512,20 +512,32 @@
 
     </div>
 
+    <div>
+      <button id='Percent'>Percent</button>
+      <button id='Number'>Number</button>
 
-    <div id='LineCh1a'>
-      <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
-      <svg id='LineCt1a'></svg>
-    </div>
-    <div id='LineCh6a'>
-      <h4 style="text-align:center">No. Of PC members Vs Year</h4>
-      <svg id='LineCt6a'></svg>
-    </div>
-    <div id='LineCh6c'>
-      <h4 style="text-align:center">No. Of OC members Vs Year</h4>
-      <svg id='LineCt6c'></svg>
-    </div>
+      <label for="years">Year:</label>
+      <select name="cars" id="cars">
+        <option value="1990" id="1990">1990-2000</option>
+        <option value="2000" id="2000">2000-2010</option>
+        <option value="2010" id="2010">2010-2020</option>
+      </select>
+      <div>
+        <div id='LineCh1a' style="display:inline-block">
+          <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
 
+          <svg id='LineCt1a'></svg>
+        </div>
+        <div id='LineCh6a' style="display:inline-block">
+          <h4 style="text-align:center">No. Of PC members Vs Year</h4>
+          <svg id='LineCt6a'></svg>
+        </div>
+        <div id='LineCh6c' style="display:inline-block">
+          <h4 style="text-align:center">No. Of OC members Vs Year</h4>
+          <svg id='LineCt6c'></svg>
+        </div>
+      </div>
+    </div>
   </div>
 
 

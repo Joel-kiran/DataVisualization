@@ -38,12 +38,12 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.y(d => yScale(yAccessor(d)))
 		.curve(d3.curveMonotoneX)
 
-	var MaleCurves = svg.append("path")
+	var MaleCurve = svg.append("path")
 		.datum(male)
 		.attr("class", "line")
 		.attr("d", line)
 		.style("fill", "none")
-		.style("stroke", "yellow")
+		.style("stroke", "green")
 		.style("stroke-width", "2");
 
 	var FemaleCurve = svg.append("path")
@@ -77,7 +77,7 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	//				  .text("Number of authors")
 
     conf = ['Male', 'Female', 'Unknown']
-	color = ['yellow', 'red', 'blue']
+	color = ['green', 'red', 'blue']
 
     var legend = svg.append('g')
         .attr('class', 'legend')
@@ -111,5 +111,75 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
         .attr('text-anchor', 'start')
         .attr('alignment-baseline', 'hanging');
 
-	console.log(dataset)
+	//console.log(dataset)
+
+	var yAccessorNew = d => +d.percent
+
+	/*d3.select("#Number").on('click', function(){
+       
+        yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		
+		line.y(d => yScale(yAccessor(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
+
+        })
+
+	d3.select("#Percent").on('click', function(){
+           
+		var yScale = d3.scaleLinear()
+		.domain(d3.extent(dataset, yAccessorNew))
+		.range([dimensions.height, 0])
+
+        yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		line.y(d => yScale(yAccessorNew(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
+
+	})*/
+
+	document.getElementById("Number").addEventListener("click", function(){
+		yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		
+		line.y(d => yScale(yAccessor(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
+
+	})
+
+	document.getElementById("Percent").addEventListener("click", function(){
+		var yScale = d3.scaleLinear()
+		.domain(d3.extent(dataset, yAccessorNew))
+		.range([dimensions.height, 0])
+
+        yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		line.y(d => yScale(yAccessorNew(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
+	})
+	
 })
