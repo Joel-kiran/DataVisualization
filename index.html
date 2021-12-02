@@ -214,11 +214,28 @@
 
       byYear.appendChild(row1)
 
+      //For Line Chart
 
+      Line_Chart = document.createElement("div")
+      Line_Chart.setAttribute("id", "Line_Chart")
+      Line_Chart.setAttribute("style", "display: inline-block;")
+      
+      PercentButtonLC = document.createElement("button")
+      PercentButtonLC.setAttribute("id","Percent")
+      PercentButtonLC.setAttribute("style", 'position:absolute; top:28%; left: 32%')
+      PercentButtonLC.innerHTML="Percent"
+      Line_Chart.appendChild(PercentButtonLC)
+
+      NumberButtonLC = document.createElement("button")
+      NumberButtonLC.setAttribute("id","Number")
+      NumberButtonLC.setAttribute("style", 'position:absolute; top:28%; left: 32%')
+      NumberButtonLC.innerHTML="Number"
+      Line_Chart.appendChild(NumberButtonLC)
+
+      
       heading1a = document.createElement("h4")
       heading1a.setAttribute("style", "text-align:center")
       heading1a.innerHTML = "No. Of Authors In IEEE Vis Vs Year"
-
 
       heading6a = document.createElement("h4")
       heading6a.setAttribute("style", "text-align:center")
@@ -227,6 +244,9 @@
       heading6c = document.createElement("h4")
       heading6c.setAttribute("style", "text-align:center")
       heading6c.innerHTML = "No. Of OC members Vs Year"
+      
+      line2Div = document.createElement("div")
+      line2Div.setAttribute("id","svg_div")
 
       LineCt1a = document.createElement("div")
       LineCt1a.setAttribute("id", "LineCh1a")
@@ -234,9 +254,7 @@
       svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       svg1a.setAttribute("id", "LineCt1a")
       LineCt1a.appendChild(svg1a)
-      byYear.appendChild(LineCt1a)
-
-      line2Div = document.createElement("div")
+      line2Div.appendChild(LineCt1a)
 
       LineCt6a = document.createElement("div")
       LineCt6a.setAttribute("style", 'display: inline-block')
@@ -255,8 +273,11 @@
       svg6c.setAttribute("id", "LineCt6c")
       LineCt6c.appendChild(svg6c)
       line2Div.appendChild(LineCt6c)
+      
+      Line_Chart.appendChild(line2Div)
 
-      byYear.appendChild(line2Div)
+      //byYear.appendChild(line2Div)
+      byYear.appendChild(Line_Chart)
 
       document.getElementById("body").appendChild(byYear)
 
@@ -432,17 +453,10 @@
       LineCt6cscript.src = "src/script6c.js";
       document.getElementById("body").appendChild(LineCt6cscript)
 
+      //document.getElementById('year').checked = true
     }
 
     function range1d() {
-      var gpBc1dscript = document.createElement("script");
-      gpBc1dscript.type = "text/javascript";
-      gpBc1dscript.src = "src/groupedBarChart_1d.js";
-      document.getElementById("body").appendChild(gpBc1dscript)
-      document.getElementById('year').checked = true
-    }
-
-    function filter1d() {
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -512,17 +526,17 @@
 
     </div>
 
-    <div>
+    <div id="Line_Chart">
       <button id='Percent'>Percent</button>
       <button id='Number'>Number</button>
 
-      <label for="years">Year:</label>
-      <select name="cars" id="cars">
+     <!-- <label for="years">Year:</label>
+      <select name="select_year">
         <option value="1990" id="1990">1990-2000</option>
         <option value="2000" id="2000">2000-2010</option>
         <option value="2010" id="2010">2010-2020</option>
-      </select>
-      <div>
+      </select>-->
+      <div id="svg_div">
         <div id='LineCh1a' style="display:inline-block">
           <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
 
