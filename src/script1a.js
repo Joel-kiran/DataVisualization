@@ -115,7 +115,7 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 
 	var yAccessorNew = d => +d.percent
 
-	d3.select("#Number").on('click', function(){
+	/*d3.select("#Number").on('click', function(){
        
         yAxisgen.scale(yScale)
 
@@ -148,6 +148,38 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		FemaleCurve.transition().attr("d", line)
 		UnknownCurve.transition().attr("d", line)
 
+	})*/
+
+	document.getElementById("Number").addEventListener("click", function(){
+		yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		
+		line.y(d => yScale(yAccessor(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
+
+	})
+
+	document.getElementById("Percent").addEventListener("click", function(){
+		var yScale = d3.scaleLinear()
+		.domain(d3.extent(dataset, yAccessorNew))
+		.range([dimensions.height, 0])
+
+        yAxisgen.scale(yScale)
+
+        yAxis.transition()
+                     .call(yAxisgen)
+
+		line.y(d => yScale(yAccessorNew(d)))
+
+		MaleCurve.transition().attr("d", line)
+		FemaleCurve.transition().attr("d", line)
+		UnknownCurve.transition().attr("d", line)
 	})
 	
 })
