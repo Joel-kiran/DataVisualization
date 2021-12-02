@@ -348,8 +348,9 @@ d3.csv('dataset/1d.csv', function (data) {
     }
 
     populatePubInfo = function (confName, year) {
-        d3.csv('dataset/AuthorPublication-uptoVIS2020.csv', function (publicationData) {
-            pubDataByConfAndYear = publicationData.filter(d => { return d.Conference == confName && +d.Year == year })
+        d3.csv('dataset/author_gender_info.csv', function (publicationData) {
+            pubDataByConfAndYear = publicationData.filter(d => { return d.Conference == confName && +d.Year == year &&
+                                                        d.Gender=='female' })
             d3.csv('dataset/IEEEVISpapers1990-2020-Maindataset.csv', function (mainData) {
                 mainDataByConfYear = mainData.filter(d => { return +d.Year == year && d.Conference == confName })
                 groupedPubAndMainData = []
