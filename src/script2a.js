@@ -180,7 +180,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 
 
 			var data = []
-			color = []
+			var color = ['']
 			// Step 1   
 			total = sciConf.length + visConf.length + vastConf.length + infoVisConf.length
 			console.log("total", total)
@@ -201,7 +201,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 				data.push({ name: "InfoVis", share: (infoVisConf.length / total) * 100 })
 				color.push('magenta')
 			}
-			console.log("color", color)
+			console.log("color", color, data)
 
 			//console.log("width", piewidth/2,pieheight )
 			var g = svg.append("g")
@@ -241,7 +241,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 				})
 				.text(function (d) { return d.data.name; })
 				.style("font-family", "arial")
-				.style("font-size", 15);
+				.style("font-size", 12);
 
 
 		})

@@ -87,30 +87,34 @@ function displayBarchart(gender) {
 
         mouseoverSciVis = function (d) {
             populatePubInfo("SciVis", d.Year)
-            /*document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>SciVis</b> and the year is <b>" + d.Year +
-                "</b> and the percentage of female is <b>" + d.SciVis.toFixed(2) + "</b>"*/
+            /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>SciVis</b> and the year is <b>" + d.Year +
+                "</b> and the percentage of "+ gender +" is <b>" + d.SciVis.toFixed(2) + "</b>"
+            */
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
 
         mouseoverVAST = function (d) {
             populatePubInfo("VAST", d.Year)
-            /*document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>VAST</b> and the year is <b>" + d.Year +
-                "</b> and the percentage of female is <b>" + d.VAST.toFixed(2) + "</b>"
+            /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>VAST</b> and the year is <b>" + d.Year +
+                "</b> and the percentage of "+ gender +" is <b>"  + d.VAST.toFixed(2) + "</b>"
                 */
+                
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
         mouseoverInfoVis = function (d) {
             populatePubInfo("InfoVis", d.Year)
-            /*document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>InfoVis</b> and the year is <b>" + d.Year +
-                "</b> and the percentage of female is <b>" + d.InfoVis.toFixed(2) + "</b>"
-            */
+            /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>InfoVis</b> and the year is <b>" + d.Year +
+                "</b> and the percentage of "+ gender +" is <b>"  + d.InfoVis.toFixed(2) + "</b>"
+                */
+            
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
         mouseoverVis = function (d) {
             populatePubInfo("Vis", d.Year)
-            /*document.getElementById("confChoosen").innerHTML = "The choosen conference is <b>Vis</b> and the year is <b>" + d.Year +
-                "</b> and the percentage of female is <b>" + d.Vis.toFixed(2) + "</b>"
-            */
+            /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>Vis</b> and the year is <b>" + d.Year +
+                "</b> and the percentage of "+ gender +" is <b>"  + d.Vis.toFixed(2) + "</b>"
+                */
+            
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
         conf = []
@@ -284,7 +288,7 @@ function displayBarchart(gender) {
             .text(function (d) {
                 return d;
             })
-            .attr('y', 0)
+            .attr('y', -10)
             .attr('x', function (d, i) {
                 return i * 65;
             })
@@ -297,7 +301,6 @@ function displayBarchart(gender) {
         populatePubInfo = function (confName, year) {
             document.getElementById("pieYearConf").style.visibility= "visible"
             document.getElementById("headingPieConfYear").style.visibility= "visible"
-            headingPieConfYear
             document.getElementById("pieYearConf").innerHTML = "The Choosen Conference is <b>" + confName + "</b> and the Year is <b>" + year + " </b>"
             d3.csv('dataset/author_gender_info.csv', function (publicationData) {
                 pubDataByConfAndYear = publicationData.filter(d => {
@@ -369,7 +372,7 @@ function displayBarchart(gender) {
                 data.push({ name: "Last", share: lastPer })
                 color.push('#fbaccc')
             }
-
+            console.log("color", color, data)
             //console.log("width", piewidth/2,pieheight )
             var g = svg.append("g")
                 .attr("transform", "translate(" + piewidth / 2 + "," + pieheight / 2 + ")");
