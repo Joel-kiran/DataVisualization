@@ -64,6 +64,7 @@
       document.getElementById("body").appendChild(collaScript)
 
       document.getElementById("pieYearConf").style.visibility= "hidden"
+      document.getElementById("headingPieConfYear").style.visibility= "hidden"
 
 
     }
@@ -115,29 +116,29 @@
     </div>
     <div style='display:inline-block'>
       <div id='gpBc1d'>
-
-        <span style='position:absolute;  left: 40%'> From Year : <input type="text" id='fromYear1d' style='width:80px'
+        
+        <span style='position:absolute;  left: 35%'> From Year : <input type="text" id='fromYear1d' style='width:80px'
             value="1990" /></span>
-        <span style='position:absolute;  left: 55%'> To Year : <input type="text" id='toYear1d' style='width:80px;'
+        <span style='position:absolute;  left: 50%'> To Year : <input type="text" id='toYear1d' style='width:80px;'
             value="2020" /></span>
-        <input type="button" id='go1d' style='position:absolute;  left: 70%' value="Go" onclick='range1d()'>
+        <input type="button" id='go1d' style='position:absolute;  left: 65%' value="Go" onclick='range1d()'>
 
-        <span style='position:absolute; top:5%; left: 40%'>Filter By Conference : </span>
-        <span style='position:absolute; top:5%; left:50%'><input id='infovischkbox' type='checkbox' name="InfoVis"
+        <span style='position:absolute; top:5%; left: 35%'>Filter By Conference : </span>
+        <span style='position:absolute; top:5%; left:45%'><input id='infovischkbox' type='checkbox' name="InfoVis"
             value="InfoVis" checked /> InfoVis </span>
-        <span style='position:absolute; top:5%; left: 55%'><input id='vastchkbox' type='checkbox' name="VAST"
+        <span style='position:absolute; top:5%; left: 50%'><input id='vastchkbox' type='checkbox' name="VAST"
             value="VAST" checked /> VAST </span>
-        <span style='position:absolute; top:5%; left: 60%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
+        <span style='position:absolute; top:5%; left: 55%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
             checked /> Vis</span>
-        <span style='position:absolute; top:5%; left: 65%'> <input id='scivischkbk' type='checkbox' name="SciVis"
+        <span style='position:absolute; top:5%; left: 59%'> <input id='scivischkbk' type='checkbox' name="SciVis"
             value="SciVis" checked />SciVis </span>
-        <button style='position:absolute; top:5%; left: 70%' onclick='filter1d()'>Filter</button>
+        <button style='position:absolute; top:5%; left: 65%' onclick='filter1d()'>Filter</button>
       </div>
 
     </div>
     <div id="pieDiv" style='display:inline-block' width='300px' height='500px'>
-      <p style='text-align:center'><b>Distribution of Author Order Rank</b></p>
-      <p  id='pieYearConf' > The Choosen Conference is InfoVisand the Year is 2003  </p>
+      <p style='text-align:center' id='headingPieConfYear'><b>Distribution of Author Order Rank</b></p>
+      <p  id='pieYearConf' > The Choosen Conference is InfoVis and the Year is 2003  </p>
       <svg style='position:relative;top:20%' id='pie' width='400px' height='400px'></svg>
     </div>
   </div>
@@ -148,8 +149,8 @@
       <svg id='LineCt2a' ></svg>
     </div>
     <div style="display: inline-block;">
-      <div id='confPieText'></div>
-      <svg id="confpie" width="300px" height="400px"  ></svg>
+      <div id='confPieText' style="position:relative;left:50%"></div>
+      <svg id="confpie" style="position:relative;left:50%; "width="300px" height="400px"  ></svg>
     </div>
 
   </div>

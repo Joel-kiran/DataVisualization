@@ -90,7 +90,7 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.style("text-anchor", "end")
 		.attr("dx", "-.8em")
 		.attr("dy", ".10em")
-		.attr("transform", "rotate(-40)");
+		.attr("transform", "rotate(-60)");
 
 
 

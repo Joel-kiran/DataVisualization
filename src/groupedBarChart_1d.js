@@ -140,6 +140,8 @@ function displayBarchart(gender) {
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0);
                     document.getElementById("pie").innerHTML = ""
+                    document.getElementById("pieYearConf").style.visibility='hidden'
+                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
                 })
 
             conf.push("Vis")
@@ -165,6 +167,8 @@ function displayBarchart(gender) {
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0);
                     document.getElementById("pie").innerHTML = ""
+                    document.getElementById("pieYearConf").style.visibility='hidden'
+                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
                 })
 
             conf.push("InfoVis")
@@ -188,6 +192,8 @@ function displayBarchart(gender) {
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0)
                     document.getElementById("pie").innerHTML = ""
+                    document.getElementById("pieYearConf").style.visibility='hidden'
+                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
                 })
 
             conf.push("VAST")
@@ -213,6 +219,8 @@ function displayBarchart(gender) {
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0);
                     document.getElementById("pie").innerHTML = ""
+                    document.getElementById("pieYearConf").style.visibility='hidden'
+                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
                 })
 
             conf.push("SciVis")
@@ -287,8 +295,10 @@ function displayBarchart(gender) {
         var groupedPubAndMainData = []
 
         populatePubInfo = function (confName, year) {
-            document.getElementById("pieYearConf").style.visibility= "true"
-            document.getElementById("pieYearConf").innerHTML = "The Choosen Conference is <b>" + confName + "</b>and the Year is <b>" + year + " </b>"
+            document.getElementById("pieYearConf").style.visibility= "visible"
+            document.getElementById("headingPieConfYear").style.visibility= "visible"
+            headingPieConfYear
+            document.getElementById("pieYearConf").innerHTML = "The Choosen Conference is <b>" + confName + "</b> and the Year is <b>" + year + " </b>"
             d3.csv('dataset/author_gender_info.csv', function (publicationData) {
                 pubDataByConfAndYear = publicationData.filter(d => {
                     return d.Conference == confName && +d.Year == year &&

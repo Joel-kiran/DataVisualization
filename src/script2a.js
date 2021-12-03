@@ -157,7 +157,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 			document.getElementById("confPieText").innerHTML="The Distribution of <b>"+gender+"</b> by Conference"
 			var svg = d3.select("#confpie"),
 				piewidth = 300,
-				pieheight = 500,
+				pieheight = 400,
 				pieradius = 150;
 
 			sciConf = dataset.filter(d => {
@@ -191,7 +191,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 			}
 			if (visConf.length > 0) {
 				data.push({ name: "Vis", share: (visConf.length / total) * 100 })
-				color.push('yellow')
+				color.push('orange')
 			}
 			if (vastConf.length > 0) {
 				data.push({ name: "VAST", share: (vastConf.length / total) * 100 })
@@ -199,7 +199,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 			}
 			if (infoVisConf.length > 0) {
 				data.push({ name: "InfoVis", share: (infoVisConf.length / total) * 100 })
-				color.push('red')
+				color.push('magenta')
 			}
 			console.log("color", color)
 
