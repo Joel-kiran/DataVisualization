@@ -20,9 +20,9 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	var xAccessor = d => +d.Year
 	var yAccessor = d => +d.n_authors
 
-	var xScale = d3.scaleLinear()
-		.domain(d3.extent(dataset, xAccessor))
-		.range([dimensions.margin.left, dimensions.width + dimensions.margin.left])
+	var xScale = d3.scaleBand()
+		.domain(dataset.map(xAccessor))
+		.range([dimensions.margin.left, dimensions.width + dimensions.margin.left]);
 
 	var yScale = d3.scaleLinear()
 		.domain(d3.extent(dataset, yAccessor))
