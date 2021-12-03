@@ -1,12 +1,12 @@
 d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	var dimensions = {
-		width: 600,
-		height: 220,
+		width: 400,
+		height: 300,
 		margin: {
 			top: 20,
 			bottom: 20,
 			right: 20,
-			left: 50
+			left: 40
 		}
 	}
 	//console.log("script6a start")
@@ -41,26 +41,44 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	var MaleCurves = svg.append("path")
 		.datum(male)
 		.attr("class", "line")
+		.attr("id", "male")
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "yellow")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover", function (d) {
+			d3.select("#male").style("stroke-width", "5")
+			d3.select("#female").style("stroke-width", "1")
+		})
+		.on("mouseout", function (d) {
+			d3.select("#male").style("stroke-width", "2")
+			d3.select("#female").style("stroke-width", "2")
+		})
 
 	var FemaleCurve = svg.append("path")
 		.datum(female)
 		.attr("class", "line")
+		.attr("id", "female")
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "red")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2")
+		.on("mouseover", function (d) {
+			d3.select("#female").style("stroke-width", "5")
+			d3.select("#male").style("stroke-width", "1")
+		})
+		.on("mouseout", function (d) {
+			d3.select("#male").style("stroke-width", "2")
+			d3.select("#female").style("stroke-width", "2")
+		})
 
-	var UnknownCurve = svg.append("path")
+	/*var UnknownCurve = svg.append("path")
 		.datum(unknown)
 		.attr("class", "line")
 		.attr("d", line)
 		.style("fill", "none")
 		.style("stroke", "blue")
-		.style("stroke-width", "2");
+		.style("stroke-width", "2");*/
 	var xAxisgen = d3.axisBottom().scale(xScale)
 	var yAxisgen = d3.axisLeft().scale(yScale)
 
@@ -76,8 +94,8 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
 	//				  .text("Number of authors")
 
-    conf = ['Male', 'Female', 'Unknown']
-	color = ['yellow', 'red', 'blue']
+    conf = ['Male', 'Female' ]
+	color = ['yellow', 'red']
 
     var legend = svg.append('g')
         .attr('class', 'legend')
@@ -112,4 +130,14 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
         .attr('alignment-baseline', 'hanging');
 
 	console.log(dataset)
+
+	document.getElementById("male").addEventListener("click", function(){
+		console.log("male clicked")
+		DisplayBarchart('Male')
+	  })
+	  document.getElementById("female").addEventListener("click", function(){
+		console.log("female clicked")
+		DisplayBarchart('Female')
+	  })
 })
+

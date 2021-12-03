@@ -10,6 +10,18 @@
       border: 1px solid black;
       border-collapse: collapse;
     }
+
+    .float-container {
+      padding: 20px;
+      width: 100%
+    }
+
+    .float-child {
+      width: 50%;
+      padding: 20px;
+      float: left;
+
+    }
   </style>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
@@ -415,7 +427,7 @@
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
 
-      document.getElementById('year').checked = true
+      //document.getElementById('year').checked = true
 
       var LineCt1ascript = document.createElement("script");
       LineCt1ascript.type = "text/javascript";
@@ -432,9 +444,15 @@
       LineCt6cscript.src = "src/script6c.js";
       document.getElementById("body").appendChild(LineCt6cscript)
 
+      
+
     }
 
-    function range1d() {
+    function DisplayBarchart(gender){
+      displayBarchart(gender)
+    }
+
+    function range1d(gender) {
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -455,37 +473,48 @@
 <body id='body' onload="landing()" style='overflow-x:scroll;background-color: #D8D8D8;'>
   <div style='position:fixed; width:100%;top:0%; background-color:#FFC0CB; padding:10px'>
     <h2 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h2>
-    <div style="text-align:center">
+    <!--<div style="text-align:center">
       <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
       <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
       <input type="radio" id="collaboration" name="fav_language" value="collaboration"
         onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
-    </div>
+    </div>-->
   </div>
 
-  <div id='byYear' style='top:10%'>
-    <div id='row1'>
-      <div style='position:absolute; top:14%; left:30%'><b>The Below graph provides the trend in the percentage of
+  <div id='byYear' style='position:absolute; top:100px' >
+
+    <!--<div style='position:absolute; top:14%; left:30%'><b>The Below graph provides the trend in the percentage of
           female w.r.t
-          year for four different conferences</b></div>
-      <div id='gpBc1d' style='display: inline-block; '>
-        <span style='position:absolute; top:17%; left: 4%'> From Year : <input type="text" id='fromYear1d'
-            style='width:80px' value="1990" /></span>
-        <span style='position:absolute; top:17%; left: 14%'> To Year : <input type="text" id='toYear1d'
-            style='width:80px;' value="2020" /></span>
-        <input type="button" id='go1d' style='position:absolute; top:17%; left: 24%' value="Go" onclick='range1d()'>
-        <span style='position:absolute; top:22%; left: 2%'>Filter By Conference : </span>
-        <span style='position:absolute; top:22%; left: 10%'><input id='infovischkbox' type='checkbox' name="InfoVis"
+          year for four different conferences</b>
+      </div>-->
+
+    <div id='LineCh1a' style='display:inline-block; position:relative;top:5%'>
+      <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
+      <svg id='LineCt1a'></svg>
+    </div>
+    <div style='display:inline-block'>
+      <div id='gpBc1d'>
+       
+        <span style='position:absolute;  left: 40%'> From Year : <input type="text" id='fromYear1d' style='width:80px'
+            value="1990" /></span>
+        <span style='position:absolute;  left: 55%'> To Year : <input type="text" id='toYear1d' style='width:80px;'
+            value="2020" /></span>
+        <input type="button" id='go1d' style='position:absolute;  left: 70%' value="Go" onclick='range1d()'>
+        
+        <span style='position:absolute; top:5%; left: 40%'>Filter By Conference : </span>
+        <span style='position:absolute; top:5%; left:50%'><input id='infovischkbox' type='checkbox' name="InfoVis"
             value="InfoVis" checked /> InfoVis </span>
-        <span style='position:absolute; top:22%; left: 14%'><input id='vastchkbox' type='checkbox' name="VAST"
+        <span style='position:absolute; top:5%; left: 55%'><input id='vastchkbox' type='checkbox' name="VAST"
             value="VAST" checked /> VAST </span>
-        <span style='position:absolute; top:22%; left: 18%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
+        <span style='position:absolute; top:5%; left: 60%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
             checked /> Vis</span>
-        <span style='position:absolute; top:22%; left: 21%'> <input id='scivischkbk' type='checkbox' name="SciVis"
+        <span style='position:absolute; top:5%; left: 65%'> <input id='scivischkbk' type='checkbox' name="SciVis"
             value="SciVis" checked />SciVis </span>
-        <button style='position:absolute; top:22%; left: 25%' onclick='filter1d()'>Filter</button>
+        <button style='position:absolute; top:5%; left: 70%' onclick='filter1d()'>Filter</button>
+       
         <!--<h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>-->
       </div>
+      <!--
       <div id='pubInfo' width='400px' height='600px' style='display: inline-block; '>
         <span id='confChoosen' style='display:none; position:absolute; top:20%'>The choosen conference is None and the
           year is None</span>
@@ -503,17 +532,19 @@
           </tbody>
 
         </Table>
-      </div>
-      <div id="pieDiv" style='display:None' width='400px' height='400px'>
-        <br />
-        <p style='text-align:center'><b>Distribution of Author Order Rank</b></p>
-        <svg id='pie' width='400px' height='400px'></svg>
-      </div>
+      </div>-->
+     
 
     </div>
+    <div id="pieDiv" style='display:inline-block' width='300px' height='500px'>
+      <p style='text-align:center'><b>Distribution of Author Order Rank</b></p>
+      <svg id='pie' width='400px' height='400px'></svg>
+    </div>
+  </div>
 
 
-    <div id='LineCh1a'>
+
+  <!--<div id='LineCh1a'>
       <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
       <svg id='LineCt1a'></svg>
     </div>
@@ -524,7 +555,7 @@
     <div id='LineCh6c'>
       <h4 style="text-align:center">No. Of OC members Vs Year</h4>
       <svg id='LineCt6c'></svg>
-    </div>
+    </div>-->
 
   </div>
 
