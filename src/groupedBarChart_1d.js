@@ -255,7 +255,7 @@ function displayBarchart(gender) {
             .attr("x", 0 - (height / 3))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Percentage");
+            .text("Percentage of "+ gender);
 
         // Add the Y Axis
         svg.append("g")
