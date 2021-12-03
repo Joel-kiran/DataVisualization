@@ -10,404 +10,24 @@
       border: 1px solid black;
       border-collapse: collapse;
     }
+
+    .float-container {
+      padding: 20px;
+      width: 100%
+    }
+
+    .float-child {
+      width: 50%;
+      padding: 20px;
+      float: left;
+
+    }
   </style>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
     var txt1c = "This graph explains the trend over the years in the percentage of Female Count w.r.t all genders for four different conference"
     var txt1d = "This graph explains the trend in the drop out rate with respect to career age for male and female genders"
-
-    function vizByYear() {
-      console.log("Display by year")
-      age = document.getElementById('byAge')
-      if (age != null) {
-        age.remove()
-      }
-      colla = document.getElementById('byCollaboration')
-      if (colla != null) {
-        colla.remove()
-      }
-      byYear = document.createElement("div")
-      byYear.setAttribute("id", "byYear")
-
-      row1 = document.createElement("div")
-      row1.setAttribute("id", 'row1')
-
-      text1d = document.createElement("div")
-      text1d.setAttribute("style", "position:absolute; top:14%; left:30%")
-      text1d.innerHTML = "<b>The Below graph provides the trend in the percentage of female w.r.t year for four different conferences</b>"
-      row1.appendChild(text1d)
-
-      bc1d = document.createElement("div")
-      bc1d.setAttribute("id", "gpBc1d")
-      bc1d.setAttribute("style", "display: inline-block;")
-      fromyearSpan = document.createElement("span")
-      fromyearSpan.setAttribute("style", "position:absolute; top:17%; left: 4%")
-      fromyearSpan.innerHTML = "From Year : "
-      fromyearInput = document.createElement("input")
-      fromyearInput.setAttribute("type", "text")
-      fromyearInput.setAttribute("id", "fromYear1d")
-      fromyearInput.setAttribute("style", 'width:80px;')
-      fromyearInput.setAttribute("value", "1990")
-      fromyearSpan.appendChild(fromyearInput)
-      bc1d.appendChild(fromyearSpan)
-
-      toyearSpan = document.createElement("span")
-      toyearSpan.setAttribute("style", "position:absolute; top:17%; left: 14%")
-      toyearSpan.innerHTML = "To Year : "
-      toyearInput = document.createElement("input")
-      toyearInput.setAttribute("type", "text")
-      toyearInput.setAttribute("id", "toYear1d")
-      toyearInput.setAttribute("style", 'width:80px;')
-      toyearInput.setAttribute("value", "2020")
-      toyearSpan.appendChild(toyearInput)
-      bc1d.appendChild(toyearSpan)
-
-      goYearBCInput = document.createElement("input")
-      goYearBCInput.setAttribute("type", "button")
-      goYearBCInput.setAttribute("id", "go1d")
-      goYearBCInput.setAttribute("style", 'position:absolute; top:17%; left: 24%')
-      goYearBCInput.setAttribute("value", "Go")
-      goYearBCInput.setAttribute("onclick", 'range1d()')
-      bc1d.appendChild(goYearBCInput)
-
-      //heading1c = document.createElement("h4")
-      //heading1c.setAttribute("style", "text-align:center")
-      //heading1c.innerHTML = "Percentage of Female By Conference Vs Year"
-      //bc1d.appendChild(heading1c)
-
-
-
-      spanChkbx1 = document.createElement("span")
-      spanChkbx1.setAttribute("style", 'position:absolute; top:22%; left: 2%')
-      spanChkbx1.innerHTML = 'Filter By Conference : '
-      bc1d.appendChild(spanChkbx1)
-
-      spanChkbx2 = document.createElement("span")
-      spanChkbx2.setAttribute("style", 'position:absolute; top:22%; left: 10%')
-      spanChkbx2.innerHTML = 'InfoVis'
-      inputInfo = document.createElement("input")
-      inputInfo.setAttribute("id", "infovischkbox")
-      inputInfo.setAttribute("type", "checkbox")
-      inputInfo.checked = true
-      spanChkbx2.appendChild(inputInfo)
-      bc1d.appendChild(spanChkbx2)
-
-      spanChkbx3 = document.createElement("span")
-      spanChkbx3.setAttribute("style", 'position:absolute; top:22%; left: 14%')
-      spanChkbx3.innerHTML = 'VAST'
-      inputvast = document.createElement("input")
-      inputvast.setAttribute("id", "vastchkbox")
-      inputvast.setAttribute("type", "checkbox")
-      inputvast.checked = true
-      spanChkbx3.appendChild(inputvast)
-      bc1d.appendChild(spanChkbx3)
-
-      spanChkbx4 = document.createElement("span")
-      spanChkbx4.setAttribute("style", 'position:absolute; top:22%; left: 18%')
-      spanChkbx4.innerHTML = 'Vis'
-      inputvis = document.createElement("input")
-      inputvis.setAttribute("id", "vischkbox")
-      inputvis.setAttribute("type", "checkbox")
-      inputvis.checked = true
-      spanChkbx4.appendChild(inputvis)
-      bc1d.appendChild(spanChkbx4)
-
-      spanChkbx5 = document.createElement("span")
-      spanChkbx5.setAttribute("style", 'position:absolute; top:22%; left: 21%')
-      spanChkbx5.innerHTML = 'SciVis'
-      inputsci = document.createElement("input")
-      inputsci.setAttribute("id", "scivischkbk")
-      inputsci.setAttribute("type", "checkbox")
-      inputsci.checked = true
-      spanChkbx5.appendChild(inputsci)
-      bc1d.appendChild(spanChkbx5)
-
-      filterButton = document.createElement("button")
-      filterButton.setAttribute("style", 'position:absolute; top:22%; left: 25%')
-      filterButton.setAttribute("onclick", "filter1d()")
-      filterButton.innerHTML = 'Filter'
-      bc1d.appendChild(filterButton)
-
-
-      row1.appendChild(bc1d)
-
-      pubInfoDiv = document.createElement("div")
-      pubInfoDiv.setAttribute("width", "400px")
-      pubInfoDiv.setAttribute("height", "600px")
-      pubInfoDiv.setAttribute("style", 'display: inline-block; ')
-
-      h4span = document.createElement("span")
-      h4span.setAttribute("id", "confChoosen")
-      h4span.setAttribute("style", 'display:none; position:absolute; top:20%')
-      h4span.innerHTML = 'The choosen conference is None and the year is None'
-
-      pubInfoDiv.appendChild(h4span)
-
-      sortPubDiv = document.createElement("div")
-      sortPubDiv.setAttribute("id", "sortByPub")
-      sortPubDiv.setAttribute("style", "display:none")
-      spanPub = document.createElement("span")
-      emPub = document.createElement("em")
-      emPub.innerHTML = 'Sort By Publication Citation : '
-      sortPubDiv.appendChild(emPub)
-
-      sortBubAscSpan = document.createElement("span")
-      sortBubAscSpan.innerHTML = " Asc "
-      sortPubAsc = document.createElement("input")
-      sortPubAsc.setAttribute("type", "radio")
-      sortPubAsc.setAttribute("id", "pubAsc")
-      sortPubAsc.setAttribute("name", "sortByPub")
-      sortPubAsc.setAttribute("value", "asc")
-      sortBubAscSpan.appendChild(sortPubAsc)
-      sortPubDiv.appendChild(sortBubAscSpan)
-
-      sortBubDescSpan = document.createElement("span")
-      sortBubDescSpan.innerHTML = " Desc "
-      sortPubDesc = document.createElement("input")
-      sortPubDesc.setAttribute("type", "radio")
-      sortPubDesc.setAttribute("id", "pubDesc")
-      sortPubDesc.setAttribute("name", "sortByPub")
-      sortPubDesc.setAttribute("value", "desc")
-      sortBubDescSpan.appendChild(sortPubDesc)
-      sortPubDiv.appendChild(sortBubDescSpan)
-
-      pubInfoDiv.appendChild(sortPubDiv)
-
-      pubTable = document.createElement("table")
-      pubTable.setAttribute("id", "pubAuthInfo")
-      pubTable.setAttribute("style", "display:none;")
-
-      thead = document.createElement("thead")
-      thead.setAttribute("id", "pubInfoHead")
-
-      tbody = document.createElement("tbody")
-      tbody.setAttribute("id", "pubInfoBody")
-      tbody.setAttribute("style", 'overflow-y:scroll; overflow-x:scroll; display:block;height:400px; width:700px')
-
-      pubTable.appendChild(thead)
-      pubTable.appendChild(tbody)
-
-      pubInfoDiv.appendChild(pubTable)
-
-      row1.appendChild(pubInfoDiv)
-
-      piediv = document.createElement("div")
-      piediv.setAttribute("style", 'display:None; width: 400px; height: 400px')
-      piediv.setAttribute("id", "pieDiv")
-
-
-      piep = document.createElement("p")
-      piep.setAttribute("style", 'text-align:center')
-      pieb = document.createElement("b")
-      pieb.innerHTML = "Distribution of Author Order Rank"
-      piep.appendChild(pieb)
-      piediv.appendChild(piep)
-
-      piesvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      piesvg.setAttribute("id", "pie")
-      piesvg.setAttribute("width", "400")
-      //piesvg.setAttribute("width", "400px")
-      piesvg.setAttribute("height", "400")
-      piediv.appendChild(piesvg)
-
-      row1.appendChild(piediv)
-
-      byYear.appendChild(row1)
-
-
-      heading1a = document.createElement("h4")
-      heading1a.setAttribute("style", "text-align:center")
-      heading1a.innerHTML = "No. Of Authors In IEEE Vis Vs Year"
-
-
-      heading6a = document.createElement("h4")
-      heading6a.setAttribute("style", "text-align:center")
-      heading6a.innerHTML = "No. Of PC members Vs Year"
-
-      heading6c = document.createElement("h4")
-      heading6c.setAttribute("style", "text-align:center")
-      heading6c.innerHTML = "No. Of OC members Vs Year"
-
-      LineCt1a = document.createElement("div")
-      LineCt1a.setAttribute("id", "LineCh1a")
-      LineCt1a.appendChild(heading1a)
-      svg1a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      svg1a.setAttribute("id", "LineCt1a")
-      LineCt1a.appendChild(svg1a)
-      byYear.appendChild(LineCt1a)
-
-      line2Div = document.createElement("div")
-
-      LineCt6a = document.createElement("div")
-      LineCt6a.setAttribute("style", 'display: inline-block')
-      LineCt6a.setAttribute("id", "LineCh6a")
-      LineCt6a.appendChild(heading6a)
-      svg6a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      svg6a.setAttribute("id", "LineCt6a")
-      LineCt6a.appendChild(svg6a)
-      line2Div.appendChild(LineCt6a)
-
-      LineCt6c = document.createElement("div")
-      LineCt6c.setAttribute("style", 'display: inline-block')
-      LineCt6c.setAttribute("id", "LineCh6c")
-      LineCt6c.appendChild(heading6c)
-      svg6c = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      svg6c.setAttribute("id", "LineCt6c")
-      LineCt6c.appendChild(svg6c)
-      line2Div.appendChild(LineCt6c)
-
-      byYear.appendChild(line2Div)
-
-      document.getElementById("body").appendChild(byYear)
-
-      var gpBc1dscript = document.createElement("script");
-      gpBc1dscript.type = "text/javascript";
-      gpBc1dscript.src = "src/groupedBarChart_1d.js";
-      document.getElementById("body").appendChild(gpBc1dscript)
-
-
-      var LineCt1ascript = document.createElement("script");
-      LineCt1ascript.type = "text/javascript";
-      LineCt1ascript.src = "src/script1a.js";
-      document.getElementById("body").appendChild(LineCt1ascript)
-
-      var LineCt6ascript = document.createElement("script");
-      LineCt6ascript.type = "text/javascript";
-      LineCt6ascript.src = "src/script6a.js";
-      document.getElementById("body").appendChild(LineCt6ascript)
-
-      var LineCt6cscript = document.createElement("script");
-      LineCt6cscript.type = "text/javascript";
-      LineCt6cscript.src = "src/script6c.js";
-      document.getElementById("body").appendChild(LineCt6cscript)
-
-    }
-
-    function vizByAge() {
-      console.log("Display by age")
-      year = document.getElementById('byYear')
-      if (year != null) {
-        year.remove()
-      }
-      colla = document.getElementById('byCollaboration')
-      if (colla != null) {
-        colla.remove()
-      }
-      byAge = document.createElement("div")
-      byAge.setAttribute("id", "byAge")
-      byAge.setAttribute("style", "position:absolute;top:13%")
-
-      headingSteam = document.createElement("h4")
-      headingSteam.setAttribute("style", "text-align:center")
-      headingSteam.innerHTML = "DropOut Rate Vs Career Age"
-
-      heading2a = document.createElement("h4")
-      heading2a.setAttribute("style", "text-align:center")
-      heading2a.innerHTML = "No. Of Authors Vs Career Age"
-
-
-      line1Div = document.createElement("div")
-
-      steam = document.createElement("div")
-      steam.setAttribute("id", "steam")
-      steam.setAttribute("style", "display: inline-block")
-      steam.appendChild(headingSteam)
-      line1Div.appendChild(steam)
-
-      steamText = document.createElement("div")
-      steamText.setAttribute("style", "display: inline-block; position:absolute; width: 500px; height: 500px; top: 20%")
-      steamText.innerHTML = "This graph provides an overview of the trend in dropout rate (aka quiting job)  with respect to career age for Male and Female authors"
-      line1Div.appendChild(steamText)
-
-      byAge.appendChild(line1Div)
-
-      agelineDiv = document.createElement("div")
-      agelineDiv.setAttribute("style", "width:95%; padding: 1%; background-color:#FFC0CB; text-align:center")
-      agelineDiv.innerHTML = "<br/><br/><br/>The below graphs provides an overiew of the trend w.r.t to number of authors and career age, " +
-        "it helps us understand how many authors of a particular career age are present in the organisation. <b>click on the male/female line " +
-        "in the graph, to explore more details "
-      byAge.appendChild(agelineDiv)
-
-
-      line2Div = document.createElement("div")
-      LineCt2a = document.createElement("div")
-      LineCt2a.setAttribute("style", "display: inline-block")
-      LineCt2a.setAttribute("id", "LineCh2a")
-      LineCt2a.appendChild(heading2a)
-      svg2a = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      svg2a.setAttribute("id", "LineCt2a")
-      LineCt2a.appendChild(svg2a)
-      line2Div.appendChild(LineCt2a)
-
-      divTable = document.createElement("div")
-      divTable.setAttribute("id", "AgeTable")
-      divTable.setAttribute("style", "display: inline-block; width:500px; height: 500px")
-
-
-      line2Div.appendChild(divTable)
-
-      svgPieDiv = document.createElement("div")
-      svgPieDiv.setAttribute("style", "display: inline-block; width:300px; height: 500px")
-      svgPieDiv.setAttribute("id", "piespan")
-      pieText = document.createElement("span")
-      pieText.setAttribute("id", "pietext")
-      svgPieDiv.appendChild(pieText)
-      svgPie = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      svgPie.setAttribute("id", "confpie")
-      svgPie.setAttribute("style", "display: inline-block; width:300px; height: 400px")
-      svgPieDiv.appendChild(svgPie)
-
-      line2Div.appendChild(svgPieDiv)
-
-      byAge.appendChild(line2Div)
-
-      document.getElementById("body").appendChild(byAge)
-
-      var steamScript = document.createElement("script");
-      steamScript.type = "text/javascript";
-      steamScript.src = "src/steam_3d.js";
-      document.getElementById("body").appendChild(steamScript)
-
-      var LineCt2ascript = document.createElement("script");
-      LineCt2ascript.type = "text/javascript";
-      LineCt2ascript.src = "src/script2a.js";
-      document.getElementById("body").appendChild(LineCt2ascript)
-
-
-    }
-
-    function vizByCollaboration() {
-      console.log("Display by collaboration")
-      year = document.getElementById('byYear')
-      if (year != null) {
-        year.remove()
-      }
-      age = document.getElementById('byAge')
-      if (age != null) {
-        age.remove()
-      }
-      byColla = document.createElement("div")
-      byColla.setAttribute("id", "byCollaboration")
-      collabortion = document.createElement("div")
-      collabortion.setAttribute("style", "display:inline-block")
-      collabortion.setAttribute("id", "collaboration_actual")
-      byColla.appendChild(collabortion)
-
-      collaText = document.createElement("div")
-      collaText.setAttribute("style", "position:fixed; top: 40%;display:inline-block; width:600px ")
-      collaText.innerHTML = "This Heatmap gives an overview of how the paper publication count varies w.r.t collaboration between same and " +
-        "opposite gender authors"
-
-      byColla.appendChild(collaText)
-
-
-      document.getElementById("body").appendChild(byColla)
-
-      var collaScript = document.createElement("script");
-      collaScript.type = "text/javascript";
-      collaScript.src = "src/script-heatmap.js";
-      document.getElementById("body").appendChild(collaScript)
-    }
+    var genderCh = 'Female'
 
     function landing() {
       var gpBc1dscript = document.createElement("script");
@@ -415,7 +35,7 @@
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
       document.getElementById("body").appendChild(gpBc1dscript)
 
-      document.getElementById('year').checked = true
+      //document.getElementById('year').checked = true
 
       var LineCt1ascript = document.createElement("script");
       LineCt1ascript.type = "text/javascript";
@@ -432,9 +52,29 @@
       LineCt6cscript.src = "src/script6c.js";
       document.getElementById("body").appendChild(LineCt6cscript)
 
+      var LineCt2ascript = document.createElement("script");
+      LineCt2ascript.type = "text/javascript";
+      LineCt2ascript.src = "src/script2a.js";
+      document.getElementById("body").appendChild(LineCt2ascript)
+
+
+      var collaScript = document.createElement("script");
+      collaScript.type = "text/javascript";
+      collaScript.src = "src/script-heatmap.js";
+      document.getElementById("body").appendChild(collaScript)
+
+      document.getElementById("pieYearConf").style.visibility= "hidden"
+      document.getElementById("headingPieConfYear").style.visibility= "hidden"
+
+
     }
 
-    function range1d() {
+    function DisplayBarchart(gender) {
+      genderCh = gender
+      displayBarchart(gender)
+    }
+
+    function range1d(gender) {
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -452,79 +92,74 @@
   </script>
 </head>
 
-<body id='body' onload="landing()" style='overflow-x:scroll;background-color: #D8D8D8;'>
+<body id='body' onload="landing()" style='overflow-x:scroll;background-color: #D8D8D8; padding: 10px;'>
   <div style='position:fixed; width:100%;top:0%; background-color:#FFC0CB; padding:10px'>
     <h2 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h2>
-    <div style="text-align:center">
+    <!--<div style="text-align:center">
       <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
       <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
       <input type="radio" id="collaboration" name="fav_language" value="collaboration"
         onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
-    </div>
+    </div>-->
   </div>
 
-  <div id='byYear' style='top:10%'>
-    <div id='row1'>
-      <div style='position:absolute; top:14%; left:30%'><b>The Below graph provides the trend in the percentage of
+  <div id='byYear' style='position:absolute; top:100px'>
+
+    <!--<div style='position:absolute; top:14%; left:30%'><b>The Below graph provides the trend in the percentage of
           female w.r.t
-          year for four different conferences</b></div>
-      <div id='gpBc1d' style='display: inline-block; '>
-        <span style='position:absolute; top:17%; left: 4%'> From Year : <input type="text" id='fromYear1d'
-            style='width:80px' value="1990" /></span>
-        <span style='position:absolute; top:17%; left: 14%'> To Year : <input type="text" id='toYear1d'
-            style='width:80px;' value="2020" /></span>
-        <input type="button" id='go1d' style='position:absolute; top:17%; left: 24%' value="Go" onclick='range1d()'>
-        <span style='position:absolute; top:22%; left: 2%'>Filter By Conference : </span>
-        <span style='position:absolute; top:22%; left: 10%'><input id='infovischkbox' type='checkbox' name="InfoVis"
-            value="InfoVis" checked /> InfoVis </span>
-        <span style='position:absolute; top:22%; left: 14%'><input id='vastchkbox' type='checkbox' name="VAST"
-            value="VAST" checked /> VAST </span>
-        <span style='position:absolute; top:22%; left: 18%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
-            checked /> Vis</span>
-        <span style='position:absolute; top:22%; left: 21%'> <input id='scivischkbk' type='checkbox' name="SciVis"
-            value="SciVis" checked />SciVis </span>
-        <button style='position:absolute; top:22%; left: 25%' onclick='filter1d()'>Filter</button>
-        <!--<h4 style="text-align:center">Percentage of Female By Conference Vs Year</h4>-->
-      </div>
-      <div id='pubInfo' width='400px' height='600px' style='display: inline-block; '>
-        <span id='confChoosen' style='display:none; position:absolute; top:20%'>The choosen conference is None and the
-          year is None</span>
-        <div id='sortByPub' style='display:none'>
-          <span><em>Sort By Publication Citation: </em></span>
-          <span>Asc <input type='radio' id='pubAsc' name='sortByPub' value='asc'></input></span>
-          <span>Desc<input type='radio' id='pubDesc' name='sortByPub' value='desc'></input></span>
-        </div>
-        <Table id='pubAuthInfo' style="display:none;">
-          <thead id='pubInfoHead'>
+          year for four different conferences</b>
+      </div>-->
 
-          </thead>
-          <tbody id='pubInfoBody' style='overflow-y:scroll; overflow-x:scroll; display:block;height:400px; width:700px'>
-
-          </tbody>
-
-        </Table>
-      </div>
-      <div id="pieDiv" style='display:None' width='400px' height='400px'>
-        <br />
-        <p style='text-align:center'><b>Distribution of Author Order Rank</b></p>
-        <svg id='pie' width='400px' height='400px'></svg>
-      </div>
-
-    </div>
-
-
-    <div id='LineCh1a'>
-      <h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>
+    <div id='LineCh1a' style='display:inline-block; position:relative;top:5%'>
+      <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
       <svg id='LineCt1a'></svg>
     </div>
-    <div id='LineCh6a'>
-      <h4 style="text-align:center">No. Of PC members Vs Year</h4>
-      <svg id='LineCt6a'></svg>
+    <div style='display:inline-block'>
+      <div id='gpBc1d'>
+        
+        <span style='position:absolute;  left: 35%'> From Year : <input type="text" id='fromYear1d' style='width:80px'
+            value="1990" /></span>
+        <span style='position:absolute;  left: 50%'> To Year : <input type="text" id='toYear1d' style='width:80px;'
+            value="2020" /></span>
+        <input type="button" id='go1d' style='position:absolute;  left: 65%' value="Go" onclick='range1d()'>
+
+        <span style='position:absolute; top:5%; left: 35%'>Filter By Conference : </span>
+        <span style='position:absolute; top:5%; left:45%'><input id='infovischkbox' type='checkbox' name="InfoVis"
+            value="InfoVis" checked /> InfoVis </span>
+        <span style='position:absolute; top:5%; left: 50%'><input id='vastchkbox' type='checkbox' name="VAST"
+            value="VAST" checked /> VAST </span>
+        <span style='position:absolute; top:5%; left: 55%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
+            checked /> Vis</span>
+        <span style='position:absolute; top:5%; left: 59%'> <input id='scivischkbk' type='checkbox' name="SciVis"
+            value="SciVis" checked />SciVis </span>
+        <button style='position:absolute; top:5%; left: 65%' onclick='filter1d()'>Filter</button>
+      </div>
+
     </div>
-    <div id='LineCh6c'>
-      <h4 style="text-align:center">No. Of OC members Vs Year</h4>
-      <svg id='LineCt6c'></svg>
+    <div id="pieDiv" style='display:inline-block' width='300px' height='500px'>
+      <p style='text-align:center' id='headingPieConfYear'><b>Distribution of Author Order Rank</b></p>
+      <p  id='pieYearConf' > The Choosen Conference is InfoVis and the Year is 2003  </p>
+      <svg style='position:relative;top:20%' id='pie' width='400px' height='400px'></svg>
     </div>
+  </div>
+  <div style="position:absolute; top:600px ;width: 100%; background-color:#FFC0CB; text-align:center ;padding:10px"><b>Career Age</b></div>
+  <div style='position:absolute; top:700px'>
+    <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
+    <div style="display: inline-block;">
+      <svg id='LineCt2a' ></svg>
+    </div>
+    <div style="display: inline-block;">
+      <div id='confPieText' style="position:relative;left:50%"></div>
+      <svg id="confpie" style="position:relative;left:50%; "width="300px" height="400px"  ></svg>
+    </div>
+
+  </div>
+  <div style="position:absolute; top:1180px ;width: 100%; background-color:#FFC0CB; text-align:center ;padding:10px"><b>By Collaboration</b></div>
+  <div id='collaboration_actual' style='position:absolute; top:1200px; padding: 10px;'>
+
+  </div>
+
+  </div>
 
   </div>
 
