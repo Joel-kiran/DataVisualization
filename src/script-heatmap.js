@@ -25,10 +25,10 @@ svg.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x))
 
-  svg.append("text")
-        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
-        .style("text-anchor", "middle")
-        .text("#male authors");
+svg.append("text")
+  .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
+  .style("text-anchor", "middle")
+  .text("#male authors");
 
 // Build y scales and axis:
 var y = d3.scaleBand()
@@ -38,13 +38,13 @@ var y = d3.scaleBand()
 svg.append("g")
   .call(d3.axisLeft(y));
 
-  svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x",0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text("#female authors");
+svg.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left)
+  .attr("x", 0 - (height / 2))
+  .attr("dy", "1em")
+  .style("text-anchor", "middle")
+  .text("#female authors");
 
 // Build color scale
 var myColor = d3.scaleLinear()
@@ -65,17 +65,17 @@ d3.csv("dataset/6_coll_actual_count.csv", function (data) {
     .style("border-radius", "5px")
     .style("padding", "5px")
 
-     // Three function that change the tooltip when user hover / move / leave a cell
-  var mouseover = function(d) {
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function (d) {
     tooltip.style("opacity", 1)
   }
-  var mousemove = function(d) {
+  var mousemove = function (d) {
     tooltip
       .html("The Publication Count for the choosen cell is : " + d.real_count)
-      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("left", (d3.mouse(this)[0] + 70) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
-  var mouseleave = function(d) {
+  var mouseleave = function (d) {
     tooltip.style("opacity", 0)
   }
 
@@ -94,23 +94,23 @@ d3.csv("dataset/6_coll_actual_count.csv", function (data) {
     .on("mouseleave", mouseleave)
 
 
-     // Add title to graph
-svg.append("text")
-.attr("x", 70)
-.attr("y", -50)
-.attr("text-anchor", "left")
-.style("font-size", "30px")
-.text("A Heatmap Graph");
+  // Add title to graph
+  svg.append("text")
+    .attr("x", 70)
+    .attr("y", -50)
+    .attr("text-anchor", "left")
+    .style("font-size", "30px")
+    .text("A Heatmap Graph");
 
-// Add subtitle to graph
-svg.append("text")
-.attr("x", 90)
-.attr("y", -20)
-.attr("text-anchor", "left")
-.style("font-size", "22px")
-.style("fill", "black")
-.style("max-width", 400)
-.text("Actual paper counts");
+  // Add subtitle to graph
+  svg.append("text")
+    .attr("x", 90)
+    .attr("y", -20)
+    .attr("text-anchor", "left")
+    .style("font-size", "22px")
+    .style("fill", "black")
+    .style("max-width", 400)
+    .text("Actual paper counts");
 
 })
 

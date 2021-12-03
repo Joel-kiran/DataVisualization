@@ -86,7 +86,12 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 	var xAxis = svg.append("g")
 		.call(xAxisgen)
 		.style("transform", `translateY(${dimensions.height}px)`)
-	//				  .text("Year")
+		.selectAll("text")
+		.style("text-anchor", "end")
+		.attr("dx", "-.8em")
+		.attr("dy", ".10em")
+		.attr("transform", "rotate(-40)");
+
 
 
 	var yAxis = svg.append("g")
@@ -94,50 +99,67 @@ d3.csv("dataset/01-AB_n_gender_year.csv", function (dataset) {
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
 	//				  .text("Number of authors")
 
-    conf = ['Male', 'Female' ]
+
+
+	svg.append("text")
+		.attr("transform", "translate(" + (dimensions.width / 2) + " ," + (dimensions.height + dimensions.margin.top + dimensions.margin.bottom) + ")")
+		.style("text-anchor", "middle")
+		.text("Years");
+
+
+	svg.append("text")
+		.attr("transform", "rotate(-90)")
+		.attr("y", -5)
+		.attr("x", 0 - (dimensions.height) / 2)
+		.attr("dy", "1em")
+		.style("text-anchor", "middle")
+		.text("Number of Authors");
+
+
+	conf = ['Male', 'Female']
 	color = ['yellow', 'red']
 
-    var legend = svg.append('g')
-        .attr('class', 'legend')
-        .attr('transform', 'translate(' + (10) + ', 10)');
+	var legend = svg.append('g')
+		.attr('class', 'legend')
+		.attr('transform', 'translate(' + (10) + ', 10)');
 
-    legend.selectAll('rect')
-        .data(conf)
-        .enter()
-        .append('rect')
-        .attr('x', 60)
-        .attr('y', function (d, i) {
-            return i * 25;
-        })
-        .attr('width', 12)
-        .attr('height', 12)
-        .attr('fill', function (d, i) {
-            return color[i];
-        });
+	legend.selectAll('rect')
+		.data(conf)
+		.enter()
+		.append('rect')
+		.attr('x', 60)
+		.attr('y', function (d, i) {
+			return i * 25;
+		})
+		.attr('width', 12)
+		.attr('height', 12)
+		.attr('fill', function (d, i) {
+			return color[i];
+		});
 
-    legend.selectAll('text')
-        .data(conf)
-        .enter()
-        .append('text')
-        .text(function (d) {
-            return d;
-        })
-        .attr('x', 80)
-        .attr('y', function (d, i) {
-            return i * 28;
-        })
-        .attr('text-anchor', 'start')
-        .attr('alignment-baseline', 'hanging');
+	legend.selectAll('text')
+		.data(conf)
+		.enter()
+		.append('text')
+		.text(function (d) {
+			return d;
+		})
+		.attr('x', 80)
+		.attr('y', function (d, i) {
+			return i * 28;
+		})
+		.attr('text-anchor', 'start')
+		.attr('alignment-baseline', 'hanging');
 
 	console.log(dataset)
 
-	document.getElementById("male").addEventListener("click", function(){
+	document.getElementById("male").addEventListener("click", function () {
 		console.log("male clicked")
 		DisplayBarchart('Male')
-	  })
-	  document.getElementById("female").addEventListener("click", function(){
+	})
+	document.getElementById("female").addEventListener("click", function () {
 		console.log("female clicked")
 		DisplayBarchart('Female')
-	  })
+	})
 })
 

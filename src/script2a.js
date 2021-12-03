@@ -54,6 +54,9 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 			d3.select("#maleline").style("stroke-width", "2")
 			d3.select("#femaleline").style("stroke-width", "2")
 		})
+		.on("click", function(){
+			displayAgeData("Male")
+		})
 
 	console.log("Ima in 2a")
 	var FemaleCurve = svg.append("path")
@@ -76,6 +79,9 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 			d3.select("#maleline").style("stroke-width", "2")
 			d3.select("#femaleline").style("stroke-width", "2")
 		})
+		.on("click", function(){
+			displayAgeData("Female")
+		})
 
 
 
@@ -92,6 +98,20 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 	var yAxis = svg.append("g")
 		.call(yAxisgen)
 		.style("transform", `translateX(${dimensions.margin.left}px)`)
+
+		svg.append("text")
+		.attr("transform", "translate(" + (dimensions.width / 2) + " ," + (dimensions.height + dimensions.margin.top + dimensions.margin.bottom-5) + ")")
+		.style("text-anchor", "middle")
+		.text("Career Age");
+
+
+	svg.append("text")
+		.attr("transform", "rotate(-90)")
+		.attr("y", -5)
+		.attr("x", 0 - (dimensions.height) / 2)
+		.attr("dy", "1em")
+		.style("text-anchor", "middle")
+		.text("Number of Authors");
 
 	conf = ['Male', 'Female']
 	color = ['yellow', 'red']
@@ -132,65 +152,9 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 
 	function displayAgeData(gender) {
 		d3.csv('dataset/author_gender_info.csv', function (dataset) {
-
-
-
-			if (document.getElementById("AgeTable") != null) {
-				document.getElementById("AgeTable").innerHTML = ''
-			}
-
-			agetext = document.createElement("span")
-			agetext.innerHTML = "<em>The Choosen gender is <b>" + gender + "</b></em><br/><br/>"
-			document.getElementById("AgeTable").appendChild(agetext)
-			console.log("data", dataset)
-			dataForCAge = dataset.filter(d => { return d.Gender ? d.Gender.toUpperCase() == gender.toUpperCase() : false })
-			console.log("age", gender, dataForCAge)
-
-			table = document.createElement("table")
-			table.setAttribute("style", "overflow-y:scroll; display:block;width: 350px; height: 380px; padding: 2px")
-
-			hrow = document.createElement("tr")
-			header1 = document.createElement("th")
-			header1.innerHTML = "Author"
-			hrow.appendChild(header1)
-
-			header2 = document.createElement("th")
-			header2.innerHTML = "Conference"
-			hrow.appendChild(header2)
-
-			header3 = document.createElement("th")
-			header3.innerHTML = "CareerAge"
-			hrow.appendChild(header3)
-
-			table.appendChild(hrow)
-
-			for (var i in dataForCAge) {
-				row = document.createElement('tr')
-
-				col1 = document.createElement("td")
-				col1.innerHTML = dataForCAge[i].Author
-
-				col2 = document.createElement("td")
-				col2.innerHTML = dataForCAge[i].Conference
-
-				col3 = document.createElement("td")
-				col3.innerHTML = dataForCAge[i].CareerAge
-
-				row.appendChild(col1)
-				row.appendChild(col2)
-				row.appendChild(col3)
-
-				table.appendChild(row)
-			}
-
-			document.getElementById("AgeTable").appendChild(table)
-
-			pietext = document.getElementById("pietext")
-			pietext.innerHTML = "<b>Conference Distrbution for the choosen Gender</b>"
-
-
-
 			// Step 3
+
+			document.getElementById("confPieText").innerHTML="The Distribution of <b>"+gender+"</b> by Conference"
 			var svg = d3.select("#confpie"),
 				piewidth = 300,
 				pieheight = 500,
@@ -282,6 +246,7 @@ d3.csv("dataset/02-A_career_author.csv", function (dataset) {
 
 		})
 	}
+	displayAgeData("Male")
 
 
 
