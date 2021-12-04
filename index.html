@@ -65,7 +65,7 @@
 
       document.getElementById("pieYearConf").style.visibility = "hidden"
       document.getElementById("textBubble").style.visibility = "hidden"
-      document.getElementById("paperIfno").style.visibility="hidden"
+      document.getElementById("paperIfno").style.visibility = "hidden"
 
       var forceScript = document.createElement("script");
       forceScript.type = "text/javascript";
@@ -96,8 +96,8 @@
       document.getElementById('year').checked = true
     }
 
-    function paperForceFilter(){
-      document.getElementById("allPapers").innerHTML=""
+    function paperForceFilter() {
+      document.getElementById("allPapers").innerHTML = ""
       var allyearspapers = document.createElement("script");
       allyearspapers.type = "text/javascript";
       allyearspapers.src = "src/forces.js";
@@ -111,25 +111,26 @@
   style='overflow-x:scroll;background-color: #D8D8D8; padding: 5px;padding-bottom: 20px;'>
   <div style='position:fixed; width:100%;top:0%; background-color:#FFC0CB; padding:10px'>
     <h3 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h3>
-    <!--<div style="text-align:center">
-      <input type="radio" id="year" name="fav_language" value="year" onclick="vizByYear()">Gender Viz By Year</input>
-      <input type="radio" id="age" name="fav_language" value="age" onclick="vizByAge()">Gender Viz By Age</input>
-      <input type="radio" id="collaboration" name="fav_language" value="collaboration"
-        onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
-    </div>-->
   </div>
   <div style='position:absolute; top:100px;'>
-    <span>From Year: <input type="text" id="fromYearForce" value="1990"/></span>
-    <span>To Year: <input type="text" id="toYearForce" value="2000"/></span>
-    <input type='button' onclick="paperForceFilter()" value="Filter"/>
-    <p>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:0% ;background-color: magenta;" >InfoVis</div>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:5%; background-color: orange;" >Vis</div>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:10%; background-color: green;" >VAST</div>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:15%; background-color: blue;" >SciVis</div>
+    <p style='position:relative; left:30%;  '>
+      <span>From Year: <input type="text" id="fromYearForce" value="2008" /></span>
+      <span>To Year: <input type="text" id="toYearForce" value="2015" /></span>
+      <input type='button' onclick="paperForceFilter()" value="Filter" />
     </p>
-    <p id="paperIfno"> Author is None and Publication Citation is None</p>
-    <svg id="allPapers" width='1400px' height='600px'></svg>
+    <p>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:40%;;background-color: magenta;">
+      InfoVis</div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:45%; background-color: orange;">
+      Vis
+    </div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:50%; background-color: green;">
+      VAST</div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:55%; background-color: blue;">
+      SciVis</div>
+    </p>
+    <p id="paperIfno"  style="text-align: center;"> Author is None and Publication Citation is None</p>
+    <svg id="allPapers" width='1400px' height='500px'></svg>
   </div>
 
   <div id='byYear' style='position:absolute; top:850px'>
@@ -189,7 +190,7 @@
   <!--<div style="position:absolute; top:1180px ;width: 100%; background-color:#FFC0CB; text-align:center ;padding:10px"><b>By Collaboration</b></div>
   <div id='collaboration_actual' style='position:absolute; top:1200px; padding: 10px;'>-->
 
-  
+
 
 
   </div>

@@ -13,10 +13,10 @@ d3.csv('dataset/IEEEVISpapers1990-2020-Maindataset.csv', function (data) {
     vis.sort(function(a,b){return b.PubsCited-a.PubsCited})
     vast.sort(function(a,b){return b.PubsCited-a.PubsCited})
     
-    scivisconf=scivisconf.slice(0,200)
-    infovis=infovis.slice(0,200)
-    vis=vis.slice(0,200)
-    vast=vast.slice(0,200)
+    scivisconf=scivisconf.slice(0,250)
+    infovis=infovis.slice(0,250)
+    vis=vis.slice(0,250)
+    vast=vast.slice(0,250)
 
     data= scivisconf.concat(infovis, vis, vast);
     data = data.sort((a, b) => 1 - Math.random())
@@ -25,14 +25,14 @@ d3.csv('dataset/IEEEVISpapers1990-2020-Maindataset.csv', function (data) {
     console.log("data", data)
 
     width = 1400
-    height = 600
+    height = 500
     var svg = d3.select("#allPapers")
         .style("width", width)
         .style("height", height)
 
     var layout = d3.forceSimulation(data)
         .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collisions', d3.forceCollide(15))
+        .force('collisions', d3.forceCollide(12))
         //.force('charge', d3.forceManyBody().strength(-25))
         .on('tick', ticked)
 
