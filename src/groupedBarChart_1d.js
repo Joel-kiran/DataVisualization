@@ -98,7 +98,7 @@ function displayBarchart(gender) {
             /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>VAST</b> and the year is <b>" + d.Year +
                 "</b> and the percentage of "+ gender +" is <b>"  + d.VAST.toFixed(2) + "</b>"
                 */
-                
+
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
         mouseoverInfoVis = function (d) {
@@ -106,7 +106,7 @@ function displayBarchart(gender) {
             /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>InfoVis</b> and the year is <b>" + d.Year +
                 "</b> and the percentage of "+ gender +" is <b>"  + d.InfoVis.toFixed(2) + "</b>"
                 */
-            
+
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
         mouseoverVis = function (d) {
@@ -114,7 +114,7 @@ function displayBarchart(gender) {
             /*document.getElementById("pieYearConf").innerHTML = "The choosen conference is <b>Vis</b> and the year is <b>" + d.Year +
                 "</b> and the percentage of "+ gender +" is <b>"  + d.Vis.toFixed(2) + "</b>"
                 */
-            
+
             d3.select(this).attr("stroke", "black").style('stroke-width', 1)
         }
         conf = []
@@ -143,9 +143,10 @@ function displayBarchart(gender) {
                 .on("mouseover", mouseoverVis)
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0);
-                    document.getElementById("pie").innerHTML = ""
-                    document.getElementById("pieYearConf").style.visibility='hidden'
-                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
+                    //document.getElementById("pie").innerHTML = ""
+                    //document.getElementById("pieYearConf").style.visibility = 'hidden'
+                    //document.getElementById("headingPieConfYear").style.visibility = "hidden"
+                   
                 })
 
             conf.push("Vis")
@@ -170,9 +171,10 @@ function displayBarchart(gender) {
                 .on("mouseover", mouseoverInfoVis)
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0);
-                    document.getElementById("pie").innerHTML = ""
-                    document.getElementById("pieYearConf").style.visibility='hidden'
-                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
+                    //document.getElementById("pie").innerHTML = ""
+                    //document.getElementById("pieYearConf").style.visibility = 'hidden'
+                    //document.getElementById("headingPieConfYear").style.visibility = "hidden"
+                    
                 })
 
             conf.push("InfoVis")
@@ -195,9 +197,10 @@ function displayBarchart(gender) {
                 .on("mouseover", mouseoverVAST)
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0)
-                    document.getElementById("pie").innerHTML = ""
-                    document.getElementById("pieYearConf").style.visibility='hidden'
-                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
+                    //document.getElementById("pie").innerHTML = ""
+                    //document.getElementById("pieYearConf").style.visibility = 'hidden'
+                    //document.getElementById("headingPieConfYear").style.visibility = "hidden"
+                    
                 })
 
             conf.push("VAST")
@@ -222,9 +225,10 @@ function displayBarchart(gender) {
                 .on("mouseover", mouseoverSciVis)
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "").style('stroke-width', 0);
-                    document.getElementById("pie").innerHTML = ""
-                    document.getElementById("pieYearConf").style.visibility='hidden'
-                    document.getElementById("headingPieConfYear").style.visibility= "hidden"
+                    //document.getElementById("pie").innerHTML = ""
+                    //document.getElementById("pieYearConf").style.visibility = 'hidden'
+                    //document.getElementById("headingPieConfYear").style.visibility = "hidden"
+                    
                 })
 
             conf.push("SciVis")
@@ -255,7 +259,7 @@ function displayBarchart(gender) {
             .attr("x", 0 - (height / 3))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Percentage of "+ gender);
+            .text("Percentage of " + gender);
 
         // Add the Y Axis
         svg.append("g")
@@ -299,8 +303,8 @@ function displayBarchart(gender) {
         var groupedPubAndMainData = []
 
         populatePubInfo = function (confName, year) {
-            document.getElementById("pieYearConf").style.visibility= "visible"
-            document.getElementById("headingPieConfYear").style.visibility= "visible"
+            document.getElementById("pieYearConf").style.visibility = "visible"
+            //document.getElementById("headingPieConfYear").style.visibility = "visible"
             document.getElementById("pieYearConf").innerHTML = "The Choosen Conference is <b>" + confName + "</b> and the Year is <b>" + year + " </b>"
             d3.csv('dataset/author_gender_info.csv', function (publicationData) {
                 pubDataByConfAndYear = publicationData.filter(d => {
@@ -332,7 +336,8 @@ function displayBarchart(gender) {
                     middleAuth = groupedPubAndMainData.filter(d => { return d.authorOrderRank == 'Middle' })
                     lastAuth = groupedPubAndMainData.filter(d => { return d.authorOrderRank == 'Last' })
                     console.log("firstAuth", firstAuth)
-                    displayPieDistribution(firstAuth.length, middleAuth.length, lastAuth.length)
+                    //displayPieDistribution(firstAuth.length, middleAuth.length, lastAuth.length)
+                    displayTopPaperData(confName,groupedPubAndMainData)
                 })
 
             })
@@ -413,6 +418,74 @@ function displayBarchart(gender) {
                 .style("font-family", "arial")
                 .style("font-size", 15);
 
+        }
+
+        function displayTopPaperData(confName, groupedPubAndMainData) {
+
+            document.getElementById("pie").innerHTML=""
+
+            forceWidth=400
+            forceHeight=400
+
+            groupedPubAndMainData.sort(function(a, b){return a.pubCited-b.pubCited})
+            //console.log("groupedPubAndMainData", groupedPubAndMainData.slice(0,10))
+
+            topFivePapers=groupedPubAndMainData.slice(0,25)
+
+
+            var svg = d3.select("#pie")
+                .style("width", forceWidth/2)
+                .style("height", forceHeight/2)
+
+
+
+            //var nodes = [{ id: 1, type: 1, r: 5 }, { id: 2, type: 1, r: 7 }, { id: 3, type: 1, r: 10 }, { id: 4, type: 1, r: 12 }]
+            //{id:5, type: 2},{id:6, type: 2},{id:7, type: 2}, {id :8, type: 2}]
+
+            //var arcs = [{ source: 1, target: 3 }, { source: 2, target: 3 }]
+
+            var layout = d3.forceSimulation(topFivePapers)
+                .force('center', d3.forceCenter(forceWidth/2, forceHeight/2))
+                .force('collisions', d3.forceCollide(27))
+                .on('tick', ticked)
+
+            var node = svg.selectAll("circle")
+                .data(topFivePapers)
+                .enter()
+                .append("circle")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("fill", d => { 
+                    if (confName=='Vis') return "orange" 
+                    else if (confName=='InfoVis') return "magenta"
+                    else if (confName=="VAST") return "green"
+                    else if (confName=="SciVis") return "blue"
+               
+                
+                })
+                .attr("r", d => d.pubCited/2.5)
+                .on("mouseover", d=>{
+                    console.log("clicked the bubble", d.author)
+                    document.getElementById("textBubble").style.visibility= "visible"
+                    document.getElementById("textBubble").innerHTML="PubCitation: <b>" + d.pubCited+ "</b>, Author: <b>" + d.author +"</b>"
+                })
+                .on("mouseout", d=>{
+                    document.getElementById("textBubble").style.visibility= "hidden"
+                })
+                .text(function(d) {return "hihihihi"})
+
+
+            function ticked() {
+                svg.selectAll("circle")
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+
+                //svg.selectAll("line")
+            
+
+
+            }
+        
         }
 
 

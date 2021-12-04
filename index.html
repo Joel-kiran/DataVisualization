@@ -64,7 +64,7 @@
       document.getElementById("body").appendChild(collaScript)
 
       document.getElementById("pieYearConf").style.visibility= "hidden"
-      document.getElementById("headingPieConfYear").style.visibility= "hidden"
+      document.getElementById("textBubble").style.visibility= "hidden"
 
 
     }
@@ -136,10 +136,12 @@
       </div>
 
     </div>
-    <div id="pieDiv" style='display:inline-block' width='300px' height='500px'>
-      <p style='text-align:center' id='headingPieConfYear'><b>Distribution of Author Order Rank</b></p>
+    <div id="pieDiv" style='display:inline-block' width='400px' height='400px'>
+      <!--<p style='text-align:center' id='headingPieConfYear'><b>Distribution of Author Order Rank</b></p>-->
       <p  id='pieYearConf' > The Choosen Conference is InfoVis and the Year is 2003  </p>
-      <svg style='position:relative;top:18%; left:8%' id='pie' width='400px' height='400px'></svg>
+      <p   id='textBubble'>PubCiation is None and Author is None </p>
+      <svg style='position:relative;top:20%; left:8%' id='pie' width='400px' height='400px'></svg>
+      
     </div>
   </div>
   <div style="position:absolute; top:600px ;width: 100%; background-color:#FFC0CB; text-align:center ;padding:10px"><b>Career Age</b></div>
