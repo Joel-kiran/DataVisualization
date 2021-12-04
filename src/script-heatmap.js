@@ -95,13 +95,7 @@ d3.csv("dataset/6_coll_actual_count.csv", function (data) {
 
 
   // Add title to graph
-  svg.append("text")
-    .attr("x", 70)
-    .attr("y", -50)
-    .attr("text-anchor", "left")
-    .style("font-size", "30px")
-    .text("A Heatmap Graph");
-
+  
   // Add subtitle to graph
   svg.append("text")
     .attr("x", 90)
