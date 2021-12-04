@@ -63,8 +63,14 @@
       collaScript.src = "src/script-heatmap.js";
       document.getElementById("body").appendChild(collaScript)
 
-      document.getElementById("pieYearConf").style.visibility= "hidden"
-      document.getElementById("textBubble").style.visibility= "hidden"
+      document.getElementById("pieYearConf").style.visibility = "hidden"
+      document.getElementById("textBubble").style.visibility = "hidden"
+      document.getElementById("paperIfno").style.visibility="hidden"
+
+      var forceScript = document.createElement("script");
+      forceScript.type = "text/javascript";
+      forceScript.src = "src/forces.js";
+      document.getElementById("body").appendChild(forceScript)
 
 
     }
@@ -89,10 +95,20 @@
       document.getElementById("body").appendChild(gpBc1dscript)
       document.getElementById('year').checked = true
     }
+
+    function paperForceFilter(){
+      document.getElementById("allPapers").innerHTML=""
+      var allyearspapers = document.createElement("script");
+      allyearspapers.type = "text/javascript";
+      allyearspapers.src = "src/forces.js";
+      document.getElementById("body").appendChild(allyearspapers)
+      //document.getElementById('year').checked = true
+    }
   </script>
 </head>
 
-<body id='body' onload="landing()" style='overflow-x:scroll;background-color: #D8D8D8; padding: 5px;padding-bottom: 20px;'>
+<body id='body' onload="landing()"
+  style='overflow-x:scroll;background-color: #D8D8D8; padding: 5px;padding-bottom: 20px;'>
   <div style='position:fixed; width:100%;top:0%; background-color:#FFC0CB; padding:10px'>
     <h3 style="text-align:center">Gender in 30 Years Of IEEE Visualization</h3>
     <!--<div style="text-align:center">
@@ -102,8 +118,21 @@
         onclick="vizByCollaboration()">Gender Viz By Collaboration</input>
     </div>-->
   </div>
+  <div style='position:absolute; top:100px;'>
+    <span>From Year: <input type="text" id="fromYearForce" value="1990"/></span>
+    <span>To Year: <input type="text" id="toYearForce" value="2000"/></span>
+    <input type='button' onclick="paperForceFilter()" value="Filter"/>
+    <p>
+      <div style="display:inline-block; width:10px;height:10px; position: relative;left:0% ;background-color: magenta;" >InfoVis</div>
+      <div style="display:inline-block; width:10px;height:10px; position: relative;left:5%; background-color: orange;" >Vis</div>
+      <div style="display:inline-block; width:10px;height:10px; position: relative;left:10%; background-color: green;" >VAST</div>
+      <div style="display:inline-block; width:10px;height:10px; position: relative;left:15%; background-color: blue;" >SciVis</div>
+    </p>
+    <p id="paperIfno"> Author is None and Publication Citation is None</p>
+    <svg id="allPapers" width='1400px' height='600px'></svg>
+  </div>
 
-  <div id='byYear' style='position:absolute; top:68px'>
+  <div id='byYear' style='position:absolute; top:850px'>
 
     <!--<div style='position:absolute; top:14%; left:30%'><b>The Below graph provides the trend in the percentage of
           female w.r.t
@@ -116,7 +145,7 @@
     </div>
     <div style='display:inline-block'>
       <div id='gpBc1d'>
-        
+
         <span style='position:absolute;  left: 35%'> From Year : <input type="text" id='fromYear1d' style='width:80px'
             value="1990" /></span>
         <span style='position:absolute;  left: 50%'> To Year : <input type="text" id='toYear1d' style='width:80px;'
@@ -138,28 +167,30 @@
     </div>
     <div id="pieDiv" style='display:inline-block' width='400px' height='400px'>
       <!--<p style='text-align:center' id='headingPieConfYear'><b>Distribution of Author Order Rank</b></p>-->
-      <p  id='pieYearConf' > The Choosen Conference is InfoVis and the Year is 2003  </p>
-      <p   id='textBubble'>PubCiation is None and Author is None </p>
+      <p id='pieYearConf'> The Choosen Conference is InfoVis and the Year is 2003 </p>
+      <p id='textBubble'>PubCiation is None and Author is None </p>
       <svg style='position:relative;top:10%;' id='pie' width='400px' height='400px'></svg>
-      
+
     </div>
   </div>
-  <div style='position:absolute; top:500px'>
+  <div style='position:absolute; top:1300px'>
     <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
     <div style="display: inline-block;">
-      <svg id='LineCt2a' ></svg>
+      <svg id='LineCt2a'></svg>
     </div>
     <div style="display: inline-block;">
-      <div id='confPieText' ></div>
-      <svg id="confpie" width="300px" height="400px"  ></svg>
+      <div id='confPieText'></div>
+      <svg id="confpie" width="300px" height="400px"></svg>
     </div>
     <div id='collaboration_actual' style="display:inline-block; position:relative;left:10%">
-     
     </div>
 
   </div>
   <!--<div style="position:absolute; top:1180px ;width: 100%; background-color:#FFC0CB; text-align:center ;padding:10px"><b>By Collaboration</b></div>
   <div id='collaboration_actual' style='position:absolute; top:1200px; padding: 10px;'>-->
+
+  
+
 
   </div>
 
