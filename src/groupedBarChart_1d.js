@@ -487,12 +487,7 @@ function displayBarchart(gender) {
             }
         
         }
-        gpText = document.createElement("p")
-        gpText.innerHTML = "Here we look at the trends for each child conference making up<br/>" +
-            "IEEE Visualization. <br>Percentages have fluctuated over the years due to the<br/>" +
-            "relatively small number of female authors in each conference.<br>Vis and" +
-            "SciVis have a smaller female representation than <br/>the other conferences."
-        document.getElementById("gpBc1d").appendChild(gpText)
+       
 
     })
 

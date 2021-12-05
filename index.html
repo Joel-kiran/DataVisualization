@@ -76,11 +76,14 @@
     }
 
     function DisplayBarchart(gender) {
+
       genderCh = gender
       displayBarchart(gender)
+      document.getElementById("gpBc1d").removeChild(document.getElementById("textGp1d"))
     }
 
     function range1d(gender) {
+      
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -89,6 +92,7 @@
     }
 
     function filter1d() {
+      
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -136,7 +140,10 @@
       the largest and <br>oldest academic visualization-focused venue.<br>Our work contributes to an in-depth analysis of gender <br>related patterns in the VIS community.<br></span>
   </div>
 
-  <div id='byYear' style='position:absolute; top:850px'>
+  <div style='position:absolute; top:850px'>The below graphs show how the trend has been over the years w.r.t to count of the authors.
+          The first graph shows the count and second graph shows the distribution among the child conferences of IEEE.</div>
+
+  <div id='byYear' style='position:absolute; top:900px'>
 
     <!--<div style='position:absolute; top:14%; left:30%'><b>The Below graph provides the trend in the percentage of
           female w.r.t
@@ -147,9 +154,7 @@
       <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
       
       <svg id='LineCt1a'></svg>
-      <p>This graph shows the distribution of number of authors in IEEE over the years.<br> The x-axis shows the year and the y-axis displays the count of authors.<br>Over the past
-        30 years, the visualization research community <br>has been continually
-        growing, and the number of VIS authors has been <br>increasing every year which is true for both the genders.</p>      
+          
     </div>
     <div style='display:inline-block'>
       <div id='gpBc1d'>
@@ -181,15 +186,17 @@
 
     </div>
   </div>
+
+  <div style='position:absolute; top:1350px'><br>The below graphs show the trend w.r.t career age. 
+    The publications of each gender in the child conferences over the entire career age.
+    And the last graph shows the collaboration of the authors for publications</div>
+
+
   <div style='position:absolute; top:1300px'>
     <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
     <div style="display: inline-block;">
       <svg id='LineCt2a'></svg>
-      <p>This graph shows the distribution of number of authors with 
-        <br>respect to their career age.
-        <br>To understand how seniority in the IEEE VIS conference evolves across
-        <br>time and varies across genders, we now look at an average career age
-        <br>by year and by gender.</p>
+      
     </div>
     <div style="display: inline-block;">
       <div id='confPieText'></div>
