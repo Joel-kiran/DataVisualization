@@ -4,23 +4,9 @@
 <head>
   <title>DataVisualization</title>
   <style>
-    table,
-    th,
-    td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-
-    .float-container {
-      padding: 20px;
-      width: 100%
-    }
-
-    .float-child {
-      width: 50%;
-      padding: 20px;
-      float: left;
-
+    .scale {
+      height: 20px;
+      background: linear-gradient(45deg, white 0%, maroon 50%, black 100%);
     }
   </style>
   <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -65,7 +51,7 @@
 
       document.getElementById("pieYearConf").style.visibility = "hidden"
       document.getElementById("textBubble").style.visibility = "hidden"
-      document.getElementById("paperIfno").style.visibility="hidden"
+      document.getElementById("paperIfno").style.visibility = "hidden"
 
       var forceScript = document.createElement("script");
       forceScript.type = "text/javascript";
@@ -83,7 +69,7 @@
     }
 
     function range1d(gender) {
-      
+
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -92,7 +78,7 @@
     }
 
     function filter1d() {
-      
+
       var gpBc1dscript = document.createElement("script");
       gpBc1dscript.type = "text/javascript";
       gpBc1dscript.src = "src/groupedBarChart_1d.js";
@@ -100,8 +86,8 @@
       document.getElementById('year').checked = true
     }
 
-    function paperForceFilter(){
-      document.getElementById("allPapers").innerHTML=""
+    function paperForceFilter() {
+      document.getElementById("allPapers").innerHTML = ""
       var allyearspapers = document.createElement("script");
       allyearspapers.type = "text/javascript";
       allyearspapers.src = "src/forces.js";
@@ -123,25 +109,33 @@
     </div>-->
   </div>
   <div style='position:absolute; top:100px;'>
-    <span style="position: relative;left:30%">From Year: <input type="text" id="fromYearForce" value="1990"/></span>
-    <span style="position: relative;left:32%">To Year: <input type="text" id="toYearForce" value="2000"/></span>
-    <input  style="position: relative;left:34%" type='button' onclick="paperForceFilter()" value="Filter"/>
+    <span style="position: relative;left:30%">From Year: <input type="text" id="fromYearForce" value="2008" /></span>
+    <span style="position: relative;left:32%">To Year: <input type="text" id="toYearForce" value="2015" /></span>
+    <input style="position: relative;left:34%" type='button' onclick="paperForceFilter()" value="Filter" />
     <p>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:40% ;background-color: magenta;" ><br>InfoVis</div>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:45%; background-color: orange;" ><br>Vis</div>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:50%; background-color: green;" ><br>VAST</div>
-      <div style="display:inline-block; width:10px;height:10px; position: relative;left:55%; background-color: blue;" ><br>SciVis</div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:40% ;background-color: magenta;">
+      <br>InfoVis</div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:45%; background-color: orange;">
+      <br>Vis</div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:50%; background-color: green;">
+      <br>VAST</div>
+    <div style="display:inline-block; width:10px;height:10px; position: relative;left:55%; background-color: blue;">
+      <br>SciVis</div>
     </p>
     <p id="paperIfno" style='text-align: center;'> Author is None and Publication Citation is N
       one</p>
-    
-    <svg id="allPapers"style="position: relative;left:10%" width='1400px' height='600px'></svg>
-    <span style='position:absolute; left: 0%; bottom:50%'> We present a descriptive, exploratory data analysis of gender representation<br> in the academic visualization community about papers published at <br>the IEEE Visualization (VIS) conference,
-      the largest and <br>oldest academic visualization-focused venue.<br>Our work contributes to an in-depth analysis of gender <br>related patterns in the VIS community.<br></span>
+
+    <svg id="allPapers" style="position: relative;left:10%" width='1400px' height='600px'></svg>
+    <span style='position:absolute; left: 0%; bottom:50%'> We present a descriptive, exploratory data analysis of gender
+      representation<br> in the academic visualization community about papers published at <br>the IEEE Visualization
+      (VIS) conference,
+      the largest and <br>oldest academic visualization-focused venue.<br>Our work contributes to an in-depth analysis
+      of gender <br>related patterns in the VIS community.<br></span>
   </div>
 
-  <div style='position:absolute; top:850px'>The below graphs show how the trend has been over the years w.r.t to count of the authors.
-          The first graph shows the count and second graph shows the distribution among the child conferences of IEEE.</div>
+  <div style='position:absolute; top:850px'>The below graphs show how the trend has been over the years w.r.t to count
+    of the authors.
+    The first graph shows the count and second graph shows the distribution among the child conferences of IEEE.</div>
 
   <div id='byYear' style='position:absolute; top:900px'>
 
@@ -152,9 +146,9 @@
 
     <div id='LineCh1a' style='display:inline-block; position:relative;top:5%'>
       <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
-      
+
       <svg id='LineCt1a'></svg>
-          
+
     </div>
     <div style='display:inline-block'>
       <div id='gpBc1d'>
@@ -165,29 +159,29 @@
             value="2020" /></span>
         <input type="button" id='go1d' style='position:absolute;  left: 65%' value="Go" onclick='range1d()'>
 
-        <span style='position:absolute; top:5%; left: 35%'>Filter By Conference: </span>
-        <span style='position:absolute; top:5%; left:45%'><input id='infovischkbox' type='checkbox' name="InfoVis"
+        <span style='position:absolute; top:7%; left: 35%'>Filter By Conference: </span>
+        <span style='position:absolute; top:7%; left:45%'><input id='infovischkbox' type='checkbox' name="InfoVis"
             value="InfoVis" checked /> InfoVis </span>
-        <span style='position:absolute; top:5%; left: 50%'><input id='vastchkbox' type='checkbox' name="VAST"
+        <span style='position:absolute; top:7%; left: 50%'><input id='vastchkbox' type='checkbox' name="VAST"
             value="VAST" checked /> VAST </span>
-        <span style='position:absolute; top:5%; left: 55%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
+        <span style='position:absolute; top:7%; left: 55%'><input id='vischkbox' type='checkbox' name="Vis" value="Vis"
             checked /> Vis</span>
-        <span style='position:absolute; top:5%; left: 59%'> <input id='scivischkbk' type='checkbox' name="SciVis"
+        <span style='position:absolute; top:7%; left: 59%'> <input id='scivischkbk' type='checkbox' name="SciVis"
             value="SciVis" checked />SciVis </span>
-        <button style='position:absolute; top:5%; left: 65%' onclick='filter1d()'>Filter</button>
+        <button style='position:absolute; top:7%; left: 65%' onclick='filter1d()'>Filter</button>
       </div>
 
     </div>
     <div id="pieDiv" style='display:inline-block' width='400px' height='400px'>
       <!--<p style='text-align:center' id='headingPieConfYear'><b>Distribution of Author Order Rank</b></p>-->
-      <p id='pieYearConf'style='position:absolute;top:0px'> The chosen conference is InfoVis and the Year is 2003 </p>
+      <p id='pieYearConf' style='position:absolute;top:0px'> The chosen conference is InfoVis and the Year is 2003 </p>
       <p id='textBubble' style='position:absolute;top:30px'>Publication is None and Author is None </p>
-      <svg  id='pie' width='400px' height='400px'></svg>
+      <svg id='pie' width='400px' height='400px'></svg>
 
     </div>
   </div>
 
-  <div style='position:absolute; top:1350px'><br>The below graphs show the trend w.r.t career age. 
+  <div style='position:absolute; top:1350px'><br>The below graphs show the trend w.r.t career age.
     The publications of each gender in the child conferences over the entire career age.
     And the last graph shows the collaboration of the authors for publications</div>
 
@@ -196,23 +190,28 @@
     <!--<h4 style="text-align:center">No. Of Authors In IEEE Vis Vs Year</h4>-->
     <div style="display: inline-block;">
       <svg id='LineCt2a'></svg>
-      
+
     </div>
     <div style="display: inline-block;">
       <div id='confPieText'></div>
       <svg id="confpie" width="300px" height="400px"></svg>
-     <!-- <p>This graph shows the distribution of number of authors with 
+      <!-- <p>This graph shows the distribution of number of authors with 
         <br>respect to their career age.
         <br>Career age is the how long a particular author has been active 
         <br>in the visualization committee<br> The x-axis shows the career age and the y-axis displays the <br>count of authors.</p>-->
     </div>
     <div id='collaboration_actual' style="display:inline-block; position:relative;left:10%">
+      <div class="scale" style='position: relative;top:125px'></div>
+      <div>
+        <div style='float:left; position: relative;top:127px'> 0</div>
+        <div style="float: right; position: relative;top:127px">700</div>
       </div>
-     <!-- <p>This graph shows the distribution of number of authors with 
+    </div>
+    <!-- <p>This graph shows the distribution of number of authors with 
         <br>respect to their career age.
         <br>Career age is the how long a particular author has been active 
         <br>in the visualization committee<br> The x-axis shows the career age and the y-axis displays the <br>count of authors.</p>-->
-      
+
   </div>
   <!--<div style="position:absolute; top:1180px ;width: 100%; background-color:#FFC0CB; text-align:center ;padding:10px"><b>By Collaboration</b></div>
   <div id='collaboration_actual' style='position:absolute; top:1200px; padding: 10px;'>-->
